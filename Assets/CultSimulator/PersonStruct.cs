@@ -15,7 +15,8 @@ namespace Assets.Standard_Assets.Models
 	public struct SearchableAsset
 	{
 		public Profession profession;
-		public List<Trait> traits;
+		public Sin sin;
+		public Virtue virtue;
 	}
 
 	public enum Profession
@@ -31,7 +32,7 @@ namespace Assets.Standard_Assets.Models
 		farmer = 8
 	}
 
-	public enum Trait
+	public enum Sin
 	{
 		none = 0,
 		wrath = 1,
@@ -40,14 +41,17 @@ namespace Assets.Standard_Assets.Models
 		gluttony = 4,
 		sloth = 5,
 		lust = 6,
-		envy = 7,
-		forgiveness = 8,
-		humility = 9,
-		charity = 10,
-		temperance = 11,
-		diligence = 12,
-		chastity = 13,
-		kindness = 14
+		envy = 7
+	}
 
+	public enum Virtue
+	{
+		forgiveness = 1,
+		humility = 2,
+		charity = 3,
+		temperance = 4,
+		diligence = 5,
+		chastity = 6,
+		kindness = 7
 	}
 }

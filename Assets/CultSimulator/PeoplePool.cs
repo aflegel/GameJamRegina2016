@@ -8,12 +8,12 @@ namespace Assets.Standard_Assets.Models
 	class PeoplePool
 	{
 		public Dictionary<int, FullPerson> activePool;
-		public Dictionary<Trait, Dictionary<Trait, int>> traitPool;
+		public Dictionary<Sin, Dictionary<Sin, int>> traitPool;
 
 		public PeoplePool()
 		{
 			activePool = new Dictionary<int, FullPerson>();
-			traitPool = new Dictionary<Trait, Dictionary<Trait, int>>();
+			traitPool = new Dictionary<Sin, Dictionary<Sin, int>>();
 		}
 
 		public void Startup()
@@ -24,10 +24,15 @@ namespace Assets.Standard_Assets.Models
 
 		public void GeneratePeople()
 		{
+			Array sins = Enum.GetValues(typeof(Sin));
+			Array virtues = Enum.GetValues(typeof(Virtue));
+			Array professions = Enum.GetValues(typeof(Profession));
 
 			PersonNames names = new PersonNames();
 
-			for( int i=0; i<20; i++)
+			Random ranomNumber = new Random();
+
+			for (int i = 0; i < 20; i++)
 			{
 				FullPerson freshPerson = new FullPerson();
 
@@ -39,6 +44,10 @@ namespace Assets.Standard_Assets.Models
 				freshPerson.person.name = name;
 
 				freshPerson.assets = new SearchableAsset();
+				freshPerson.assets.sin = (Sin)sins.GetValue(ranomNumber.Next(sins.Length));
+				freshPerson.assets.virtue = (Virtue)virtues.GetValue(ranomNumber.Next(virtues.Length));
+				freshPerson.assets.profession = (Profession)professions.GetValue(ranomNumber.Next(professions.Length));
+
 				activePool.Add(activePool.Count + 1, freshPerson);
 			}
 
@@ -48,6 +57,8 @@ namespace Assets.Standard_Assets.Models
 		{
 
 		}
+
+
 
 		public Dictionary<int, FullPerson> SearchPeople(SearchableAsset assets)
 		{
@@ -63,18 +74,12 @@ namespace Assets.Standard_Assets.Models
 		{
 			int fullValue = 0;
 			//loop through every trait against every other trait and return a full sum
-			foreach(Trait trait in keyValues.traits)
-			{
-				foreach (Trait match in matchValues.traits)
-				{
-					fullValue += GetTraitValue(trait, match);
-				}
-			}
+		//			fullValue += GetTraitValue(trait, match);
 
 			return fullValue;
 		}
 
-		public int GetTraitValue(Trait keyValue, Trait matchValue)
+		public int GetTraitValue(Sin keyValue, Sin matchValue)
 		{
 			//check the dictionary against values and return the match
 			if (traitPool.ContainsKey(keyValue))
