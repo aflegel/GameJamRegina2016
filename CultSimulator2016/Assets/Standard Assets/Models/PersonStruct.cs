@@ -9,16 +9,16 @@ namespace Assets.Standard_Assets.Models
 	{
 		int personID;
 		Person person;
-		searchableAssets assets;
+		SearchableAsset assets;
 	}
 
-	public struct searchableAssets
+	public struct SearchableAsset
 	{
-		profession profession;
-		List<trait> traits;
+		Profession profession;
+		List<Trait> traits;
 	}
 
-	public enum profession
+	public enum Profession
 	{
 		none = 0,
 		medical = 1,
@@ -31,7 +31,7 @@ namespace Assets.Standard_Assets.Models
 		farmer = 8
 	}
 
-	public enum trait
+	public enum Trait
 	{
 		none = 0,
 		wrath = 1,
