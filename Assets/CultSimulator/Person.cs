@@ -11,12 +11,12 @@ namespace Assets.CultSimulator
 		public bool Active { get; set; }
 		public string Name { get; set; }
 		public string FlavourText { get; set; }
-		public double Abduction { get; set; }
-		public double AbductionDefense { get; set; }
-		public double Investigation { get; set; }
-		public double InvestigationDefense { get; set; }
-		public double Recruitment { get; set; }
-		public double RecruitmentDefense { get; set; }
+		public int Abduction { get; set; }
+		public int AbductionDefense { get; set; }
+		public int Investigation { get; set; }
+		public int InvestigationDefense { get; set; }
+		public int Recruitment { get; set; }
+		public int RecruitmentDefense { get; set; }
 		public bool Gender { get; set; }
 
 		public SearchableAsset assets;

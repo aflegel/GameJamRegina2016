@@ -22,24 +22,24 @@ namespace Assets.CultSimulator
 			AddNames();
 		}
 
-		public string GetNextName(int? count, bool gender)
+		public string GetNextName(int? count, bool gender, Random randomNumber)
 		{
 			//sets an internal counter and escape
 			count = (count ?? 0);
-			if(count == 50)
+			if (count == 50)
 			{
 				return "";
 			}
 
 			string freshName = "";
 
-			Random randomNumber = new Random();
 
-			freshName =  gender ? femaleNames[randomNumber.Next(0, femaleNames.Count)] : maleNames[randomNumber.Next(0, maleNames.Count)] + " " + lastNames[randomNumber.Next(0, lastNames.Count)];
+
+			freshName = gender ? femaleNames[randomNumber.Next(0, femaleNames.Count)] : maleNames[randomNumber.Next(0, maleNames.Count)] + " " + lastNames[randomNumber.Next(0, lastNames.Count)];
 
 			if (usedNames.Contains(freshName))
 			{
-				return GetNextName(count, gender);
+				return GetNextName(count + 1, gender, randomNumber);
 			}
 			else
 			{

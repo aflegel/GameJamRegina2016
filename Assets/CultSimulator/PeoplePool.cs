@@ -8,25 +8,26 @@ namespace Assets.CultSimulator
 	class PeoplePool
 	{
 		public Dictionary<int, Person> activePool;
+		public ProfessionPool professionPool;
 
 		public PeoplePool()
 		{
 			activePool = new Dictionary<int, Person>();
+			professionPool = new ProfessionPool();
+
 		}
 
 		public void GeneratePeople(int numberOfNewRecords, List<SearchableAsset> requiredAssets)
 		{
-
-
 			NamePool names = new NamePool();
-
+			Random randomNumber = new Random();
 
 			for (int i = 0; i < (numberOfNewRecords - requiredAssets.Count); i++)
 			{
 
 				Person freshPerson = GeneratePerson(activePool.Count + 1, null);
 
-				string name = names.GetNextName(null, freshPerson.Gender);
+				string name = names.GetNextName(null, freshPerson.Gender, randomNumber);
 
 				if (name == "")
 					break;
@@ -40,7 +41,7 @@ namespace Assets.CultSimulator
 
 				Person freshPerson = GeneratePerson(activePool.Count + 1, null);
 
-				string name = names.GetNextName(null, freshPerson.Gender);
+				string name = names.GetNextName(null, freshPerson.Gender, randomNumber);
 
 				if (name == "")
 					break;
@@ -60,20 +61,22 @@ namespace Assets.CultSimulator
 			Person freshPerson = new Person();
 			Random randomNumber = new Random();
 
-
+			freshPerson.PersonID = id;
 			freshPerson.Active = true;
 			freshPerson.assets = new SearchableAsset();
 			freshPerson.assets.sin = (Sin)sins.GetValue(randomNumber.Next(sins.Length));
 			freshPerson.assets.virtue = (Virtue)virtues.GetValue(randomNumber.Next(0, virtues.Length));
 			freshPerson.assets.profession = (Profession)professions.GetValue(randomNumber.Next(0, professions.Length));
-
 			freshPerson.Gender = randomNumber.Next(0, 1) == 0;
-			freshPerson.Abduction = randomNumber.NextDouble();
-			freshPerson.AbductionDefense = randomNumber.NextDouble();
-			freshPerson.Investigation = randomNumber.NextDouble();
-			freshPerson.InvestigationDefense = randomNumber.NextDouble();
-			freshPerson.Recruitment = randomNumber.NextDouble();
-			freshPerson.RecruitmentDefense = randomNumber.NextDouble();
+
+			SkillMap professionSkills = professionPool.GetProfessionValue(freshPerson.assets);
+
+			freshPerson.Abduction = randomNumber.Next(0,100) + professionSkills.Abduction;
+			freshPerson.AbductionDefense = randomNumber.Next(0, 100) + professionSkills.AbductionDefense;
+			freshPerson.Investigation = randomNumber.Next(0, 100) + professionSkills.Investigation;
+			freshPerson.InvestigationDefense = randomNumber.Next(0, 100) + professionSkills.InvestigationDefense;
+			freshPerson.Recruitment = randomNumber.Next(0, 100) + professionSkills.Recruitment;
+			freshPerson.RecruitmentDefense = randomNumber.Next(0, 100) + professionSkills.RecruitmentDefense;
 
 			return freshPerson;
 		}
