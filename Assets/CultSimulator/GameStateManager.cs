@@ -28,12 +28,19 @@ namespace Assets.CultSimulator
 			cultistCandidates = new List<PersonReference>();
 			currentTarget = new YearTarget();
 			peoplePool = new PeoplePool();
+			peoplePool.GeneratePeople(20, new List<SearchableAsset> {
+				new SearchableAsset() { profession = Profession.educator, sin = Sin.envy, virtue = Virtue.temperance },
+				new SearchableAsset() { profession = Profession.law, sin = Sin.lust, virtue = Virtue.kindness }
+			});
 
 			cultists = new Cultist[NUMBER_OF_CULTISTS];
 			for (int i = 0; i < NUMBER_OF_CULTISTS; i++)
 			{
 				cultists[i] = null;
 			}
+
+			cultists[0] = new Cultist() { PersonID = peoplePool.activePool[0].PersonID, Instruction = null };
+			cultists[1] = new Cultist() { PersonID = peoplePool.activePool[1].PersonID, Instruction = null };
 		}
 
 		public void AddSacrificeCandidate(int personID)
