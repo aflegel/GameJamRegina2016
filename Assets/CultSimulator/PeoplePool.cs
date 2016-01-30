@@ -42,12 +42,20 @@ namespace Assets.CultSimulator
 				freshPerson.Name = name;
 
 				freshPerson.PersonID = activePool.Count + 1;
+
 				freshPerson.Active = true;
 				freshPerson.assets = new SearchableAsset();
 				freshPerson.assets.sin = (Sin)sins.GetValue(randomNumber.Next(sins.Length));
 				freshPerson.assets.virtue = (Virtue)virtues.GetValue(randomNumber.Next(0,virtues.Length));
 				freshPerson.assets.profession = (Profession)professions.GetValue(randomNumber.Next(0,professions.Length));
+
 				freshPerson.Gender = randomNumber.Next(0, 1) == 0;
+				freshPerson.Abduction = randomNumber.NextDouble();
+				freshPerson.AbductionDefense = randomNumber.NextDouble();
+				freshPerson.Investigation = randomNumber.NextDouble();
+				freshPerson.InvestigationDefense = randomNumber.NextDouble();
+				freshPerson.Recruitment = randomNumber.NextDouble();
+				freshPerson.RecruitmentDefense = randomNumber.NextDouble();
 
 				activePool.Add(freshPerson.PersonID, freshPerson);
 			}

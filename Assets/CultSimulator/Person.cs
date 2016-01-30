@@ -11,10 +11,12 @@ namespace Assets.CultSimulator
 		public bool Active { get; set; }
 		public string Name { get; set; }
 		public string FlavourText { get; set; }
-		public decimal Investigation { get; set; }
-		public decimal InvestigationDefense { get; set; }
-		public decimal Recruitment { get; set; }
-		public decimal RecruitmentDefense { get; set; }
+		public double Abduction { get; set; }
+		public double AbductionDefense { get; set; }
+		public double Investigation { get; set; }
+		public double InvestigationDefense { get; set; }
+		public double Recruitment { get; set; }
+		public double RecruitmentDefense { get; set; }
 		public bool Gender { get; set; }
 
 		public SearchableAsset assets;
@@ -37,7 +39,9 @@ namespace Assets.CultSimulator
 		trades = 5,
 		merchant = 6,
 		educator = 7,
-		farmer = 8
+		farmer = 8,
+		cow = 9,
+		goat = 10
 	}
 
 	public enum Sin
