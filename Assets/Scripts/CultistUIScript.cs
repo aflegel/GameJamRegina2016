@@ -11,16 +11,31 @@ public class CultistUIScript : MonoBehaviour
 
 	public Text CultistTraits;
 
-	public void SetCultistInformation(Person person)
+	public GameObject EmptyText;
+
+	public GameObject InformationBlock;
+
+	private int lastCultistID = -1;
+
+	public void SetCultistInformation(Person cultist)
 	{
-		if (person == null)
-			gameObject.SetActive(false);
-		else
+		if (cultist == null)
 		{
-			CultistName.text = person.Name;
-			CultistProfession.text = person.assets.profession.ToString();
-			CultistTraits.text = person.assets.virtue.ToString() + " / " + person.assets.sin.ToString();
-			gameObject.SetActive(true);
+			if (lastCultistID != -1)
+			{
+				InformationBlock.SetActive(false);
+				EmptyText.SetActive(true);
+				lastCultistID = -1;
+			}
+		}
+		else if (cultist.PersonID != lastCultistID)
+		{
+			CultistName.text = cultist.Name;
+			CultistProfession.text = cultist.assets.profession.ToString();
+			CultistTraits.text = cultist.assets.virtue.ToString() + " / " + cultist.assets.sin.ToString();
+			InformationBlock.SetActive(true);
+			EmptyText.SetActive(false);
+			lastCultistID = cultist.PersonID;
 		}
 	}
 }
