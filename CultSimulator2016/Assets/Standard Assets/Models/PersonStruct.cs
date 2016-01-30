@@ -14,8 +14,8 @@ namespace Assets.Standard_Assets.Models
 
 	public struct SearchableAsset
 	{
-		Profession profession;
-		List<Trait> traits;
+		public Profession profession;
+		public List<Trait> traits;
 	}
 
 	public enum Profession
