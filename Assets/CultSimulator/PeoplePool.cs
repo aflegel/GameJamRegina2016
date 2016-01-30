@@ -17,7 +17,7 @@ namespace Assets.CultSimulator
 		public void Startup()
 		{
 			GeneratePeople();
-			GenerateTraits();
+
 		}
 
 		public void GeneratePeople()
@@ -28,7 +28,7 @@ namespace Assets.CultSimulator
 
 			NamePool names = new NamePool();
 
-			Random ranomNumber = new Random();
+			Random randomNumber = new Random();
 
 			for (int i = 0; i < 20; i++)
 			{
@@ -41,12 +41,15 @@ namespace Assets.CultSimulator
 				freshPerson = new Person();
 				freshPerson.Name = name;
 
+				freshPerson.PersonID = activePool.Count + 1;
+				freshPerson.Active = true;
 				freshPerson.assets = new SearchableAsset();
-				freshPerson.assets.sin = (Sin)sins.GetValue(ranomNumber.Next(sins.Length));
-				freshPerson.assets.virtue = (Virtue)virtues.GetValue(ranomNumber.Next(virtues.Length));
-				freshPerson.assets.profession = (Profession)professions.GetValue(ranomNumber.Next(professions.Length));
+				freshPerson.assets.sin = (Sin)sins.GetValue(randomNumber.Next(sins.Length));
+				freshPerson.assets.virtue = (Virtue)virtues.GetValue(randomNumber.Next(0,virtues.Length));
+				freshPerson.assets.profession = (Profession)professions.GetValue(randomNumber.Next(0,professions.Length));
+				freshPerson.Gender = randomNumber.Next(0, 1) == 0;
 
-				activePool.Add(activePool.Count + 1, freshPerson);
+				activePool.Add(freshPerson.PersonID, freshPerson);
 			}
 
 		}
@@ -61,9 +64,9 @@ namespace Assets.CultSimulator
 			return new Dictionary<int, Person>();
 		}
 
-		public Dictionary<int, Person> SearchPeopleByID(int id)
+		public Person SearchPeopleByID(int id)
 		{
-			return new Dictionary<int, Person>();
+			return activePool[id];
 		}
 
 

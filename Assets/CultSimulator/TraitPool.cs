@@ -5,19 +5,18 @@ using System.Text;
 
 namespace Assets.CultSimulator
 {
-	class TraitPool
+	static class TraitPool
 	{
-		public Dictionary<TraitMap, int> traitPool;
+		public static Dictionary<TraitMap, int> traitPool;
 
-		public TraitPool()
+		public static void Constructor()
 		{
 			traitPool = new Dictionary<TraitMap, int>();
-			AddTraits();
+			GeneratePeople();
 		}
 
 
-
-		public int GetTraitValue(SearchableAsset keyValues, SearchableAsset matchValues)
+		public static int GetTraitValue(SearchableAsset keyValues, SearchableAsset matchValues)
 		{
 			int fullValue = 0;
 			//loop through every trait against every other trait and return a full sum
@@ -29,7 +28,7 @@ namespace Assets.CultSimulator
 			return fullValue;
 		}
 
-		public int GetTraitValue(object keyValue, object matchValue)
+		public static int GetTraitValue(object keyValue, object matchValue)
 		{
 			TraitMap getKey = new TraitMap(keyValue, matchValue);
 
@@ -37,34 +36,25 @@ namespace Assets.CultSimulator
 			return traitPool[getKey];
 		}
 
-		protected void AddTraits()
+		public static void GeneratePeople()
 		{
-			traitPool.Add(new TraitMap(0, 0), 0);
-			traitPool.Add(new TraitMap(0, 0), 0);
-			traitPool.Add(new TraitMap(0, 0), 0);
-			traitPool.Add(new TraitMap(0, 0), 0);
-			traitPool.Add(new TraitMap(0, 0), 0);
-			traitPool.Add(new TraitMap(0, 0), 0);
 
-			traitPool.Add(new TraitMap(0, 0), 0);
-			traitPool.Add(new TraitMap(0, 0), 0);
-			traitPool.Add(new TraitMap(0, 0), 0);
-			traitPool.Add(new TraitMap(0, 0), 0);
-			traitPool.Add(new TraitMap(0, 0), 0);
+			List<object> values = Enum.GetValues(typeof(Sin)).Cast<object>().ToList();
+			values.Add(Enum.GetValues(typeof(Sin)).Cast<object>().ToList());
 
-			traitPool.Add(new TraitMap(0, 0), 0);
-			traitPool.Add(new TraitMap(0, 0), 0);
-			traitPool.Add(new TraitMap(0, 0), 0);
-			traitPool.Add(new TraitMap(0, 0), 0);
+			foreach (object firstKey in values)
+			{
+				foreach (object secondKey in values)
+				{
+					TraitMap entry = new TraitMap(firstKey, secondKey);
+					if (!traitPool.ContainsKey(entry))
+					{
+						traitPool.Add(entry, 0);
+					}
+				}
+			}
 
-			traitPool.Add(new TraitMap(0, 0), 0);
-			traitPool.Add(new TraitMap(0, 0), 0);
-			traitPool.Add(new TraitMap(0, 0), 0);
-
-			traitPool.Add(new TraitMap(0, 0), 0);
-			traitPool.Add(new TraitMap(0, 0), 0);
-
-			traitPool.Add(new TraitMap(0, 0), 0);
+			traitPool[new TraitMap(Sin.envy, Sin.gluttony)] = 0;
 
 
 		}

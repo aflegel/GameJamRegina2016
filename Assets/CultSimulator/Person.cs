@@ -8,16 +8,16 @@ namespace Assets.CultSimulator
 	public class Person
 	{
 		public int PersonID { get; set; }
-		public bool Inactive { get; set; }
+		public bool Active { get; set; }
 		public string Name { get; set; }
 		public string FlavourText { get; set; }
 		public decimal Investigation { get; set; }
 		public decimal InvestigationDefense { get; set; }
 		public decimal Recruitment { get; set; }
 		public decimal RecruitmentDefense { get; set; }
+		public bool Gender { get; set; }
 
 		public SearchableAsset assets;
-
 	}
 
 	public struct SearchableAsset
