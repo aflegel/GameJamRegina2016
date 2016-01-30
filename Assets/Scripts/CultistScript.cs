@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CultistScript : MonoBehaviour
 {
-	public GameObject UIController;
+	public UIScript UIController;
 
 	public int CultistID;
 
