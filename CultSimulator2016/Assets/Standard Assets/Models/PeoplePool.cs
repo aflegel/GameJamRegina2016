@@ -16,26 +16,50 @@ namespace Assets.Standard_Assets.Models
 			traitPool = new Dictionary<Trait, Dictionary<Trait, int>>();
 		}
 
+		public void Startup()
+		{
+			GeneratePeople();
+			GenerateTraits();
+		}
 
-		public Dictionary<int, FullPerson> searchPeople(SearchableAsset assets)
+		public void GeneratePeople()
+		{
+
+		}
+
+		public void GenerateTraits()
+		{
+
+		}
+
+		public Dictionary<int, FullPerson> SearchPeople(SearchableAsset assets)
 		{
 			return new Dictionary<int, FullPerson>();
 		}
 
-		public Dictionary<int, FullPerson> searchPeopleByID(int id)
+		public Dictionary<int, FullPerson> SearchPeopleByID(int id)
 		{
 			return new Dictionary<int, FullPerson>();
 		}
 
-		public int getTraitValue(SearchableAsset keyValues, SearchableAsset matchValues)
+		public int GetTraitValue(SearchableAsset keyValues, SearchableAsset matchValues)
 		{
-			foreach(keyVaules. )
+			int fullValue = 0;
+			//loop through every trait against every other trait and return a full sum
+			foreach(Trait trait in keyValues.traits)
+			{
+				foreach (Trait match in matchValues.traits)
+				{
+					fullValue += GetTraitValue(trait, match);
+				}
+			}
 
-			return 0;
+			return fullValue;
 		}
 
-		public int getTraitValue(Trait keyValue, Trait matchValue)
+		public int GetTraitValue(Trait keyValue, Trait matchValue)
 		{
+			//check the dictionary against values and return the match
 			if (traitPool.ContainsKey(keyValue))
 				return traitPool[keyValue].ContainsKey(matchValue) ? traitPool[keyValue][matchValue] : 0;
 			else
