@@ -9,13 +9,22 @@ namespace Assets.Standard_Assets
 {
 	class GameStateManager : MonoBehaviour
 	{
-		private List<FullPerson> _sacrificeCandidates = new List<FullPerson>();
-		private List<FullPerson> _cultistCandidates = new List<FullPerson>();
-		private List<FullPerson> _cultists = new List<FullPerson>();
+		private List<FullPerson> _sacrificeCandidates;
+		private List<FullPerson> _cultistCandidates;
+		private List<FullPerson> _cultists;
 		private YearTarget _currentTarget;
+		private int _seasonNumber;
 
 		// Public interactions
-		public int SeasonNumber { get; set; }
+		public GameStateManager()
+		{
+			_seasonNumber = 1;
+
+			_sacrificeCandidates = new List<FullPerson>();
+			_cultistCandidates = new List<FullPerson>();
+			_cultists = new List<FullPerson>();
+			_currentTarget = new YearTarget();
+		}
 
 		public void AddSacrificeCandidate(FullPerson newCandidate)
 		{
@@ -54,6 +63,16 @@ namespace Assets.Standard_Assets
 		public YearTarget GetCurrentTarget()
 		{
 			return _currentTarget;
+		}
+
+		public int GetSeasonNumber()
+		{
+			return _seasonNumber;
+		}
+
+		public void IncrementSeason()
+		{
+			_seasonNumber += 1;
 		}
 	}
 }
