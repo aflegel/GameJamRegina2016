@@ -7,14 +7,13 @@ namespace Assets.CultSimulator
 {
 	static class TraitPool
 	{
-		public static Dictionary<TraitMap, int> traitPool;
+		public static Dictionary<TraitMap, int> Pool { get; set; }
 
 		public static void Constructor()
 		{
-			traitPool = new Dictionary<TraitMap, int>();
-			GeneratePeople();
+			Pool = new Dictionary<TraitMap, int>();
+			GenerateTraits();
 		}
-
 
 		public static int GetTraitValue(SearchableAsset keyValues, SearchableAsset matchValues)
 		{
@@ -33,12 +32,11 @@ namespace Assets.CultSimulator
 			TraitMap getKey = new TraitMap(keyValue, matchValue);
 
 			//check the dictionary against values and return the match
-			return traitPool[getKey];
+			return Pool[getKey];
 		}
 
-		public static void GeneratePeople()
+		public static void GenerateTraits()
 		{
-
 			List<object> values = Enum.GetValues(typeof(Sin)).Cast<object>().ToList();
 			values.Add(Enum.GetValues(typeof(Sin)).Cast<object>().ToList());
 
@@ -47,16 +45,14 @@ namespace Assets.CultSimulator
 				foreach (object secondKey in values)
 				{
 					TraitMap entry = new TraitMap(firstKey, secondKey);
-					if (!traitPool.ContainsKey(entry))
+					if (!Pool.ContainsKey(entry))
 					{
-						traitPool.Add(entry, 0);
+						Pool.Add(entry, 0);
 					}
 				}
 			}
 
-			traitPool[new TraitMap(Sin.envy, Sin.gluttony)] = 0;
-
-
+			Pool[new TraitMap(Sin.envy, Sin.gluttony)] = 0;
 		}
 	}
 

@@ -8,74 +8,76 @@ namespace Assets.CultSimulator
 {
 	class GameStateManager : MonoBehaviour
 	{
-		private List<PersonReference> _sacrificeCandidates;
-		private List<PersonReference> _cultistCandidates;
-		private List<PersonReference> _cultists;
-		private YearTarget _currentTarget;
-		private int _seasonNumber;
-
-		public PeoplePool peoplePool { get; set; }
+		private List<PersonReference> sacrificeCandidates;
+		private List<PersonReference> cultistCandidates;
+		private List<PersonReference> cultists;
+		private YearTarget currentTarget;
+		private int seasonNumber;
+		private int yearNumber;
+		private PeoplePool peoplePool { get; set; }
 
 		// Public interactions
 		public GameStateManager()
 		{
-			_seasonNumber = 1;
+			seasonNumber = 1;
+			yearNumber = 1;
 
-			_sacrificeCandidates = new List<PersonReference>();
-			_cultistCandidates = new List<PersonReference>();
-			_cultists = new List<PersonReference>();
-			_currentTarget = new YearTarget();
+			sacrificeCandidates = new List<PersonReference>();
+			cultistCandidates = new List<PersonReference>();
+			cultists = new List<PersonReference>();
+			currentTarget = new YearTarget();
+			peoplePool = new PeoplePool();
 		}
 
 		public void AddSacrificeCandidate(int personID)
 		{
-			_sacrificeCandidates.Add(new PersonReference { PersonID = personID, Instruction = null });
+			sacrificeCandidates.Add(new PersonReference { PersonID = personID, Instruction = null });
 		}
 
 		public IEnumerable<PersonReference> GetSacrificeCandidates()
 		{
-			return _sacrificeCandidates;
+			return sacrificeCandidates;
 		}
 
 		public void RemoveSacrificeCandidate(int personID)
 		{
-			_sacrificeCandidates.Remove(_sacrificeCandidates.Find(person => person.PersonID == personID));
+			sacrificeCandidates.Remove(sacrificeCandidates.Find(person => person.PersonID == personID));
 		}
 
 		public IEnumerable<PersonReference> GetCultistCandidates()
 		{
-			return _cultistCandidates;
+			return cultistCandidates;
 		}
 
 		public void AddCultistCandidate(int personID)
 		{
-			_cultistCandidates.Add(new PersonReference { PersonID = personID, Instruction = null });
+			cultistCandidates.Add(new PersonReference { PersonID = personID, Instruction = null });
 		}
 
 		public void RemoveCultistCandidate(int personID)
 		{
-			_cultistCandidates.Remove(_cultistCandidates.Find(person => person.PersonID == personID));
+			cultistCandidates.Remove(cultistCandidates.Find(person => person.PersonID == personID));
 		}
 
 		public void AddCultist(int personID)
 		{
-			_cultists.Add(new PersonReference { PersonID = personID, Instruction = null });
+			cultists.Add(new PersonReference { PersonID = personID, Instruction = null });
 		}
 
 		public IEnumerable<PersonReference> GetCurrentCultists()
 		{
-			return _cultists;
+			return cultists;
 		}
 
 		public void SetCultistInstruction(int personID, ActionType action, int targetPersonID)
 		{
-			var cultist = _cultists.Find(cult => cult.PersonID == personID);
+			var cultist = cultists.Find(cult => cult.PersonID == personID);
 			cultist.Instruction = new Instruction { Action = action, TargetID =  targetPersonID};
 		}
 
 		public void SetNewTarget(int numberOfCultists, SearchableAsset[] sacrificeTargets)
 		{
-			_currentTarget = new YearTarget()
+			currentTarget = new YearTarget()
 			{
 				NumberOfCultists = numberOfCultists,
 				SacrificeTargets = sacrificeTargets
@@ -84,17 +86,34 @@ namespace Assets.CultSimulator
 
 		public YearTarget GetCurrentTarget()
 		{
-			return _currentTarget;
+			return currentTarget;
 		}
 
 		public int GetSeasonNumber()
 		{
-			return _seasonNumber;
+			return seasonNumber;
 		}
 
 		public void IncrementSeason()
 		{
-			_seasonNumber += 1;
+			seasonNumber += 1;
+
+			if (seasonNumber == 5)
+			{
+				IncrementYear();
+			}
+		}
+
+		public int GetYearNumber()
+		{
+			return yearNumber;
+		}
+
+		public void IncrementYear()
+		{
+			yearNumber += 1;
+			seasonNumber = 1;
+			peoplePool.GeneratePeople(20, null);
 		}
 	}
 }
