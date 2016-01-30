@@ -7,6 +7,7 @@ namespace Assets.Standard_Assets.Models
 {
 	public struct FullPerson
 	{
+		int personID;
 		Person person;
 		profession profession;
 		List<trait> traits;
