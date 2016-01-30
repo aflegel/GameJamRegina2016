@@ -9,6 +9,6 @@ namespace Assets.CultSimulator
 	{
 		public int PersonID { get; set; }
 		public ActionType Action { get; set; }
-		public int Target { get; set; }
+		public int TargetID { get; set; }
 	}
 }

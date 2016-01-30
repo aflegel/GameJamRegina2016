@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using Assets.Standard_Assets.Models;
 
-namespace Assets.Standard_Assets
+namespace Assets.CultSimulator
 {
 	class GameStateManager : MonoBehaviour
 	{
@@ -36,9 +35,9 @@ namespace Assets.Standard_Assets
 			return _sacrificeCandidates;
 		}
 
-		public void RemoveSacrificeCandidate(int personId)
+		public void RemoveSacrificeCandidate(int personID)
 		{
-			_sacrificeCandidates.Remove(_sacrificeCandidates.Find(person => person.PersonID == personId));
+			_sacrificeCandidates.Remove(_sacrificeCandidates.Find(person => person.PersonID == personID));
 		}
 
 		public IEnumerable<Person> GetCultistCandidates()
@@ -51,9 +50,9 @@ namespace Assets.Standard_Assets
 			_cultistCandidates.Add(newCandidate);
 		}
 
-		public void RemoveCultistCandidate(int personId)
+		public void RemoveCultistCandidate(int personID)
 		{
-			_cultistCandidates.Remove(_cultistCandidates.Find(person => person.PersonID == personId));
+			_cultistCandidates.Remove(_cultistCandidates.Find(person => person.PersonID == personID));
 		}
 
 		public void AddCultist(Person newCultist)
