@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +8,36 @@ namespace Assets.Standard_Assets.Models
 {
 	public class Person
 	{
-		public int PersonID { get; set; }
-		public bool Inactive { get; set; }
-		public string Name { get; set; }
-		public string FlavourText { get; set; }
+		public string Name;
+		public string FlavourText;
+		public decimal Abduction { get; set; }
+		public decimal AbductionDefense { get; set; }
 		public decimal Investigation { get; set; }
 		public decimal InvestigationDefense { get; set; }
 		public decimal Recruitment { get; set; }
 		public decimal RecruitmentDefense { get; set; }
+	}
+}
+=======
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Assets.Standard_Assets.Models
+{
+	public class Person
+	{
+		public int personID { get; set; }
+		public bool inactive { get; set; }
+		public string name { get; set; }
+		public string flavourText { get; set; }
+		public decimal abduction { get; set; }
+		public decimal abductionDefense { get; set; }
+		public decimal investigation { get; set; }
+		public decimal investigationDefense { get; set; }
+		public decimal recruitment { get; set; }
+		public decimal recruitmentDefense { get; set; }
 
 		public SearchableAsset assets;
 
@@ -63,3 +86,4 @@ namespace Assets.Standard_Assets.Models
 		kindness = 7
 	}
 }
+>>>>>>> b5b9956f5e3f66c029b6496a9be79bf3eec844a1

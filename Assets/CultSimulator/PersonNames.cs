@@ -20,8 +20,6 @@ namespace Assets.Standard_Assets.Models
 			AddNames();
 		}
 
-
-
 		public string GetNextName(int? count)
 		{
 			//sets an internal counter and escape
