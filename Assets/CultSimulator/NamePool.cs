@@ -5,14 +5,14 @@ using System.Text;
 
 namespace Assets.Standard_Assets.Models
 {
-	class PersonNames
+	class NamePool
 	{
 		public HashSet<string> usedNames;
 		public List<string> lastNames;
 		public List<string> firstNames;
 
 
-		public PersonNames()
+		public NamePool()
 		{
 			usedNames = new HashSet<string>();
 			lastNames = new List<string>();

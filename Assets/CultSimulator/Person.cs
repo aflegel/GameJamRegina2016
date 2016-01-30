@@ -54,6 +54,7 @@ namespace Assets.Standard_Assets.Models
 
 	public enum Virtue
 	{
+		none = 0,
 		forgiveness = 1,
 		humility = 2,
 		charity = 3,
