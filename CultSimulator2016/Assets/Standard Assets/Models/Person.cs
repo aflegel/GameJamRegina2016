@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Assets.Standard_Assets.Models
 {
-	class Person
+	public class Person
 	{
 		public string name;
 		public string flavourText;

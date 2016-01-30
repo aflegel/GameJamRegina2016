@@ -7,8 +7,42 @@ using Assets.Standard_Assets.Models;
 
 namespace Assets.Standard_Assets
 {
-	public class GameStateManager : MonoBehaviour
+	class GameStateManager : MonoBehaviour
 	{
-		 public YearTarget CurrentTarget { get; private set; }
+		private List<FullPerson> _sacrificeCandidates = new List<FullPerson>();
+		private List<FullPerson> _cultistCandidates = new List<FullPerson>();
+		private YearTarget _currentTarget;
+
+		// Public interactions
+		public int SeasonNumber { get; set; }
+
+		public void AddSacrificeCandidate(FullPerson newCandidate)
+		{
+			_sacrificeCandidates.Add(newCandidate);
+		}
+
+		public FullPerson[] GetSacrificeCandidates()
+		{
+			return _sacrificeCandidates.ToArray();
+		}
+
+		public void RemoveSacrificeCandidate(int personId)
+		{
+			_sacrificeCandidates.Remove(_sacrificeCandidates.Find(x => x.personID == personId));
+		}
+
+		public void SetNewTarget(int numberOfCultists, SearchableAsset[] sacrificeTargets)
+		{
+			_currentTarget = new YearTarget()
+			{
+				NumberOfCultists = numberOfCultists,
+				SacrificeTargets = sacrificeTargets
+			};
+		}
+
+		public YearTarget GetCurrentTarget()
+		{
+			return _currentTarget;
+		}
 	}
 }

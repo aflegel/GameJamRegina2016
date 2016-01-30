@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Assets.Standard_Assets.Models
 {
-	public class YearTarget
+	class YearTarget
 	{
-		public int NumberOfCultists { get; private set; }
-		public int[] SacrificeTargets { get; private set; }
+		public int NumberOfCultists { get; set; }
+		public SearchableAsset[] SacrificeTargets { get; set; }
 	}
 }

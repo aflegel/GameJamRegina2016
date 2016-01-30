@@ -7,9 +7,9 @@ namespace Assets.Standard_Assets.Models
 {
 	public struct FullPerson
 	{
-		int personID;
-		Person person;
-		SearchableAsset assets;
+		public int personID;
+		public Person person;
+		public SearchableAsset assets;
 	}
 
 	public struct SearchableAsset
