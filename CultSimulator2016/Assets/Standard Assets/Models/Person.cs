@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Assets.Standard_Assets.Models
 {
-	class Sacrifice
+	class Person
 	{
 		public decimal abduction { get; set; }
 		public decimal abductionDefense { get; set; }
