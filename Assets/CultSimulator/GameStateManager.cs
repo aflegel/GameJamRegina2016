@@ -8,29 +8,31 @@ namespace Assets.CultSimulator
 {
 	class GameStateManager : MonoBehaviour
 	{
-		private List<Person> _sacrificeCandidates;
-		private List<Person> _cultistCandidates;
-		private List<Person> _cultists;
+		private List<PersonReference> _sacrificeCandidates;
+		private List<PersonReference> _cultistCandidates;
+		private List<PersonReference> _cultists;
 		private YearTarget _currentTarget;
 		private int _seasonNumber;
+
+		public PeoplePool peoplePool { get; set; }
 
 		// Public interactions
 		public GameStateManager()
 		{
 			_seasonNumber = 1;
 
-			_sacrificeCandidates = new List<Person>();
-			_cultistCandidates = new List<Person>();
-			_cultists = new List<Person>();
+			_sacrificeCandidates = new List<PersonReference>();
+			_cultistCandidates = new List<PersonReference>();
+			_cultists = new List<PersonReference>();
 			_currentTarget = new YearTarget();
 		}
 
-		public void AddSacrificeCandidate(Person newCandidate)
+		public void AddSacrificeCandidate(int personID)
 		{
-			_sacrificeCandidates.Add(newCandidate);
+			_sacrificeCandidates.Add(new PersonReference { PersonID = personID, Instruction = null });
 		}
 
-		public IEnumerable<Person> GetSacrificeCandidates()
+		public IEnumerable<PersonReference> GetSacrificeCandidates()
 		{
 			return _sacrificeCandidates;
 		}
@@ -40,14 +42,14 @@ namespace Assets.CultSimulator
 			_sacrificeCandidates.Remove(_sacrificeCandidates.Find(person => person.PersonID == personID));
 		}
 
-		public IEnumerable<Person> GetCultistCandidates()
+		public IEnumerable<PersonReference> GetCultistCandidates()
 		{
 			return _cultistCandidates;
 		}
 
-		public void AddCultistCandidate(Person newCandidate)
+		public void AddCultistCandidate(int personID)
 		{
-			_cultistCandidates.Add(newCandidate);
+			_cultistCandidates.Add(new PersonReference { PersonID = personID, Instruction = null });
 		}
 
 		public void RemoveCultistCandidate(int personID)
@@ -55,14 +57,20 @@ namespace Assets.CultSimulator
 			_cultistCandidates.Remove(_cultistCandidates.Find(person => person.PersonID == personID));
 		}
 
-		public void AddCultist(Person newCultist)
+		public void AddCultist(int personID)
 		{
-			_cultists.Add(newCultist);
+			_cultists.Add(new PersonReference { PersonID = personID, Instruction = null });
 		}
 
-		public IEnumerable<Person> GetCurrentCultists()
+		public IEnumerable<PersonReference> GetCurrentCultists()
 		{
 			return _cultists;
+		}
+
+		public void SetCultistInstruction(int personID, ActionType action, int targetPersonID)
+		{
+			var cultist = _cultists.Find(cult => cult.PersonID == personID);
+			cultist.Instruction = new Instruction { Action = action, TargetID =  targetPersonID};
 		}
 
 		public void SetNewTarget(int numberOfCultists, SearchableAsset[] sacrificeTargets)

@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Assets.CultSimulator
 {
-	public class Instruction
+	public class PersonReference
 	{
-		public ActionType Action { get; set; }
-		public int? TargetID { get; set; }
+		public int PersonID { get; set; }
+		public Instruction Instruction { get; set; }
 	}
 }
