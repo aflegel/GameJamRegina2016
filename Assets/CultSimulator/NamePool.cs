@@ -9,18 +9,20 @@ namespace Assets.CultSimulator
 	{
 		public HashSet<string> usedNames;
 		public List<string> lastNames;
-		public List<string> firstNames;
+		public List<string> femaleNames;
+		public List<string> maleNames;
 
 
 		public NamePool()
 		{
 			usedNames = new HashSet<string>();
 			lastNames = new List<string>();
-			firstNames = new List<string>();
+			femaleNames = new List<string>();
+			maleNames = new List<string>();
 			AddNames();
 		}
 
-		public string GetNextName(int? count)
+		public string GetNextName(int? count, bool gender)
 		{
 			//sets an internal counter and escape
 			count = (count ?? 0);
@@ -31,15 +33,13 @@ namespace Assets.CultSimulator
 
 			string freshName = "";
 
-			Random x = new Random();
-			int firstIndex = x.Next(0, firstNames.Count);
-			int lastIndex = x.Next(0, firstNames.Count);
+			Random randomNumber = new Random();
 
-			freshName = firstNames[firstIndex] + " " + lastNames[lastIndex];
+			freshName =  gender ? femaleNames[randomNumber.Next(0, femaleNames.Count)] : maleNames[randomNumber.Next(0, maleNames.Count)] + " " + lastNames[randomNumber.Next(0, lastNames.Count)];
 
 			if (usedNames.Contains(freshName))
 			{
-				return GetNextName(count);
+				return GetNextName(count, gender);
 			}
 			else
 			{
@@ -58,13 +58,22 @@ namespace Assets.CultSimulator
 			lastNames.Add("test");
 			lastNames.Add("test2");
 
-			firstNames.Add("Alex");
-			firstNames.Add("Alexander");
-			firstNames.Add("Chris");
-			firstNames.Add("Christopher");
-			firstNames.Add("Johannes");
-			firstNames.Add("testet");
-			firstNames.Add("test");
+			femaleNames.Add("Alex");
+			femaleNames.Add("Alexander");
+			femaleNames.Add("Chris");
+			femaleNames.Add("Christopher");
+			femaleNames.Add("Johannes");
+			femaleNames.Add("testet");
+			femaleNames.Add("test");
+
+
+			maleNames.Add("Alex");
+			maleNames.Add("Alexander");
+			maleNames.Add("Chris");
+			maleNames.Add("Christopher");
+			maleNames.Add("Johannes");
+			maleNames.Add("testet");
+			maleNames.Add("test");
 		}
 
 	}
