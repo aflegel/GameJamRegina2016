@@ -9,6 +9,11 @@ namespace Assets.Standard_Assets.Models
 	{
 		int personID;
 		Person person;
+		searchableAssets assets;
+	}
+
+	public struct searchableAssets
+	{
 		profession profession;
 		List<trait> traits;
 	}
