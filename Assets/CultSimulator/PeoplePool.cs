@@ -24,29 +24,34 @@ namespace Assets.CultSimulator
 			for (int i = 0; i < (numberOfNewRecords - requiredAssets.Count); i++)
 			{
 
-				string name = names.GetNextName(null);
+				Person freshPerson = GeneratePerson(activePool.Count + 1, null);
+
+				string name = names.GetNextName(null, freshPerson.Gender);
+
 				if (name == "")
 					break;
 
-				Person freshPerson = GeneratePerson(activePool.Count + 1, name, null);
-
+				freshPerson.Name = name;
 				activePool.Add(freshPerson.PersonID, freshPerson);
 			}
 
 			foreach (SearchableAsset asset in requiredAssets)
 			{
-				string name = names.GetNextName(null);
+
+				Person freshPerson = GeneratePerson(activePool.Count + 1, null);
+
+				string name = names.GetNextName(null, freshPerson.Gender);
+
 				if (name == "")
 					break;
 
-				Person freshPerson = GeneratePerson(activePool.Count + 1, name, asset);
-
+				freshPerson.Name = name;
 				activePool.Add(freshPerson.PersonID, freshPerson);
 			}
 
 		}
 
-		public Person GeneratePerson(int id, string name, SearchableAsset? requiredAsset)
+		public Person GeneratePerson(int id, SearchableAsset? requiredAsset)
 		{
 			//arrays to generate random values
 			Array sins = Enum.GetValues(typeof(Sin));
