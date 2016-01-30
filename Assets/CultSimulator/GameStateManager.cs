@@ -9,9 +9,9 @@ namespace Assets.Standard_Assets
 {
 	class GameStateManager : MonoBehaviour
 	{
-		private List<FullPerson> _sacrificeCandidates;
-		private List<FullPerson> _cultistCandidates;
-		private List<FullPerson> _cultists;
+		private List<Person> _sacrificeCandidates;
+		private List<Person> _cultistCandidates;
+		private List<Person> _cultists;
 		private YearTarget _currentTarget;
 		private int _seasonNumber;
 
@@ -20,18 +20,18 @@ namespace Assets.Standard_Assets
 		{
 			_seasonNumber = 1;
 
-			_sacrificeCandidates = new List<FullPerson>();
-			_cultistCandidates = new List<FullPerson>();
-			_cultists = new List<FullPerson>();
+			_sacrificeCandidates = new List<Person>();
+			_cultistCandidates = new List<Person>();
+			_cultists = new List<Person>();
 			_currentTarget = new YearTarget();
 		}
 
-		public void AddSacrificeCandidate(FullPerson newCandidate)
+		public void AddSacrificeCandidate(Person newCandidate)
 		{
 			_sacrificeCandidates.Add(newCandidate);
 		}
 
-		public IEnumerable<FullPerson> GetSacrificeCandidates()
+		public IEnumerable<Person> GetSacrificeCandidates()
 		{
 			return _sacrificeCandidates;
 		}
@@ -41,12 +41,12 @@ namespace Assets.Standard_Assets
 			_sacrificeCandidates.Remove(_sacrificeCandidates.Find(x => x.personID == personId));
 		}
 
-		public void AddCultist(FullPerson newCultist)
+		public void AddCultist(Person newCultist)
 		{
 			_cultists.Add(newCultist);
 		}
 
-		public IEnumerable<FullPerson> GetCurrentCultists()
+		public IEnumerable<Person> GetCurrentCultists()
 		{
 			return _cultists;
 		}

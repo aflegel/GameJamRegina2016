@@ -7,12 +7,12 @@ namespace Assets.Standard_Assets.Models
 {
 	class PeoplePool
 	{
-		public Dictionary<int, FullPerson> activePool;
+		public Dictionary<int, Person> activePool;
 		public Dictionary<Sin, Dictionary<Sin, int>> traitPool;
 
 		public PeoplePool()
 		{
-			activePool = new Dictionary<int, FullPerson>();
+			activePool = new Dictionary<int, Person>();
 			traitPool = new Dictionary<Sin, Dictionary<Sin, int>>();
 		}
 
@@ -34,14 +34,14 @@ namespace Assets.Standard_Assets.Models
 
 			for (int i = 0; i < 20; i++)
 			{
-				FullPerson freshPerson = new FullPerson();
+				Person freshPerson = new Person();
 
 				string name = names.GetNextName(null);
 				if (name == "")
 					break;
 
-				freshPerson.person = new Person();
-				freshPerson.person.name = name;
+				freshPerson = new Person();
+				freshPerson.name = name;
 
 				freshPerson.assets = new SearchableAsset();
 				freshPerson.assets.sin = (Sin)sins.GetValue(ranomNumber.Next(sins.Length));
@@ -60,14 +60,14 @@ namespace Assets.Standard_Assets.Models
 
 
 
-		public Dictionary<int, FullPerson> SearchPeople(SearchableAsset assets)
+		public Dictionary<int, Person> SearchPeople(SearchableAsset assets)
 		{
-			return new Dictionary<int, FullPerson>();
+			return new Dictionary<int, Person>();
 		}
 
-		public Dictionary<int, FullPerson> SearchPeopleByID(int id)
+		public Dictionary<int, Person> SearchPeopleByID(int id)
 		{
-			return new Dictionary<int, FullPerson>();
+			return new Dictionary<int, Person>();
 		}
 
 		public int GetTraitValue(SearchableAsset keyValues, SearchableAsset matchValues)
