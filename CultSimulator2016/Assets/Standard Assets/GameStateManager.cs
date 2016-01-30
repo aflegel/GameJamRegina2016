@@ -11,6 +11,7 @@ namespace Assets.Standard_Assets
 	{
 		private List<FullPerson> _sacrificeCandidates = new List<FullPerson>();
 		private List<FullPerson> _cultistCandidates = new List<FullPerson>();
+		private List<FullPerson> _cultists = new List<FullPerson>();
 		private YearTarget _currentTarget;
 
 		// Public interactions
@@ -21,14 +22,24 @@ namespace Assets.Standard_Assets
 			_sacrificeCandidates.Add(newCandidate);
 		}
 
-		public FullPerson[] GetSacrificeCandidates()
+		public IEnumerable<FullPerson> GetSacrificeCandidates()
 		{
-			return _sacrificeCandidates.ToArray();
+			return _sacrificeCandidates;
 		}
 
 		public void RemoveSacrificeCandidate(int personId)
 		{
 			_sacrificeCandidates.Remove(_sacrificeCandidates.Find(x => x.personID == personId));
+		}
+
+		public void AddCultist(FullPerson newCultist)
+		{
+			_cultists.Add(newCultist);
+		}
+
+		public IEnumerable<FullPerson> GetCurrentCultists()
+		{
+			return _cultists;
 		}
 
 		public void SetNewTarget(int numberOfCultists, SearchableAsset[] sacrificeTargets)
