@@ -8,9 +8,11 @@ namespace Assets.CultSimulator
 {
 	class GameStateManager : MonoBehaviour
 	{
+		static int NUMBER_OF_CULTISTS = 8;
+
 		private List<PersonReference> sacrificeCandidates;
 		private List<PersonReference> cultistCandidates;
-		private List<PersonReference> cultists;
+		private Cultist[] cultists;
 		private YearTarget currentTarget;
 		private int seasonNumber;
 		private int yearNumber;
@@ -24,14 +26,19 @@ namespace Assets.CultSimulator
 
 			sacrificeCandidates = new List<PersonReference>();
 			cultistCandidates = new List<PersonReference>();
-			cultists = new List<PersonReference>();
 			currentTarget = new YearTarget();
 			peoplePool = new PeoplePool();
+
+			cultists = new Cultist[NUMBER_OF_CULTISTS];
+			for (int i = 0; i < NUMBER_OF_CULTISTS; i++)
+			{
+				cultists[i] = null;
+			}
 		}
 
 		public void AddSacrificeCandidate(int personID)
 		{
-			sacrificeCandidates.Add(new PersonReference { PersonID = personID, Instruction = null });
+			sacrificeCandidates.Add(new PersonReference { PersonID = personID, IndepthInvestigated = false });
 		}
 
 		public IEnumerable<PersonReference> GetSacrificeCandidates()
@@ -51,7 +58,7 @@ namespace Assets.CultSimulator
 
 		public void AddCultistCandidate(int personID)
 		{
-			cultistCandidates.Add(new PersonReference { PersonID = personID, Instruction = null });
+			cultistCandidates.Add(new PersonReference { PersonID = personID, IndepthInvestigated = false });
 		}
 
 		public void RemoveCultistCandidate(int personID)
@@ -59,20 +66,19 @@ namespace Assets.CultSimulator
 			cultistCandidates.Remove(cultistCandidates.Find(person => person.PersonID == personID));
 		}
 
-		public void AddCultist(int personID)
+		public void AddCultist(int personID, int cultistIndex)
 		{
-			cultists.Add(new PersonReference { PersonID = personID, Instruction = null });
+			cultists[cultistIndex] = new Cultist() { PersonID = personID, Instruction = null };
 		}
 
-		public IEnumerable<PersonReference> GetCurrentCultists()
+		public Cultist[] GetCurrentCultists()
 		{
 			return cultists;
 		}
 
-		public void SetCultistInstruction(int personID, ActionType action, int targetPersonID)
+		public void SetCultistInstruction(ActionType action, int targetPersonID, int cultistIndex)
 		{
-			var cultist = cultists.Find(cult => cult.PersonID == personID);
-			cultist.Instruction = new Instruction { Action = action, TargetID =  targetPersonID};
+			cultists[cultistIndex].Instruction = new Instruction { Action = action, TargetID =  targetPersonID};
 		}
 
 		public void SetNewTarget(int numberOfCultists, SearchableAsset[] sacrificeTargets)
@@ -114,6 +120,11 @@ namespace Assets.CultSimulator
 			yearNumber += 1;
 			seasonNumber = 1;
 			peoplePool.GeneratePeople(20, null);
+		}
+
+		public Person GetPerson(int personID)
+		{
+			return peoplePool.SearchPeopleByID(personID);
 		}
 	}
 }

@@ -8,6 +8,6 @@ namespace Assets.CultSimulator
 	public class PersonReference
 	{
 		public int PersonID { get; set; }
-		public Instruction Instruction { get; set; }
+		public bool IndepthInvestigated { get; set; }
 	}
 }
