@@ -58,13 +58,13 @@ namespace Assets.CultSimulator
 
 	public enum Virtue
 	{
-		none = 0,
-		forgiveness = 1,
-		humility = 2,
-		charity = 3,
-		temperance = 4,
-		diligence = 5,
-		chastity = 6,
-		kindness = 7
+		none = 10,
+		forgiveness = 11,
+		humility = 12,
+		charity = 13,
+		temperance = 14,
+		diligence = 15,
+		chastity = 16,
+		kindness = 17
 	}
 }
