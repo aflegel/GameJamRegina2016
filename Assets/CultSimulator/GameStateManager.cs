@@ -19,7 +19,7 @@ namespace Assets.CultSimulator
 		private PeoplePool peoplePool { get; set; }
 
 		// Public interactions
-		public GameStateManager()
+		void Start()
 		{
 			seasonNumber = 1;
 			yearNumber = 1;
