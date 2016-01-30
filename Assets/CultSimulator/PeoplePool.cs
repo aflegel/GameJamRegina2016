@@ -36,7 +36,7 @@ namespace Assets.Standard_Assets.Models
 					break;
 
 				freshPerson.person = new Person();
-				freshPerson.person.name = name;
+				freshPerson.person.Name = name;
 
 				freshPerson.assets = new SearchableAsset();
 				activePool.Add(activePool.Count + 1, freshPerson);

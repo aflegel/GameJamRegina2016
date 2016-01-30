@@ -38,7 +38,22 @@ namespace Assets.Standard_Assets
 
 		public void RemoveSacrificeCandidate(int personId)
 		{
-			_sacrificeCandidates.Remove(_sacrificeCandidates.Find(x => x.personID == personId));
+			_sacrificeCandidates.Remove(_sacrificeCandidates.Find(person => person.personID == personId));
+		}
+
+		public IEnumerable<FullPerson> GetCultistCandidates()
+		{
+			return _cultistCandidates;
+		}
+
+		public void AddCultistCandidate(FullPerson newCandidate)
+		{
+			_cultistCandidates.Add(newCandidate);
+		}
+
+		public void RemoveCultistCandidate(int personId)
+		{
+			_cultistCandidates.Remove(_cultistCandidates.Find(person => person.personID == personId));
 		}
 
 		public void AddCultist(FullPerson newCultist)
