@@ -88,6 +88,11 @@ namespace Assets.CultSimulator
 			cultists[cultistIndex].Instruction = new Instruction { Action = action, TargetID =  targetPersonID};
 		}
 
+		public Cultist GetCultist(int cultistIndex)
+		{
+			return cultists[cultistIndex];
+		}
+
 		public void SetNewTarget(int numberOfCultists, SearchableAsset[] sacrificeTargets)
 		{
 			currentTarget = new YearTarget()
