@@ -7,10 +7,10 @@ namespace Assets.Standard_Assets.Models
 {
 	public class Person
 	{
-		public int personID;
-
-		public string name;
-		public string flavourText;
+		public int personID { get; set; }
+		public bool inactive { get; set; }
+		public string name { get; set; }
+		public string flavourText { get; set; }
 		public decimal abduction { get; set; }
 		public decimal abductionDefense { get; set; }
 		public decimal investigation { get; set; }
