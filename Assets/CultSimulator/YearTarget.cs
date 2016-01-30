@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Assets.CultSimulator
 {
-	class YearTarget
+	public class YearTarget
 	{
 		public int NumberOfCultists { get; set; }
 		public SearchableAsset[] SacrificeTargets { get; set; }

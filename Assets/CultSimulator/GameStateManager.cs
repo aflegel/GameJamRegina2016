@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.CultSimulator
 {
-	class GameStateManager : MonoBehaviour
+	public class GameStateManager : MonoBehaviour
 	{
 		static int NUMBER_OF_CULTISTS = 8;
 

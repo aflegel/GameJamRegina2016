@@ -5,7 +5,7 @@ public class CultistScript : MonoBehaviour
 {
 	public UIScript UIController;
 
-	public int CultistID;
+	public int CultistIndex;
 
 	void Start()
 	{
@@ -19,5 +19,6 @@ public class CultistScript : MonoBehaviour
 
 	void OnMouseDown()
 	{
+		UIController.SetActiveCultist(CultistIndex);
 	}
 }
