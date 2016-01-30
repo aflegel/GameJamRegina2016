@@ -269,3 +269,5 @@ ExportedObj/
 sysinfo.txt
 
 *.dll
+ProjectSettings/ProjectSettings.asset
+ProjectSettings/ProjectVersion.txt
