@@ -26,7 +26,7 @@ public class UIScript : MonoBehaviour
 
 	private GameObject[] Cultists;
 
-	private int activeCultistIndex;
+	private int activeCultistIndex = -1;
 
 	void Start()
 	{
@@ -47,9 +47,17 @@ public class UIScript : MonoBehaviour
 
 	void Update()
 	{
-		var cultists = GameState.GetCurrentCultists().ToArray();
+		var cultists = GameState.GetCurrentCultists();
 		for (int i = 0; i < cultists.Length; ++i)
 			Cultists[i].SetActive(cultists[i] != null);
+
+		if (activeCultistIndex != -1 && cultists[activeCultistIndex] == null)
+			activeCultistIndex = -1;
+
+		if (activeCultistIndex == -1)
+			CultistUIScript.SetCultistInformation(null);
+		else
+			CultistUIScript.SetCultistInformation(GameState.GetPerson(cultists[activeCultistIndex].PersonID));
 	}
 
 	private void SetButtons(GameObject panel, string[] text)

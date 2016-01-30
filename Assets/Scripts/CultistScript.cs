@@ -7,16 +7,6 @@ public class CultistScript : MonoBehaviour
 
 	public int CultistIndex;
 
-	void Start()
-	{
-
-	}
-
-	void Update()
-	{
-
-	}
-
 	void OnMouseDown()
 	{
 		UIController.SetActiveCultist(CultistIndex);
