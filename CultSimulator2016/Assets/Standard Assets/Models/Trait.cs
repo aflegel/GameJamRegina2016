@@ -8,10 +8,10 @@ namespace Assets.Standard_Assets.Models
 	class Trait
 	{
 
-		public Dictionary<KeyValuePair<ProfessionTrait.traits, ProfessionTrait.traits>, int> traitMapping;
+		public Dictionary<KeyValuePair<trait, trait>, int> traitMapping;
 
 
-		public int getValue(ProfessionTrait.traits val1, ProfessionTrait.traits val2)
+		public int getValue(trait val1, trait val2)
 		{
 
 			return 0;
