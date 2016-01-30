@@ -12,7 +12,7 @@ namespace Assets.CultSimulator
 		public TraitPool()
 		{
 			traitPool = new Dictionary<TraitMap, int>();
-
+			AddTraits();
 		}
 
 
@@ -35,6 +35,38 @@ namespace Assets.CultSimulator
 
 			//check the dictionary against values and return the match
 			return traitPool[getKey];
+		}
+
+		protected void AddTraits()
+		{
+			traitPool.Add(new TraitMap(0, 0), 0);
+			traitPool.Add(new TraitMap(0, 0), 0);
+			traitPool.Add(new TraitMap(0, 0), 0);
+			traitPool.Add(new TraitMap(0, 0), 0);
+			traitPool.Add(new TraitMap(0, 0), 0);
+			traitPool.Add(new TraitMap(0, 0), 0);
+
+			traitPool.Add(new TraitMap(0, 0), 0);
+			traitPool.Add(new TraitMap(0, 0), 0);
+			traitPool.Add(new TraitMap(0, 0), 0);
+			traitPool.Add(new TraitMap(0, 0), 0);
+			traitPool.Add(new TraitMap(0, 0), 0);
+
+			traitPool.Add(new TraitMap(0, 0), 0);
+			traitPool.Add(new TraitMap(0, 0), 0);
+			traitPool.Add(new TraitMap(0, 0), 0);
+			traitPool.Add(new TraitMap(0, 0), 0);
+
+			traitPool.Add(new TraitMap(0, 0), 0);
+			traitPool.Add(new TraitMap(0, 0), 0);
+			traitPool.Add(new TraitMap(0, 0), 0);
+
+			traitPool.Add(new TraitMap(0, 0), 0);
+			traitPool.Add(new TraitMap(0, 0), 0);
+
+			traitPool.Add(new TraitMap(0, 0), 0);
+
+
 		}
 	}
 
