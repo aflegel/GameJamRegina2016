@@ -1,154 +1,138 @@
-<<<<<<< HEAD
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using Assets.Standard_Assets.Models;
 
-namespace Assets.Standard_Assets
+namespace Assets.CultSimulator
 {
-	class GameStateManager : MonoBehaviour
+	public class GameStateManager : MonoBehaviour
 	{
-		private List<FullPerson> _sacrificeCandidates;
-		private List<FullPerson> _cultistCandidates;
-		private List<FullPerson> _cultists;
-		private YearTarget _currentTarget;
-		private int _seasonNumber;
+		static int NUMBER_OF_CULTISTS = 8;
+
+		private List<PersonReference> sacrificeCandidates;
+		private List<PersonReference> cultistCandidates;
+		private Cultist[] cultists;
+		private YearTarget currentTarget;
+		private int seasonNumber;
+		private int yearNumber;
+		private PeoplePool peoplePool { get; set; }
+
+		private void GetNewPools(List<SearchableAsset> sacrificeAssets, List<SearchableAsset> cultistAssets, int size)
+		{
+			peoplePool.GeneratePeople(size, sacrificeAssets, false, true);
+			sacrificeCandidates = new List<PersonReference>();
+			int startingIndex = size + 1;
+
+			for (int i = peoplePool.activePool.Count - startingIndex; i < peoplePool.activePool.Count - 1; i++)
+			{
+				sacrificeCandidates.Add(new PersonReference() { PersonID = peoplePool.activePool[i].PersonID, IndepthInvestigated = false });
+			}
+
+			peoplePool.GeneratePeople(20, cultistAssets, false, false);
+			cultistCandidates = new List<PersonReference>();
+
+			for (int i = peoplePool.activePool.Count - startingIndex; i < peoplePool.activePool.Count - 1; i++)
+			{
+				cultistCandidates.Add(new PersonReference() { PersonID = peoplePool.activePool[i].PersonID, IndepthInvestigated = false });
+			}
+		}
 
 		// Public interactions
-		public GameStateManager()
+		void Start()
 		{
-			_seasonNumber = 1;
+			seasonNumber = 1;
+			yearNumber = 1;
 
-			_sacrificeCandidates = new List<FullPerson>();
-			_cultistCandidates = new List<FullPerson>();
-			_cultists = new List<FullPerson>();
-			_currentTarget = new YearTarget();
-		}
+			sacrificeCandidates = new List<PersonReference>();
+			cultistCandidates = new List<PersonReference>();
+			currentTarget = new YearTarget();
+			peoplePool = new PeoplePool();
+			cultists = new Cultist[NUMBER_OF_CULTISTS];
 
-		public void AddSacrificeCandidate(FullPerson newCandidate)
-		{
-			_sacrificeCandidates.Add(newCandidate);
-		}
-
-		public IEnumerable<FullPerson> GetSacrificeCandidates()
-		{
-			return _sacrificeCandidates;
-		}
-
-		public void RemoveSacrificeCandidate(int personId)
-		{
-			_sacrificeCandidates.Remove(_sacrificeCandidates.Find(person => person.personID == personId));
-		}
-
-		public IEnumerable<FullPerson> GetCultistCandidates()
-		{
-			return _cultistCandidates;
-		}
-
-		public void AddCultistCandidate(FullPerson newCandidate)
-		{
-			_cultistCandidates.Add(newCandidate);
-		}
-
-		public void RemoveCultistCandidate(int personId)
-		{
-			_cultistCandidates.Remove(_cultistCandidates.Find(person => person.personID == personId));
-		}
-
-		public void AddCultist(FullPerson newCultist)
-		{
-			_cultists.Add(newCultist);
-		}
-
-		public IEnumerable<FullPerson> GetCurrentCultists()
-		{
-			return _cultists;
-		}
-
-		public void SetNewTarget(int numberOfCultists, SearchableAsset[] sacrificeTargets)
-		{
-			_currentTarget = new YearTarget()
+			var sacrificeAssets = new List<SearchableAsset>
 			{
-				NumberOfCultists = numberOfCultists,
-				SacrificeTargets = sacrificeTargets
+				new SearchableAsset() { Profession = Profession.Educator, Sin = Sin.Envious, Virtue = Virtue.Temperant },
+				new SearchableAsset() { Profession = Profession.Law, Sin = Sin.Lusty, Virtue = Virtue.Kind }
 			};
-		}
 
-		public YearTarget GetCurrentTarget()
-		{
-			return _currentTarget;
-		}
+			var cultistAssets = new List<SearchableAsset>
+			{
+				new SearchableAsset() { Profession = Profession.Educator, Sin = Sin.Envious, Virtue = Virtue.Temperant },
+				new SearchableAsset() { Profession = Profession.Law, Sin = Sin.Lusty, Virtue = Virtue.Kind }
+			};
 
-		public int GetSeasonNumber()
-		{
-			return _seasonNumber;
-		}
+			// Create the starting Cultists
+			peoplePool.GeneratePeople(2, cultistAssets, false, false);
 
-		public void IncrementSeason()
-		{
-			_seasonNumber += 1;
-		}
-	}
-}
+			cultists[0] = new Cultist() { PersonID = peoplePool.activePool[1].PersonID, Instruction = null };
+			cultists[1] = new Cultist() { PersonID = peoplePool.activePool[2].PersonID, Instruction = null };
+<<<<<<< 1583113885e50b857c8b83e27e5b396d0038452e
+
+			GetNewPools(sacrificeAssets, cultistAssets, 20);
 =======
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
-using Assets.Standard_Assets.Models;
-
-namespace Assets.Standard_Assets
-{
-	class GameStateManager : MonoBehaviour
-	{
-		private List<Person> _sacrificeCandidates;
-		private List<Person> _cultistCandidates;
-		private List<Person> _cultists;
-		private YearTarget _currentTarget;
-		private int _seasonNumber;
-
-		// Public interactions
-		public GameStateManager()
-		{
-			_seasonNumber = 1;
-
-			_sacrificeCandidates = new List<Person>();
-			_cultistCandidates = new List<Person>();
-			_cultists = new List<Person>();
-			_currentTarget = new YearTarget();
+			cultists[2] = new Cultist() { PersonID = peoplePool.activePool[3].PersonID, Instruction = null };
+			cultists[3] = new Cultist() { PersonID = peoplePool.activePool[4].PersonID, Instruction = null };
+			cultists[4] = new Cultist() { PersonID = peoplePool.activePool[5].PersonID, Instruction = null };
+			cultists[5] = new Cultist() { PersonID = peoplePool.activePool[6].PersonID, Instruction = null };
+			cultists[6] = new Cultist() { PersonID = peoplePool.activePool[7].PersonID, Instruction = null };
+			cultists[7] = new Cultist() { PersonID = peoplePool.activePool[8].PersonID, Instruction = null };
+>>>>>>> Updates description text
 		}
 
-		public void AddSacrificeCandidate(Person newCandidate)
+		public void AddSacrificeCandidate(int personID)
 		{
-			_sacrificeCandidates.Add(newCandidate);
+			sacrificeCandidates.Add(new PersonReference { PersonID = personID, IndepthInvestigated = false });
 		}
 
-		public IEnumerable<Person> GetSacrificeCandidates()
+		public IEnumerable<PersonReference> GetSacrificeCandidates()
 		{
-			return _sacrificeCandidates;
+			return sacrificeCandidates;
 		}
 
-		public void RemoveSacrificeCandidate(int personId)
+		public void RemoveSacrificeCandidate(int personID)
 		{
-			_sacrificeCandidates.Remove(_sacrificeCandidates.Find(x => x.personID == personId));
+			sacrificeCandidates.Remove(sacrificeCandidates.Find(person => person.PersonID == personID));
 		}
 
-		public void AddCultist(Person newCultist)
+		public IEnumerable<PersonReference> GetCultistCandidates()
 		{
-			_cultists.Add(newCultist);
+			return cultistCandidates;
 		}
 
-		public IEnumerable<Person> GetCurrentCultists()
+		public void AddCultistCandidate(int personID)
 		{
-			return _cultists;
+			cultistCandidates.Add(new PersonReference { PersonID = personID, IndepthInvestigated = false });
+		}
+
+		public void RemoveCultistCandidate(int personID)
+		{
+			cultistCandidates.Remove(cultistCandidates.Find(person => person.PersonID == personID));
+		}
+
+		public void AddCultist(int personID, int cultistIndex)
+		{
+			cultists[cultistIndex] = new Cultist() { PersonID = personID, Instruction = null };
+		}
+
+		public Cultist[] GetCurrentCultists()
+		{
+			return cultists;
+		}
+
+		public void SetCultistInstruction(ActionType action, int targetPersonID, int cultistIndex)
+		{
+			cultists[cultistIndex].Instruction = new Instruction { Action = action, TargetID =  targetPersonID};
+		}
+
+		public Cultist GetCultist(int cultistIndex)
+		{
+			return cultists[cultistIndex];
 		}
 
 		public void SetNewTarget(int numberOfCultists, SearchableAsset[] sacrificeTargets)
 		{
-			_currentTarget = new YearTarget()
+			currentTarget = new YearTarget()
 			{
 				NumberOfCultists = numberOfCultists,
 				SacrificeTargets = sacrificeTargets
@@ -157,18 +141,50 @@ namespace Assets.Standard_Assets
 
 		public YearTarget GetCurrentTarget()
 		{
-			return _currentTarget;
+			return currentTarget;
 		}
 
 		public int GetSeasonNumber()
 		{
-			return _seasonNumber;
+			return seasonNumber;
 		}
 
 		public void IncrementSeason()
 		{
-			_seasonNumber += 1;
+			seasonNumber += 1;
+
+			if (seasonNumber == 5)
+			{
+				IncrementYear();
+			}
+		}
+
+		public int GetYearNumber()
+		{
+			return yearNumber;
+		}
+
+		public void IncrementYear()
+		{
+			yearNumber += 1;
+			seasonNumber = 1;
+
+			var sacrificeAssets = new List<SearchableAsset> {
+				new SearchableAsset() { Profession = Profession.Educator, Sin = Sin.Envious, Virtue = Virtue.Temperant },
+				new SearchableAsset() { Profession = Profession.Law, Sin = Sin.Lusty, Virtue = Virtue.Kind },
+				new SearchableAsset() { Profession = Profession.Medical, Sin = Sin.Proud, Virtue = Virtue.Charitable } };
+
+			var cultistAssets = new List<SearchableAsset> {
+				new SearchableAsset() { Profession = Profession.Educator, Sin = Sin.Envious, Virtue = Virtue.Temperant },
+				new SearchableAsset() { Profession = Profession.Law, Sin = Sin.Lusty, Virtue = Virtue.Kind },
+				new SearchableAsset() { Profession = Profession.Medical, Sin = Sin.Proud, Virtue = Virtue.Charitable } };
+
+			GetNewPools(sacrificeAssets, cultistAssets, 20);
+		}
+
+		public Person GetPerson(int personID)
+		{
+			return peoplePool.SearchPeopleByID(personID);
 		}
 	}
 }
->>>>>>> b5b9956f5e3f66c029b6496a9be79bf3eec844a1

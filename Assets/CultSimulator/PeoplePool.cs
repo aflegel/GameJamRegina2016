@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Assets.Scripts;
 
 namespace Assets.CultSimulator
 {
@@ -69,7 +70,7 @@ namespace Assets.CultSimulator
 			freshPerson.assets.Sin = (Sin)sins.GetValue( randomNumber.Next(1, sins.Length));
 			freshPerson.assets.Virtue = (Virtue)virtues.GetValue(randomNumber.Next(1, virtues.Length));
 			freshPerson.assets.Profession = (Profession)professions.GetValue(randomNumber.Next(1, professions.Length));
-			freshPerson.Gender = randomNumber.Next(0, 2) == 0;
+			freshPerson.Gender = randomNumber.Next(0, 2) == 0 ? Gender.Male : Gender.Female;
 
 
 			SkillMap professionSkills = professionPool.GetProfessionValue(freshPerson.assets);
@@ -81,6 +82,8 @@ namespace Assets.CultSimulator
 			freshPerson.Recruitment = randomNumber.Next(0, 100) + professionSkills.Recruitment;
 			freshPerson.RecruitmentDefense = randomNumber.Next(0, 100) + professionSkills.RecruitmentDefense;
 
+			var descriptions = freshPerson.assets.profession.GetAttributes<ProfessionDescriptionAttribute>().Where(d => d.Gender == null || d.Gender == freshPerson.Gender).ToArray();
+			freshPerson.ProfessionDescription = descriptions[randomNumber.Next(0, descriptions.Length)].Description;
 
 			return freshPerson;
 		}

@@ -24,7 +24,11 @@ namespace Assets.CultSimulator
 			AddNames();
 		}
 
-		public string GetNextName(int? count, Gender gender, bool animal, Random randomNumber)
+<<<<<<< 9df5f9e50cb078c13a2a49d36089097cec0da769
+		public string GetNextName(int? count, bool gender, bool animal, Random randomNumber)
+=======
+		public string GetNextName(int? count, Gender gender, Random randomNumber)
+>>>>>>> Updates description text
 		{
 			//sets an internal counter and escape
 			count = (count ?? 0);
@@ -35,14 +39,20 @@ namespace Assets.CultSimulator
 
 			string freshName = "";
 
+<<<<<<< 9df5f9e50cb078c13a2a49d36089097cec0da769
 			if(animal)
 			{
 				return animalNames[randomNumber.Next(0, animalNames.Count)];
 			} else
 			{
-				freshName = gender == Gender.Female ? femaleNames[randomNumber.Next(0, femaleNames.Count)] : maleNames[randomNumber.Next(0, maleNames.Count)];
+				freshName = gender ? femaleNames[randomNumber.Next(0, femaleNames.Count)] : maleNames[randomNumber.Next(0, maleNames.Count)];
 				freshName += " " + lastNames[randomNumber.Next(0, lastNames.Count)];
 			}
+=======
+
+
+			freshName = gender == Gender.Female ? femaleNames[randomNumber.Next(0, femaleNames.Count)] : maleNames[randomNumber.Next(0, maleNames.Count)] + " " + lastNames[randomNumber.Next(0, lastNames.Count)];
+>>>>>>> Updates description text
 
 			if (usedNames.Contains(freshName))
 			{
