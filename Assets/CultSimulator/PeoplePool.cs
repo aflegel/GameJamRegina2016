@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Assets.Scripts;
+using System.Security.Cryptography;
 
 namespace Assets.CultSimulator
 {
@@ -81,8 +82,6 @@ namespace Assets.CultSimulator
 			}
 			freshPerson.Gender = randomNumber.Next(0, 2) == 0 ? Gender.Male : Gender.Female;
 
-
-
 			SkillMap professionSkills = professionPool.GetProfessionValue(freshPerson.assets);
 
 			freshPerson.Abduction = randomNumber.Next(0, 100) + professionSkills.Abduction;
@@ -98,29 +97,43 @@ namespace Assets.CultSimulator
 			return freshPerson;
 		}
 
-		public Dictionary<int, Person> SearchPeople(SearchableAsset assets)
+		public Dictionary<int, Person> SearchPeople(SearchableAsset assets, int positives, int negatives, Random randomNumber)
 		{
 
-			var search = activePool.Values.Where(s => s.Active == true);
+			var searchSuccess = activePool.Values.Where(s => s.Active == true);
+			var searchFail = activePool.Values.Where(s => s.Active == true);
 			Dictionary<int, Person> returnVal = new Dictionary<int, Person>();
 
 			if (assets.Sin != Sin.None)
 			{
-				search.Where(s => s.assets.Sin == assets.Sin);
-			}
-			if (assets.Virtue != Virtue.None)
-			{
-				search.Where(s => s.assets.Virtue == assets.Virtue);
-			}
-			if (assets.Profession != Profession.None)
-			{
-				search.Where(s => s.assets.Profession == assets.Profession);
+				searchSuccess.Where(s => s.assets.Sin == assets.Sin);
+				searchFail.Where(s => s.assets.Sin != assets.Sin);
 			}
 
-			foreach(Person person in search)
+			if (assets.Virtue != Virtue.None)
 			{
-				returnVal.Add(person.PersonID, person);
+				searchSuccess.Where(s => s.assets.Virtue == assets.Virtue);
+				searchFail.Where(s => s.assets.Virtue != assets.Virtue);
 			}
+
+			if (assets.Profession != Profession.None)
+			{
+				searchSuccess.Where(s => s.assets.Profession == assets.Profession);
+				searchFail.Where(s => s.assets.Profession != assets.Profession);
+			}
+
+			//shuffle the results
+			searchSuccess.OrderBy(a => Guid.NewGuid());
+			searchFail.OrderBy(a => Guid.NewGuid());
+
+			searchSuccess.Take(positives);
+			searchFail.Take(negatives);
+
+			foreach(Person person in searchSuccess)
+				returnVal.Add(person.PersonID, person);
+
+			foreach (Person person in searchFail)
+				returnVal.Add(person.PersonID, person);
 
 			return returnVal;
 		}
