@@ -61,20 +61,39 @@ namespace Assets.CultSimulator
 			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -10;
 
 
-			Pool[new TraitMap(Sin.Wrathful, Sin.Proud)] = 5;
-			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
-			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
-			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
-			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
-			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
-			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
-			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
-			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
-			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
-			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
-			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
-			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
-			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
+			Pool[new TraitMap(Sin.Proud, Sin.Wrathful)] = 5;
+			Pool[new TraitMap(Sin.Greedy, Sin.Proud)] = 5;
+			Pool[new TraitMap(Sin.Gluttonous, Sin.Greedy)] = 5;
+			Pool[new TraitMap(Sin.Lazy, Sin.Gluttonous)] = 5;
+			Pool[new TraitMap(Sin.Lusty, Sin.Lazy)] = 5;
+			Pool[new TraitMap(Sin.Envious, Sin.Lusty)] = 5;
+			Pool[new TraitMap(Sin.Wrathful, Sin.Envious)] = 5;
+
+			Pool[new TraitMap(Virtue.Forgiving, Virtue.Kind)] = 5;
+			Pool[new TraitMap(Virtue.Humble, Virtue.Forgiving)] = 5;
+			Pool[new TraitMap(Virtue.Charitable, Virtue.Humble)] = 5;
+			Pool[new TraitMap(Virtue.Temperant, Virtue.Charitable)] = 5;
+			Pool[new TraitMap(Virtue.Diligent, Virtue.Temperant)] = 5;
+			Pool[new TraitMap(Virtue.Chaste, Virtue.Diligent)] = 5;
+			Pool[new TraitMap(Virtue.Kind, Virtue.Chaste)] = 5;
+
+
+			Pool[new TraitMap(Sin.Wrathful, Virtue.Humble)] = -5 ;
+			Pool[new TraitMap(Sin.Proud, Virtue.Charitable)] = -5 ;
+			Pool[new TraitMap(Sin.Greedy, Virtue.Temperant)] = -5 ;
+			Pool[new TraitMap(Sin.Gluttonous, Virtue.Diligent)] = -5 ;
+			Pool[new TraitMap(Sin.Lazy, Virtue.Chaste)] = -5 ;
+			Pool[new TraitMap(Sin.Lusty, Virtue.Kind)] = -5 ;
+			Pool[new TraitMap(Sin.Envious, Virtue.Forgiving)] = -5 ;
+
+			Pool[new TraitMap(Sin.Wrathful, Virtue.Kind)] = -5;
+			Pool[new TraitMap(Sin.Proud, Virtue.Forgiving)] = -5;
+			Pool[new TraitMap(Sin.Greedy, Virtue.Humble)] = -5;
+			Pool[new TraitMap(Sin.Gluttonous, Virtue.Charitable)] = -5;
+			Pool[new TraitMap(Sin.Lazy, Virtue.Temperant)] = -5;
+			Pool[new TraitMap(Sin.Lusty, Virtue.Diligent)] = -5;
+			Pool[new TraitMap(Sin.Envious, Virtue.Chaste)] = -5;
+
 
 		}
 
