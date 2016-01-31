@@ -39,7 +39,7 @@ namespace Assets.CultSimulator
 		}
 
 		// Public interactions
-		void Start()
+		void Awake()
 		{
 			seasonNumber = 1;
 			yearNumber = 1;
