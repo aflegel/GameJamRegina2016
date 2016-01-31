@@ -9,17 +9,18 @@ namespace Assets.CultSimulator
 	{
 		public Dictionary<int, Person> activePool;
 		public ProfessionPool professionPool;
+		public NamePool namesPool;
 
 		public PeoplePool()
 		{
 			activePool = new Dictionary<int, Person>();
 			professionPool = new ProfessionPool();
+			namesPool = new NamePool();
 
 		}
 
-		public void GeneratePeople(int numberOfNewRecords, List<SearchableAsset> requiredAssets)
+		public void GeneratePeople(int numberOfNewRecords, List<SearchableAsset> requiredAssets, bool buildAnimals, bool buildSacrifices)
 		{
-			NamePool names = new NamePool();
 			Random randomNumber = new Random();
 
 			for (int i = 0; i < (numberOfNewRecords - requiredAssets.Count); i++)
@@ -27,12 +28,13 @@ namespace Assets.CultSimulator
 
 				Person freshPerson = GeneratePerson(activePool.Count + 1, null, randomNumber);
 
-				string name = names.GetNextName(null, freshPerson.Gender, randomNumber);
+				string name = namesPool.GetNextName(null, freshPerson.Gender, buildAnimals, randomNumber);
 
 				if (name == "")
 					break;
 
 				freshPerson.Name = name;
+				freshPerson.Sacrifice = buildSacrifices;
 				activePool.Add(freshPerson.PersonID, freshPerson);
 			}
 
@@ -41,12 +43,13 @@ namespace Assets.CultSimulator
 
 				Person freshPerson = GeneratePerson(activePool.Count + 1, null, randomNumber);
 
-				string name = names.GetNextName(null, freshPerson.Gender, randomNumber);
+				string name = namesPool.GetNextName(null, freshPerson.Gender, buildAnimals, randomNumber);
 
 				if (name == "")
 					break;
 
 				freshPerson.Name = name;
+				freshPerson.Sacrifice = buildSacrifices;
 				activePool.Add(freshPerson.PersonID, freshPerson);
 			}
 
