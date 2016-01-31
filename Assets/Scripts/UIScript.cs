@@ -252,7 +252,9 @@ public class UIScript : MonoBehaviour
 
 		var cultist = GameState.GetCultist(activeCultistIndex);
 
-		SkillSuccess.text = GameState.GetSkillText(cultist);
+		System.Random randomNumber = new System.Random();
+
+		SkillSuccess.text = GameState.GetSkillText(cultist, randomNumber);
 
 		SubSubPane.SetActive(false);
 		SubSubCenterText.text = String.Empty;
