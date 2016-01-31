@@ -52,7 +52,7 @@ namespace Assets.CultSimulator
 				}
 			}
 
-			Pool[new TraitMap(Sin.envy, Sin.gluttony)] = 0;
+			Pool[new TraitMap(Sin.Envious, Sin.Gluttonous)] = 0;
 		}
 	}
 

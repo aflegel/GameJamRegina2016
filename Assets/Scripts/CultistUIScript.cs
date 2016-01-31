@@ -32,7 +32,7 @@ public class CultistUIScript : MonoBehaviour
 		{
 			CultistName.text = cultist.Name;
 			CultistProfession.text = cultist.assets.profession.ToString();
-			CultistTraits.text = cultist.assets.virtue.ToString() + " / " + cultist.assets.sin.ToString();
+			CultistTraits.text = cultist.assets.virtue.ToString() + " and " + cultist.assets.sin.ToString();
 			InformationBlock.SetActive(true);
 			EmptyText.SetActive(false);
 			lastCultistID = cultist.PersonID;
