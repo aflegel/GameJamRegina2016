@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 using Assets.CultSimulator;
 using System.Linq;
+using System;
+using UnityEngine.Events;
 
 public class UIScript : MonoBehaviour
 {
@@ -30,6 +32,26 @@ public class UIScript : MonoBehaviour
 
 	private YearTarget currentTarget;
 
+	private bool recruiting = false;
+	private bool Recruiting
+	{
+		get { return recruiting; }
+		set
+		{
+			recruiting = value;
+		}
+	}
+
+	private int sacraficeTargetIndex = -1;
+	public int SacraficeTargetIndex
+	{
+		get { return sacraficeTargetIndex; }
+		set
+		{
+			sacraficeTargetIndex = value;
+		}
+	}
+
 	void Start()
 	{
 		Cultists = new[]
@@ -45,9 +67,25 @@ public class UIScript : MonoBehaviour
 		};
 	}
 
+	private string GetNumberString(int number)
+	{
+		switch (number)
+		{
+			case 1:
+				return "1st";
+			case 2:
+				return "2nd";
+			case 3:
+				return "3rd";
+			default:
+				return number + "th";
+		}
+	}
+
 	void BuildUI()
 	{
-
+		SetButtons(Panel1, new string[] { "Recruit" }.Concat(currentTarget.SacrificeTargets.Select((a, i) => GetNumberString(i) + "Sacrafice Target")).ToArray(),
+		new UnityAction[] { () => Recruiting = true }.Concat(currentTarget.SacrificeTargets.Select((a, i) => new UnityAction(() => SacraficeTargetIndex = i))).ToArray());
 	}
 
 	void Update()
@@ -73,7 +111,7 @@ public class UIScript : MonoBehaviour
 			CultistUIScript.SetCultistInformation(GameState.GetPerson(cultists[activeCultistIndex].PersonID));
 	}
 
-	private void SetButtons(GameObject panel, string[] text)
+	private void SetButtons(GameObject panel, string[] text, UnityAction[] actions)
 	{
 		foreach (Transform transform in panel.transform)
 			Destroy(transform);
@@ -85,7 +123,7 @@ public class UIScript : MonoBehaviour
 			newButton.GetComponentInChildren<Text>().text = text[i];
 
 			var index = i;
-			newButton.GetComponent<Button>().onClick.AddListener(() => Debug.Log(text[index] + " Pressed"));
+			newButton.GetComponent<Button>().onClick.AddListener(actions[i]);
 		}
 		panel.GetComponent<RectTransform>().sizeDelta = new Vector2(0, text.Length * 30);
 	}
