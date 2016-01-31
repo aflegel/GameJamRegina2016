@@ -5,17 +5,17 @@ using System.Text;
 
 namespace Assets.CultSimulator
 {
-	static class TraitPool
+	class TraitPool
 	{
-		public static Dictionary<TraitMap, int> Pool { get; set; }
+		public Dictionary<TraitMap, int> Pool { get; set; }
 
-		public static void Constructor()
+		public TraitPool()
 		{
 			Pool = new Dictionary<TraitMap, int>();
 			GenerateTraits();
 		}
 
-		public static int GetTraitValue(SearchableAsset keyValues, SearchableAsset matchValues)
+		public int GetTraitValue(SearchableAsset keyValues, SearchableAsset matchValues)
 		{
 			int fullValue = 0;
 			//loop through every trait against every other trait and return a full sum
@@ -27,7 +27,7 @@ namespace Assets.CultSimulator
 			return fullValue;
 		}
 
-		public static int GetTraitValue(object keyValue, object matchValue)
+		public int GetTraitValue(object keyValue, object matchValue)
 		{
 			TraitMap getKey = new TraitMap(keyValue, matchValue);
 
@@ -35,7 +35,7 @@ namespace Assets.CultSimulator
 			return Pool[getKey];
 		}
 
-		public static void GenerateTraits()
+		public void GenerateTraits()
 		{
 			List<object> values = Enum.GetValues(typeof(Sin)).Cast<object>().ToList();
 			values.Add(Enum.GetValues(typeof(Sin)).Cast<object>().ToList());
