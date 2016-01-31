@@ -385,6 +385,8 @@ namespace Assets.CultSimulator
 							{
 								var sacrifice = sacrificeCandidates.Find(sa => sa.PersonID == action.TargetID);
 								sacrifice.IndepthInvestigated = true;
+								Person sac = GetPerson(sacrifice.PersonID);
+								sac.FlavourText = flavourPool.GetInvestigationValue(sac.assets.Profession, sac.assets.Sin) + " " + flavourPool.GetInvestigationValue(sac.assets.Profession, sac.assets.Virtue);
 							}
 							else
 							{
