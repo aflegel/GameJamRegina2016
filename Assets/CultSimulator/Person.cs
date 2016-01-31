@@ -9,6 +9,7 @@ namespace Assets.CultSimulator
 	{
 		public int PersonID { get; set; }
 		public bool Active { get; set; }
+		public bool Sacrifice { get; set; }
 		public string Name { get; set; }
 		public string FlavourText { get; set; }
 		public int Abduction { get; set; }
