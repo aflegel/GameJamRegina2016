@@ -271,3 +271,5 @@ sysinfo.txt
 *.dll
 ProjectSettings/ProjectSettings.asset
 ProjectSettings/ProjectVersion.txt
+DevBuild/DevBuild.html
+DevBuild/DevBuild.unity3d
