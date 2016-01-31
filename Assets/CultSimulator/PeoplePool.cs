@@ -85,7 +85,7 @@ namespace Assets.CultSimulator
 
 			SkillMap professionSkills = professionPool.GetProfessionValue(freshPerson.assets);
 
-			freshPerson.Abduction = randomNumber.Next(0,100) + professionSkills.Abduction;
+			freshPerson.Abduction = randomNumber.Next(0, 100) + professionSkills.Abduction;
 			freshPerson.AbductionDefense = randomNumber.Next(0, 100) + professionSkills.AbductionDefense;
 			freshPerson.Investigation = randomNumber.Next(0, 100) + professionSkills.Investigation;
 			freshPerson.InvestigationDefense = randomNumber.Next(0, 100) + professionSkills.InvestigationDefense;
@@ -101,7 +101,28 @@ namespace Assets.CultSimulator
 		public Dictionary<int, Person> SearchPeople(SearchableAsset assets)
 		{
 
-			return new Dictionary<int, Person>();
+			var search = activePool.Values.Where(s => s.Active == true);
+			Dictionary<int, Person> returnVal = new Dictionary<int, Person>();
+
+			if (assets.Sin != Sin.None)
+			{
+				search.Where(s => s.assets.Sin == assets.Sin);
+			}
+			if (assets.Virtue != Virtue.None)
+			{
+				search.Where(s => s.assets.Virtue == assets.Virtue);
+			}
+			if (assets.Profession != Profession.None)
+			{
+				search.Where(s => s.assets.Profession == assets.Profession);
+			}
+
+			foreach(Person person in search)
+			{
+				returnVal.Add(person.PersonID, person);
+			}
+
+			return returnVal;
 		}
 
 		public Person SearchPeopleByID(int id)

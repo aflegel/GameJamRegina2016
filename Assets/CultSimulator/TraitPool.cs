@@ -55,7 +55,7 @@ namespace Assets.CultSimulator
 			Pool[new TraitMap(Sin.Envious, Sin.Gluttonous)] = 0;
 		}
 
-		public static SearchableAsset GenerateRandomAsset(bool profession, bool sin, bool virtue, Random randomNumber)
+		public static SearchableAsset GenerateRandomAsset(bool profession, bool sin, bool virtue, bool animal, Random randomNumber)
 		{
 			//arrays to generate random values
 			Array sins = Enum.GetValues(typeof(Sin));
@@ -72,6 +72,7 @@ namespace Assets.CultSimulator
 			{
 				simple.Sin = Sin.None;
 			}
+
 			if (virtue)
 			{
 				simple.Virtue = (Virtue)virtues.GetValue(randomNumber.Next(1, virtues.Length));
