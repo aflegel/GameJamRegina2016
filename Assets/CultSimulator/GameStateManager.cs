@@ -13,6 +13,7 @@ namespace Assets.CultSimulator
 		private List<PersonReference> sacrificeCandidates;
 		private List<PersonReference> cultistCandidates;
 		private Cultist[] cultists;
+		private int numberOfCultists;
 		private YearTarget currentTarget;
 		private int seasonNumber;
 		private int yearNumber;
@@ -56,7 +57,8 @@ namespace Assets.CultSimulator
 			};
 
 			// Create the starting Cultists
-			peoplePool.GeneratePeople(2, cultistAssets, false, false);
+			numberOfCultists = 2;
+			peoplePool.GeneratePeople(numberOfCultists, cultistAssets, false, false);
 
 			cultists[0] = new Cultist() { PersonID = peoplePool.activePool[1].PersonID, Instruction = null };
 			cultists[1] = new Cultist() { PersonID = peoplePool.activePool[2].PersonID, Instruction = null };
@@ -133,8 +135,10 @@ namespace Assets.CultSimulator
 			return seasonNumber;
 		}
 
-		public void IncrementSeason()
+		public bool IncrementSeason()
 		{
+			bool gameOver = false;
+
 			seasonNumber += 1;
 			ProcessActions();
 
@@ -142,6 +146,8 @@ namespace Assets.CultSimulator
 			{
 				IncrementYear();
 			}
+
+			return gameOver;
 		}
 
 		public void ProcessActions()
@@ -170,21 +176,32 @@ namespace Assets.CultSimulator
 			return yearNumber;
 		}
 
-		public void IncrementYear()
+		public bool IncrementYear()
 		{
-			yearNumber += 1;
-			seasonNumber = 1;
+			bool gameOver = false;
 
-			currentTarget = YearTargetFactory.GetYearTargets(yearNumber);
+			if (true)
+			{
 
-			var sacrificeAssets = currentTarget.SacrificeTargets;
+			}
+			else
+			{
+				yearNumber += 1;
+				seasonNumber = 1;
 
-			var cultistAssets = new List<SearchableAsset>
+				currentTarget = YearTargetFactory.GetYearTargets(yearNumber);
+
+				var sacrificeAssets = currentTarget.SacrificeTargets;
+
+				var cultistAssets = new List<SearchableAsset>
 			{
 				new SearchableAsset() { Profession = Profession.None, Sin = Sin.None, Virtue = Virtue.None }
 			};
 
-			GetNewPools(sacrificeAssets, cultistAssets, 20);
+				GetNewPools(sacrificeAssets, cultistAssets, 20);
+			}
+
+			return gameOver;
 		}
 
 		public Person GetPerson(int personID)
