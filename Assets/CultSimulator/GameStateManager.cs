@@ -127,7 +127,11 @@ namespace Assets.CultSimulator
 		{
 			yearNumber += 1;
 			seasonNumber = 1;
-			peoplePool.GeneratePeople(20, null);
+			peoplePool.GeneratePeople(20, new List<SearchableAsset> {
+				new SearchableAsset() { profession = Profession.Educator, sin = Sin.Envious, virtue = Virtue.Temperant },
+				new SearchableAsset() { profession = Profession.Law, sin = Sin.Lusty, virtue = Virtue.Kind },
+				new SearchableAsset() { profession = Profession.Medical, sin = Sin.Proud, virtue = Virtue.Charitable }
+			});
 		}
 
 		public Person GetPerson(int personID)
