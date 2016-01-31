@@ -57,6 +57,7 @@ namespace Assets.CultSimulator
 			currentTarget = YearTargetFactory.GetYearTargets(yearNumber);
 			peoplePool = new PeoplePool();
 			traitPool = new TraitPool();
+			flavourPool = new FlavourPool();
 			cultists = new Cultist[NUMBER_OF_CULTISTS];
 
 			var cultistAssets = new List<SearchableAsset>
