@@ -42,7 +42,7 @@ namespace Assets.CultSimulator
 			foreach (SearchableAsset asset in requiredAssets)
 			{
 
-				Person freshPerson = GeneratePerson(activePool.Count + 1, null, randomNumber);
+				Person freshPerson = GeneratePerson(activePool.Count + 1, asset, randomNumber);
 
 				string name = namesPool.GetNextName(null, freshPerson.Gender, buildAnimals, randomNumber);
 
@@ -69,9 +69,9 @@ namespace Assets.CultSimulator
 			freshPerson.assets = new SearchableAsset();
 			if (requiredAsset.HasValue)
 			{
-				freshPerson.assets.Sin = (requiredAsset.Value.Sin == null ? (Sin)sins.GetValue(randomNumber.Next(1, sins.Length)) : requiredAsset.Value.Sin);
-				freshPerson.assets.Virtue = (requiredAsset.Value.Virtue == null ? (Virtue)virtues.GetValue(randomNumber.Next(1, virtues.Length)) : requiredAsset.Value.Virtue);
-				freshPerson.assets.Profession = (requiredAsset.Value.Profession == null ? (Profession)professions.GetValue(randomNumber.Next(1, professions.Length)) : requiredAsset.Value.Profession);
+				freshPerson.assets.Sin = (requiredAsset.Value.Sin == Sin.None ? (Sin)sins.GetValue(randomNumber.Next(1, sins.Length)) : requiredAsset.Value.Sin);
+				freshPerson.assets.Virtue = (requiredAsset.Value.Virtue == Virtue.None ? (Virtue)virtues.GetValue(randomNumber.Next(1, virtues.Length)) : requiredAsset.Value.Virtue);
+				freshPerson.assets.Profession = (requiredAsset.Value.Profession == Profession.None ? (Profession)professions.GetValue(randomNumber.Next(1, professions.Length)) : requiredAsset.Value.Profession);
 			}
 			else
 			{
@@ -100,6 +100,7 @@ namespace Assets.CultSimulator
 
 		public Dictionary<int, Person> SearchPeople(SearchableAsset assets)
 		{
+
 			return new Dictionary<int, Person>();
 		}
 
