@@ -25,27 +25,33 @@ namespace Assets.CultSimulator
 
 		public void GenerateProfessions()
 		{
-			List<object> values = Enum.GetValues(typeof(Profession)).Cast<object>().ToList();
 
-			foreach (object firstKey in values)
-			{
-				SkillMap entry = new SkillMap();
-				entry.Abduction = 0;
-				entry.AbductionDefense = 0;
-				entry.Investigation = 0;
-				entry.InvestigationDefense = 0;
-				entry.Recruitment = 0;
-				entry.RecruitmentDefense = 0;
+			Pool.Add(Profession.Medical, GenerateSkillMap(5, 5, 10, 10, 0, 0));
+			Pool.Add(Profession.Religious, GenerateSkillMap(0, 0, 5, 5, 10, 10));
+			Pool.Add(Profession.Law, GenerateSkillMap(10, 10, 5, 5, 0, 0));
+			Pool.Add(Profession.Politics, GenerateSkillMap(0, 0, 10, -10, 5, 5));
+			Pool.Add(Profession.Trades, GenerateSkillMap(10, 5, 5, 0, 0, 10));
+			Pool.Add(Profession.Merchant, GenerateSkillMap(-10, -10, 0, 0, 5, 5));
+			Pool.Add(Profession.Educator, GenerateSkillMap(-10, -10, 5, 5, 0, 0));
+			Pool.Add(Profession.Rural, GenerateSkillMap(5, 0, 0, 5, -10, -10));
 
 
-				if (!Pool.ContainsKey((Profession)firstKey))
-				{
-					Pool.Add((Profession)firstKey, entry);
-				}
-			}
+			Pool.Add(Profession.Cow, GenerateSkillMap(0, 1000, 0, 0, 0, 1000));
+			Pool.Add(Profession.Goat, GenerateSkillMap(0, 1000, 0, 0, 0, 1000));
 
-			SkillMap temp = Pool[Profession.Cow];
-			temp.Investigation = 0;
+		}
+
+		public SkillMap GenerateSkillMap(int abduction, int AbductionDefense, int investigation, int investigationDefense, int recruitment, int recruitmentDefense)
+		{
+			SkillMap entry = new SkillMap();
+			entry.Abduction = abduction;
+			entry.AbductionDefense = AbductionDefense;
+			entry.Investigation = investigation;
+			entry.InvestigationDefense = investigationDefense;
+			entry.Recruitment = recruitment;
+			entry.RecruitmentDefense = recruitmentDefense;
+
+			return entry;
 		}
 
 	}
