@@ -20,6 +20,7 @@ namespace Assets.CultSimulator
 		private int yearNumber;
 		private PeoplePool peoplePool { get; set; }
 		private TraitPool traitPool { get; set; }
+		private FlavourPool flavourPool { get; set; }
 		private bool gameWillEnd;
 
 		public List<string> ResultTextList;
