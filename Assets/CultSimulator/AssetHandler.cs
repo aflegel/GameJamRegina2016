@@ -85,9 +85,9 @@ namespace Assets.CultSimulator
 		[ProfessionDescription("Livestock Driver")]
 		[ProfessionDescription("Orchard Worker")]
 		Rural = 8,
-		[ProfessionDescription("Cow")]
+		[ProfessionDescription("Cow", true)]
 		Cow = 9,
-		[ProfessionDescription("Goat")]
+		[ProfessionDescription("Goat", true)]
 		Goat = 10
 	}
 

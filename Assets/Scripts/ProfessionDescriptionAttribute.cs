@@ -13,6 +13,8 @@ namespace Assets.Scripts
 
 		public Gender? Gender { get; private set; }
 
+		public bool IsAnimal { get; private set; }
+
 		public ProfessionDescriptionAttribute(string description)
 		{
 			Description = description;
@@ -22,6 +24,17 @@ namespace Assets.Scripts
 		{
 			Description = description;
 			Gender = gender;
+		}
+
+		public ProfessionDescriptionAttribute(string description, bool isAnimal)
+		{
+			Description = description;
+			IsAnimal = isAnimal;
+		}
+
+		public ProfessionDescriptionAttribute(bool isAnimal)
+		{
+			IsAnimal = isAnimal;
 		}
 	}
 }

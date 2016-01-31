@@ -28,7 +28,7 @@ namespace Assets.CultSimulator
 			for (int i = 0; i < (numberOfNewRecords - requiredAssets.Count); i++)
 			{
 
-				Person freshPerson = GeneratePerson(activePool.Count + 1, null, randomNumber);
+				Person freshPerson = GeneratePerson(activePool.Count + 1, null, randomNumber, buildAnimals);
 
 				string name = namesPool.GetNextName(null, freshPerson.Gender, buildAnimals, randomNumber);
 
@@ -43,7 +43,7 @@ namespace Assets.CultSimulator
 			foreach (SearchableAsset asset in requiredAssets)
 			{
 
-				Person freshPerson = GeneratePerson(activePool.Count + 1, asset, randomNumber);
+				Person freshPerson = GeneratePerson(activePool.Count + 1, asset, randomNumber, buildAnimals);
 
 				string name = namesPool.GetNextName(null, freshPerson.Gender, buildAnimals, randomNumber);
 
@@ -57,13 +57,15 @@ namespace Assets.CultSimulator
 
 		}
 
-		public Person GeneratePerson(int id, SearchableAsset? requiredAsset, Random randomNumber)
+		public Person GeneratePerson(int id, SearchableAsset? requiredAsset, Random randomNumber, bool buildAnimals)
 		{
 			//arrays to generate random values
-			Array sins = Enum.GetValues(typeof(Sin));
-			Array virtues = Enum.GetValues(typeof(Virtue));
-			Array professions = Enum.GetValues(typeof(Profession));
+			var sins = Enum.GetValues(typeof(Sin)).Cast<Sin>().ToArray();
+			var virtues = Enum.GetValues(typeof(Virtue)).Cast<Virtue>().ToArray();
+			var professions = Enum.GetValues(typeof(Profession)).Cast<Profession>().ToArray();
 			Person freshPerson = new Person();
+
+			professions.Where(s => s.GetAttributes<ProfessionDescriptionAttribute>().Any(a => a.IsAnimal == buildAnimals)).ToArray();
 
 			freshPerson.PersonID = id;
 			freshPerson.Active = true;
@@ -73,6 +75,7 @@ namespace Assets.CultSimulator
 				freshPerson.assets.Sin = (requiredAsset.Value.Sin == Sin.None ? (Sin)sins.GetValue(randomNumber.Next(1, sins.Length)) : requiredAsset.Value.Sin);
 				freshPerson.assets.Virtue = (requiredAsset.Value.Virtue == Virtue.None ? (Virtue)virtues.GetValue(randomNumber.Next(1, virtues.Length)) : requiredAsset.Value.Virtue);
 				freshPerson.assets.Profession = (requiredAsset.Value.Profession == Profession.None ? (Profession)professions.GetValue(randomNumber.Next(1, professions.Length)) : requiredAsset.Value.Profession);
+
 			}
 			else
 			{
@@ -129,7 +132,7 @@ namespace Assets.CultSimulator
 			searchSuccess.Take(positives);
 			searchFail.Take(negatives);
 
-			foreach(Person person in searchSuccess)
+			foreach (Person person in searchSuccess)
 				returnVal.Add(person.PersonID, person);
 
 			foreach (Person person in searchFail)
