@@ -31,8 +31,8 @@ public class CultistUIScript : MonoBehaviour
 		else if (cultist.PersonID != lastCultistID)
 		{
 			CultistName.text = cultist.Name;
-			CultistProfession.text = cultist.assets.profession.ToString();
-			CultistTraits.text = cultist.assets.virtue.ToString() + " and " + cultist.assets.sin.ToString();
+			CultistProfession.text = cultist.assets.Profession.ToString();
+			CultistTraits.text = cultist.assets.Virtue.ToString() + " and " + cultist.assets.Sin.ToString();
 			InformationBlock.SetActive(true);
 			EmptyText.SetActive(false);
 			lastCultistID = cultist.PersonID;

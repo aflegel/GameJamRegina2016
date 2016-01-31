@@ -29,8 +29,8 @@ namespace Assets.CultSimulator
 			currentTarget = new YearTarget();
 			peoplePool = new PeoplePool();
 			peoplePool.GeneratePeople(20, new List<SearchableAsset> {
-				new SearchableAsset() { profession = Profession.Educator, sin = Sin.Envious, virtue = Virtue.Temperant },
-				new SearchableAsset() { profession = Profession.Law, sin = Sin.Lusty, virtue = Virtue.Kind }
+				new SearchableAsset() { Profession = Profession.Educator, Sin = Sin.Envious, Virtue = Virtue.Temperant },
+				new SearchableAsset() { Profession = Profession.Law, Sin = Sin.Lusty, Virtue = Virtue.Kind }
 			});
 
 			cultists = new Cultist[NUMBER_OF_CULTISTS];
@@ -128,9 +128,9 @@ namespace Assets.CultSimulator
 			yearNumber += 1;
 			seasonNumber = 1;
 			peoplePool.GeneratePeople(20, new List<SearchableAsset> {
-				new SearchableAsset() { profession = Profession.Educator, sin = Sin.Envious, virtue = Virtue.Temperant },
-				new SearchableAsset() { profession = Profession.Law, sin = Sin.Lusty, virtue = Virtue.Kind },
-				new SearchableAsset() { profession = Profession.Medical, sin = Sin.Proud, virtue = Virtue.Charitable }
+				new SearchableAsset() { Profession = Profession.Educator, Sin = Sin.Envious, Virtue = Virtue.Temperant },
+				new SearchableAsset() { Profession = Profession.Law, Sin = Sin.Lusty, Virtue = Virtue.Kind },
+				new SearchableAsset() { Profession = Profession.Medical, Sin = Sin.Proud, Virtue = Virtue.Charitable }
 			});
 		}
 

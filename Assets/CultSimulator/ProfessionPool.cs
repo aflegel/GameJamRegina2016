@@ -20,7 +20,7 @@ namespace Assets.CultSimulator
 		{
 
 			//check the dictionary against values and return the match
-			return Pool[keyValue.profession];
+			return Pool[keyValue.Profession];
 		}
 
 		public void GenerateProfessions()

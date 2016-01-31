@@ -19,10 +19,10 @@ namespace Assets.CultSimulator
 		{
 			int fullValue = 0;
 			//loop through every trait against every other trait and return a full sum
-			fullValue += GetTraitValue(keyValues.sin, matchValues.sin);
-			fullValue += GetTraitValue(keyValues.sin, matchValues.virtue);
-			fullValue += GetTraitValue(keyValues.virtue, matchValues.sin);
-			fullValue += GetTraitValue(keyValues.virtue, matchValues.virtue);
+			fullValue += GetTraitValue(keyValues.Sin, matchValues.Sin);
+			fullValue += GetTraitValue(keyValues.Sin, matchValues.Virtue);
+			fullValue += GetTraitValue(keyValues.Virtue, matchValues.Sin);
+			fullValue += GetTraitValue(keyValues.Virtue, matchValues.Virtue);
 
 			return fullValue;
 		}

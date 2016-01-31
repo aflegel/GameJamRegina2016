@@ -11,9 +11,9 @@ namespace Assets.CultSimulator
 
 	public struct SearchableAsset
 	{
-		public Profession profession;
-		public Sin sin;
-		public Virtue virtue;
+		public Profession Profession;
+		public Sin Sin;
+		public Virtue Virtue;
 	}
 
 	public enum Profession
