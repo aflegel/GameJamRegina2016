@@ -13,6 +13,7 @@ namespace Assets.CultSimulator
 		public ProfessionPool()
 		{
 			Pool = new Dictionary<Profession, SkillMap>();
+			GenerateProfessions();
 		}
 
 		public SkillMap GetProfessionValue(SearchableAsset keyValue)

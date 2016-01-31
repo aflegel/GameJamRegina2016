@@ -63,12 +63,12 @@ namespace Assets.CultSimulator
 			freshPerson.PersonID = id;
 			freshPerson.Active = true;
 			freshPerson.assets = new SearchableAsset();
-			freshPerson.assets.sin = (Sin)sins.GetValue(randomNumber.Next(sins.Length));
-			freshPerson.assets.virtue = (Virtue)virtues.GetValue(randomNumber.Next(0, virtues.Length));
-			freshPerson.assets.profession = (Profession)professions.GetValue(randomNumber.Next(0, professions.Length));
+			freshPerson.assets.sin = (Sin)sins.GetValue( randomNumber.Next(1, sins.Length));
+			freshPerson.assets.virtue = (Virtue)virtues.GetValue(randomNumber.Next(1, virtues.Length));
+			freshPerson.assets.profession = (Profession)professions.GetValue(randomNumber.Next(1, professions.Length));
 			freshPerson.Gender = randomNumber.Next(0, 1) == 0;
 
-			/*
+
 			SkillMap professionSkills = professionPool.GetProfessionValue(freshPerson.assets);
 
 			freshPerson.Abduction = randomNumber.Next(0,100) + professionSkills.Abduction;
@@ -77,7 +77,7 @@ namespace Assets.CultSimulator
 			freshPerson.InvestigationDefense = randomNumber.Next(0, 100) + professionSkills.InvestigationDefense;
 			freshPerson.Recruitment = randomNumber.Next(0, 100) + professionSkills.Recruitment;
 			freshPerson.RecruitmentDefense = randomNumber.Next(0, 100) + professionSkills.RecruitmentDefense;
-			*/
+
 
 			return freshPerson;
 		}
