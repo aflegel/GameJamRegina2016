@@ -68,7 +68,14 @@ namespace Assets.CultSimulator
 
 			animalNames.Add("Bessy");
 			animalNames.Add("Buddy");
-			animalNames.Add("123456");
+			animalNames.Add("Daisy");
+			animalNames.Add("Billy");
+			animalNames.Add("Lassie");
+			animalNames.Add("Lightnight");
+			animalNames.Add("Fluffy");
+			animalNames.Add("General");
+			animalNames.Add("Smellz");
+			animalNames.Add("StinkEye");
 			animalNames.Add("Dutch");
 			animalNames.Add("Snickerdoodle");
 
