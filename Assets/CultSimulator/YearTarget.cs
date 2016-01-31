@@ -93,21 +93,67 @@ namespace Assets.CultSimulator
 					};
 					break;
 				case 7:
+					// 8 cultists
+					nextYearTargets.NumberOfCultists = 8;
+
 					// Kill cow
 					// Kill 1 virtue, 1 profession, 1 sin
-					// 8 cultists
+					nextYearTargets.SacrificeTargets = new List<SearchableAsset>()
+					{
+						TraitPool.GenerateRandomAsset(true, false, false, false, randomNumber),
+						TraitPool.GenerateRandomAsset(false, true, false, false, randomNumber),
+						TraitPool.GenerateRandomAsset(false, false, true, false, randomNumber),
+						TraitPool.GenerateRandomAsset(false, false, false, true, randomNumber)
+					};
 					break;
 				case 8:
-					// Kill goat
-					// Kill 1 virtue, 1 profession, 1 sin
+					// 8 cultists
+					nextYearTargets.NumberOfCultists = 8;
+
+					// Kill cow
+					// Kill 1 virtue - 1 sin, 1 profession, 1 sin
+					nextYearTargets.SacrificeTargets = new List<SearchableAsset>()
+					{
+						TraitPool.GenerateRandomAsset(true, true, false, false, randomNumber),
+						TraitPool.GenerateRandomAsset(false, true, false, false, randomNumber),
+						TraitPool.GenerateRandomAsset(false, false, true, false, randomNumber),
+						TraitPool.GenerateRandomAsset(false, false, false, true, randomNumber)
+					};
 					break;
 				case 9:
+					// 8 cultists
+					nextYearTargets.NumberOfCultists = 8;
+
 					// Kill cow
-					// Kill 2 virtues, 1 profession, 1 sin
+					// Kill 1 virtue - 1 sin, 1 profession, 1 sin, 1 virtue
+					nextYearTargets.SacrificeTargets = new List<SearchableAsset>()
+					{
+						TraitPool.GenerateRandomAsset(true, true, false, false, randomNumber),
+						TraitPool.GenerateRandomAsset(false, true, false, false, randomNumber),
+						TraitPool.GenerateRandomAsset(false, false, true, false, randomNumber),
+						TraitPool.GenerateRandomAsset(false, false, true, false, randomNumber),
+						TraitPool.GenerateRandomAsset(false, false, false, true, randomNumber)
+					};
 					break;
 				case 10:
 					// Kill goat
-					// Kill 2 virtues, 2 professions, 1 sin
+					// Kill 2 virtues, 2 professions, 1 sin, 1 virtue - 1 sin
+
+					// 8 cultists
+					nextYearTargets.NumberOfCultists = 8;
+
+					// Kill cow
+					// Kill 2 virtues, 2 professions, 1 sin, 1 virtue - 1 sin, 1 sin
+					nextYearTargets.SacrificeTargets = new List<SearchableAsset>()
+					{
+						TraitPool.GenerateRandomAsset(true, true, false, false, randomNumber),
+						TraitPool.GenerateRandomAsset(false, true, false, false, randomNumber),
+						TraitPool.GenerateRandomAsset(false, true, false, false, randomNumber),
+						TraitPool.GenerateRandomAsset(false, false, true, false, randomNumber),
+						TraitPool.GenerateRandomAsset(false, false, true, false, randomNumber),
+						TraitPool.GenerateRandomAsset(false, true, false, false, randomNumber),
+						TraitPool.GenerateRandomAsset(false, false, false, true, randomNumber)
+					};
 					break;
 			}
 
