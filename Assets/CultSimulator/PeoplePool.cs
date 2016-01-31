@@ -25,7 +25,7 @@ namespace Assets.CultSimulator
 			for (int i = 0; i < (numberOfNewRecords - requiredAssets.Count); i++)
 			{
 
-				Person freshPerson = GeneratePerson(activePool.Count + 1, null);
+				Person freshPerson = GeneratePerson(activePool.Count + 1, null, randomNumber);
 
 				string name = names.GetNextName(null, freshPerson.Gender, randomNumber);
 
@@ -39,7 +39,7 @@ namespace Assets.CultSimulator
 			foreach (SearchableAsset asset in requiredAssets)
 			{
 
-				Person freshPerson = GeneratePerson(activePool.Count + 1, null);
+				Person freshPerson = GeneratePerson(activePool.Count + 1, null, randomNumber);
 
 				string name = names.GetNextName(null, freshPerson.Gender, randomNumber);
 
@@ -52,14 +52,13 @@ namespace Assets.CultSimulator
 
 		}
 
-		public Person GeneratePerson(int id, SearchableAsset? requiredAsset)
+		public Person GeneratePerson(int id, SearchableAsset? requiredAsset, Random randomNumber)
 		{
 			//arrays to generate random values
 			Array sins = Enum.GetValues(typeof(Sin));
 			Array virtues = Enum.GetValues(typeof(Virtue));
 			Array professions = Enum.GetValues(typeof(Profession));
 			Person freshPerson = new Person();
-			Random randomNumber = new Random();
 
 			freshPerson.PersonID = id;
 			freshPerson.Active = true;
@@ -69,6 +68,7 @@ namespace Assets.CultSimulator
 			freshPerson.assets.profession = (Profession)professions.GetValue(randomNumber.Next(0, professions.Length));
 			freshPerson.Gender = randomNumber.Next(0, 1) == 0;
 
+			/*
 			SkillMap professionSkills = professionPool.GetProfessionValue(freshPerson.assets);
 
 			freshPerson.Abduction = randomNumber.Next(0,100) + professionSkills.Abduction;
@@ -77,6 +77,7 @@ namespace Assets.CultSimulator
 			freshPerson.InvestigationDefense = randomNumber.Next(0, 100) + professionSkills.InvestigationDefense;
 			freshPerson.Recruitment = randomNumber.Next(0, 100) + professionSkills.Recruitment;
 			freshPerson.RecruitmentDefense = randomNumber.Next(0, 100) + professionSkills.RecruitmentDefense;
+			*/
 
 			return freshPerson;
 		}
