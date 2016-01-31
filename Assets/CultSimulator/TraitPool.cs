@@ -18,11 +18,17 @@ namespace Assets.CultSimulator
 		public int GetTraitValue(SearchableAsset keyValues, SearchableAsset matchValues)
 		{
 			int fullValue = 0;
+			int temp = 0;
+
 			//loop through every trait against every other trait and return a full sum
 			fullValue += GetTraitValue(keyValues.Sin, matchValues.Sin);
+			temp = GetTraitValue(keyValues.Sin, matchValues.Sin);
 			fullValue += GetTraitValue(keyValues.Sin, matchValues.Virtue);
+			temp = GetTraitValue(keyValues.Sin, matchValues.Virtue);
 			fullValue += GetTraitValue(keyValues.Virtue, matchValues.Sin);
+			temp = GetTraitValue(keyValues.Virtue, matchValues.Sin);
 			fullValue += GetTraitValue(keyValues.Virtue, matchValues.Virtue);
+			temp = GetTraitValue(keyValues.Virtue, matchValues.Virtue);
 
 			return fullValue;
 		}
