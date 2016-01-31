@@ -193,6 +193,12 @@ public class UIScript : MonoBehaviour
 		{
 			GameState.SetCultistInstruction(ActionType.Recruit, RecruitTarget, activeCultistIndex);
 		}
+
+		SubSubPane.SetActive(false);
+		SubSubCenterText.text = String.Empty;
+		SubSubFlavourText.text = String.Empty;
+		SubSubName.text = String.Empty;
+		SubSubProfession.text = String.Empty;
 	}
 
 	private string GetNumberString(int number)
@@ -311,7 +317,9 @@ public class UIScript : MonoBehaviour
 
 	void UpdateAssignButton()
 	{
-		if (activeCultistIndex >= 0 && (FindRecruits || FindSacrafices || RecruitTarget >= 0 || SacraficeTarget >= 0))
+		var cultists = GameState.GetCurrentCultists();
+
+		if (activeCultistIndex >= 0 && (FindRecruits || FindSacrafices || RecruitTarget >= 0 || SacraficeTarget >= 0) && cultists[activeCultistIndex].Instruction == null)
 			AssignButton.interactable = true;
 		else
 			AssignButton.interactable = false;
