@@ -20,6 +20,7 @@ namespace Assets.CultSimulator
 		private int yearNumber;
 		private PeoplePool peoplePool { get; set; }
 		private TraitPool traitPool { get; set; }
+		private FlavourPool flavourPool { get; set; }
 		private bool gameWillEnd;
 
 		public List<string> ResultTextList { get; set; }
@@ -56,6 +57,7 @@ namespace Assets.CultSimulator
 			currentTarget = YearTargetFactory.GetYearTargets(yearNumber);
 			peoplePool = new PeoplePool();
 			traitPool = new TraitPool();
+			flavourPool = new FlavourPool();
 			cultists = new Cultist[NUMBER_OF_CULTISTS];
 
 			var cultistAssets = new List<SearchableAsset>
@@ -300,12 +302,13 @@ namespace Assets.CultSimulator
 					break;
 			}
 
+			string attackerString = "";
+
 			if (attackertResult > 75)
 			{
 
 			}
 			else if (attackertResult > 50)
-
 			{
 
 			}
