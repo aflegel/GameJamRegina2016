@@ -208,7 +208,15 @@ public class UIScript : MonoBehaviour
 
 	private void ProgressSeason()
 	{
+		var cultists = GameState.GetCurrentCultists();
 
+		GameState.IncrementSeason();
+
+		for (int i = 0; i < cultists.Length; i++)
+		{
+			if (cultists[i] != null)
+				cultists[i].Instruction = null;
+		}
 	}
 
 	private string GetNumberString(int number)
