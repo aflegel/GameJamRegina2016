@@ -42,7 +42,7 @@ namespace Assets.CultSimulator
 			SuccessPool = new Dictionary<SuccessRating, string>();
 
 			GenerateText();
-			//GeneratePools();
+			GeneratePools();
 		}
 
 		public void GenerateText()
@@ -111,9 +111,6 @@ namespace Assets.CultSimulator
 
 		public void GeneratePools()
 		{
-
-
-
 
 			string filename = "professionFlavour";
 
