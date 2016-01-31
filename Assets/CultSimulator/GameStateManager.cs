@@ -18,6 +18,25 @@ namespace Assets.CultSimulator
 		private int yearNumber;
 		private PeoplePool peoplePool { get; set; }
 
+		private void GetNewPools(List<SearchableAsset> sacrificeAssets, List<SearchableAsset> cultistAssets)
+		{
+			peoplePool.GeneratePeople(20, sacrificeAssets);
+			sacrificeCandidates = new List<PersonReference>();
+
+			for (int i = peoplePool.activePool.Count - 21; i < peoplePool.activePool.Count - 1; i++)
+			{
+				sacrificeCandidates.Add(new PersonReference() { PersonID = peoplePool.activePool[i].PersonID, IndepthInvestigated = false });
+			}
+
+			peoplePool.GeneratePeople(20, cultistAssets);
+			cultistCandidates = new List<PersonReference>();
+
+			for (int i = peoplePool.activePool.Count - 21; i < peoplePool.activePool.Count - 1; i++)
+			{
+				cultistCandidates.Add(new PersonReference() { PersonID = peoplePool.activePool[i].PersonID, IndepthInvestigated = false });
+			}
+		}
+
 		// Public interactions
 		void Start()
 		{
@@ -127,11 +146,18 @@ namespace Assets.CultSimulator
 		{
 			yearNumber += 1;
 			seasonNumber = 1;
-			peoplePool.GeneratePeople(20, new List<SearchableAsset> {
+
+			var sacrificeAssets = new List<SearchableAsset> {
 				new SearchableAsset() { Profession = Profession.Educator, Sin = Sin.Envious, Virtue = Virtue.Temperant },
 				new SearchableAsset() { Profession = Profession.Law, Sin = Sin.Lusty, Virtue = Virtue.Kind },
-				new SearchableAsset() { Profession = Profession.Medical, Sin = Sin.Proud, Virtue = Virtue.Charitable }
-			});
+				new SearchableAsset() { Profession = Profession.Medical, Sin = Sin.Proud, Virtue = Virtue.Charitable } };
+
+			var cultistAssets = new List<SearchableAsset> {
+				new SearchableAsset() { Profession = Profession.Educator, Sin = Sin.Envious, Virtue = Virtue.Temperant },
+				new SearchableAsset() { Profession = Profession.Law, Sin = Sin.Lusty, Virtue = Virtue.Kind },
+				new SearchableAsset() { Profession = Profession.Medical, Sin = Sin.Proud, Virtue = Virtue.Charitable } };
+
+			GetNewPools(sacrificeAssets, cultistAssets);
 		}
 
 		public Person GetPerson(int personID)
