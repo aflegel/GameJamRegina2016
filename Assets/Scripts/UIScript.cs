@@ -28,10 +28,10 @@ public class UIScript : MonoBehaviour
 
 	private int activeCultistIndex = -1;
 
+	private YearTarget currentTarget;
+
 	void Start()
 	{
-		SetButtons(Panel1, new[] { "Hello", "Cruel", "World" });
-		SetButtons(Panel2, new[] { "Hello", "Cruel", "World" });
 		Cultists = new[]
 		{
 			Cultist1,
@@ -43,6 +43,11 @@ public class UIScript : MonoBehaviour
 			Cultist7,
 			Cultist8
 		};
+	}
+
+	void BuildUI()
+	{
+
 	}
 
 	void Update()
