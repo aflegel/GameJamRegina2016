@@ -42,6 +42,7 @@ public class UIScript : MonoBehaviour
 	public Button ProgressButton;
 
 	public Text SkillSuccess;
+	public Text YearSeasonText;
 
 	public GameObject ResultsPanel;
 	public Text ResultsText;
@@ -197,6 +198,8 @@ public class UIScript : MonoBehaviour
 
 		ResultsPanel.SetActive(false);
 		ResultsCloseButton.onClick.AddListener(CloseResults);
+
+		YearSeasonText.text = string.Format("Season: {0}, Year: {1}", GameState.GetSeasonNumber(), GameState.GetYearNumber());
 	}
 
 	private void SetInvestigating()
@@ -287,6 +290,8 @@ public class UIScript : MonoBehaviour
 		{
 			ResultsText.text += result + Environment.NewLine;
 		}
+
+		YearSeasonText.text = string.Format("Season: {0}, Year: {1}", GameState.GetSeasonNumber(), GameState.GetYearNumber());
 	}
 
 	private string GetNumberString(int number)
