@@ -82,7 +82,7 @@ namespace Assets.CultSimulator
 			freshPerson.Recruitment = randomNumber.Next(0, 100) + professionSkills.Recruitment;
 			freshPerson.RecruitmentDefense = randomNumber.Next(0, 100) + professionSkills.RecruitmentDefense;
 
-			var descriptions = freshPerson.assets.profession.GetAttributes<ProfessionDescriptionAttribute>().Where(d => d.Gender == null || d.Gender == freshPerson.Gender).ToArray();
+			var descriptions = freshPerson.assets.Profession.GetAttributes<ProfessionDescriptionAttribute>().Where(d => d.Gender == null || d.Gender == freshPerson.Gender).ToArray();
 			freshPerson.ProfessionDescription = descriptions[randomNumber.Next(0, descriptions.Length)].Description;
 
 			return freshPerson;
