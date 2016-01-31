@@ -34,10 +34,6 @@ namespace Assets.CultSimulator
 			});
 
 			cultists = new Cultist[NUMBER_OF_CULTISTS];
-			for (int i = 0; i < NUMBER_OF_CULTISTS; i++)
-			{
-				cultists[i] = null;
-			}
 
 			cultists[0] = new Cultist() { PersonID = peoplePool.activePool[1].PersonID, Instruction = null };
 			cultists[1] = new Cultist() { PersonID = peoplePool.activePool[2].PersonID, Instruction = null };

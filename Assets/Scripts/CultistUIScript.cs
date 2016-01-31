@@ -7,7 +7,7 @@ public class CultistUIScript : MonoBehaviour
 {
 	public Text CultistName;
 
-	public Text CultistProfession;
+	public Text CultistProfession; 
 
 	public Text CultistTraits;
 

@@ -15,16 +15,16 @@ public class UIScript : MonoBehaviour
 
 	public CultistUIScript CultistUIScript;
 
-	public GameObject Cultist1;
-	public GameObject Cultist2;
-	public GameObject Cultist3;
-	public GameObject Cultist4;
-	public GameObject Cultist5;
-	public GameObject Cultist6;
-	public GameObject Cultist7;
-	public GameObject Cultist8;
+	public CultistScript Cultist1;
+	public CultistScript Cultist2;
+	public CultistScript Cultist3;
+	public CultistScript Cultist4;
+	public CultistScript Cultist5;
+	public CultistScript Cultist6;
+	public CultistScript Cultist7;
+	public CultistScript Cultist8;
 
-	private GameObject[] Cultists;
+	private CultistScript[] Cultists;
 
 	private int activeCultistIndex = -1;
 
@@ -49,10 +49,18 @@ public class UIScript : MonoBehaviour
 	{
 		var cultists = GameState.GetCurrentCultists();
 		for (int i = 0; i < cultists.Length; ++i)
-			Cultists[i].SetActive(cultists[i] != null);
+			Cultists[i].gameObject.SetActive(cultists[i] != null);
 
 		if (activeCultistIndex != -1 && cultists[activeCultistIndex] == null)
 			activeCultistIndex = -1;
+
+		for (int i = 0; i < Cultists.Length; ++i)
+		{
+			if (i == activeCultistIndex)
+				Cultists[i].SetActive();
+			else
+				Cultists[i].SetInactive();
+		}
 
 		if (activeCultistIndex == -1)
 			CultistUIScript.SetCultistInformation(null);
