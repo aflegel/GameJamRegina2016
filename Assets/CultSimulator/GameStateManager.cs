@@ -160,6 +160,8 @@ namespace Assets.CultSimulator
 			yearNumber += 1;
 			seasonNumber = 1;
 
+			currentTarget = YearTargetFactory.GetYearTargets(yearNumber);
+
 			var sacrificeAssets = new List<SearchableAsset> {
 				new SearchableAsset() { Profession = Profession.Educator, Sin = Sin.Envious, Virtue = Virtue.Temperant },
 				new SearchableAsset() { Profession = Profession.Law, Sin = Sin.Lusty, Virtue = Virtue.Kind },
