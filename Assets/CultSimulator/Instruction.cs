@@ -16,7 +16,7 @@ namespace Assets.CultSimulator
 	{
 		GreatSuccess = 0,
 		GoodSuccess = 1,
-		NornalSuccess = 2,
+		NormalSuccess = 2,
 		Failure = 3,
 		BadFailure = 4,
 		TerribleFailure = 5,

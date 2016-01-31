@@ -26,7 +26,6 @@ namespace Assets.CultSimulator
 		{
 			peoplePool.GeneratePeople(size, sacrificeAssets.ToList(), false, true);
 			sacrificeCandidates = new List<PersonReference>();
-			int startingIndex = size + 1;
 
 			for (int i = currentPeoplePoolIndex + 1; i < peoplePool.activePool.Count - 1; i++)
 			{
@@ -189,7 +188,7 @@ namespace Assets.CultSimulator
 				else if (result > 50)
 					ProcessSuccess(SuccessRating.GoodSuccess, cultist.Instruction);
 				else if (result > 20)
-					ProcessSuccess(SuccessRating.NornalSuccess, cultist.Instruction);
+					ProcessSuccess(SuccessRating.NormalSuccess, cultist.Instruction);
 				else if (result > 0)
 					ProcessSuccess(SuccessRating.Failure, cultist.Instruction);
 				else if (result > -20)

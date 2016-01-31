@@ -146,14 +146,6 @@ public class UIScript : MonoBehaviour
 		}
 	}
 
-	private int RecruitTargetKey
-	{
-		get
-		{
-			return RecruitTarget - 1;
-		}
-	}
-
 	private int sacraficeTarget = -1;
 	private int SacraficeTarget
 	{
