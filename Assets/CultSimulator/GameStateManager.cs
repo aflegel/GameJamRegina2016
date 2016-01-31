@@ -114,7 +114,7 @@ namespace Assets.CultSimulator
 			return cultists;
 		}
 
-		public void SetCultistInstruction(ActionType action, int targetPersonID, int cultistIndex)
+		public void SetCultistInstruction(ActionType action, int? targetPersonID, int cultistIndex)
 		{
 			cultists[cultistIndex].Instruction = new Instruction { Action = action, TargetID = targetPersonID };
 		}

@@ -189,9 +189,9 @@ public class UIScript : MonoBehaviour
 	private void AssignTask()
 	{
 		if (FindRecruits)
-			GameState.SetCultistInstruction(ActionType.Investigate, -1, activeCultistIndex);
+			GameState.SetCultistInstruction(ActionType.Investigate, null, activeCultistIndex);
 		else if (FindSacrifices)
-			GameState.SetCultistInstruction(ActionType.Investigate, -1, activeCultistIndex);
+			GameState.SetCultistInstruction(ActionType.Investigate, null, activeCultistIndex);
 		else if (RecruitTarget >= 0)
 		{
 			var recruits = GameState.GetCultistCandidates().ToArray();
@@ -200,7 +200,9 @@ public class UIScript : MonoBehaviour
 		}
 		else if (SacrificeTarget >= 0)
 		{
-
+			var sacrifices = GameState.GetSacrificeCandidates().ToArray();
+			var currentSacrifice = sacrifices[SacrificeTarget];
+			GameState.SetCultistInstruction(ActionType.Abduct, currentSacrifice.PersonID, activeCultistIndex);
 		}
 
 		SubSubPane.SetActive(false);
