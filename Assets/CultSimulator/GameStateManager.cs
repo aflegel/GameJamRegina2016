@@ -173,75 +173,87 @@ namespace Assets.CultSimulator
 
 		public void ProcessActions()
 		{
-			Person attacker;
-			Person defender;
+
 			int result;
 			System.Random randomNumber = new System.Random();
 
 			foreach (Cultist cultist in cultists)
 			{
-				attacker = GetPerson(cultist.PersonID);
-				result = 0;
-				switch (cultist.Instruction.Action)
-				{
-					case ActionType.Abduct:
-						if (cultist.Instruction.TargetID.HasValue)
-						{
-							defender = GetPerson(cultist.Instruction.TargetID.Value);
-
-							result = attacker.Abduction - defender.AbductionDefense + traitPool.GetTraitValue(attacker.assets, defender.assets);
-						}
-
-						break;
-					case ActionType.Investigate:
-						if (cultist.Instruction.TargetID.HasValue)
-						{
-							defender = GetPerson(cultist.Instruction.TargetID.Value);
-
-							result = attacker.Investigation - defender.InvestigationDefense + traitPool.GetTraitValue(attacker.assets, defender.assets);
-						}
-						else
-						{
-							result = attacker.Investigation;
-						}
-						break;
-					case ActionType.Recruit:
-						if (cultist.Instruction.TargetID.HasValue)
-						{
-							defender = GetPerson(cultist.Instruction.TargetID.Value);
-
-							result = attacker.Recruitment - defender.RecruitmentDefense + traitPool.GetTraitValue(attacker.assets, defender.assets);
-						}
-						break;
-					case ActionType.None:
-						break;
-					default:
-						break;
-				}
+				//grab the difference for the current action
+				result = GetSkillDifference(cultist);
 
 				result += randomNumber.Next(0, 100);
 
-				if(result > 0)
-				{
-					//success
-				}
+				if (result > 80)
+					ProcessSuccess(SuccessRating.GreatSuccess, cultist.Instruction);
+				else if (result > 50)
+					ProcessSuccess(SuccessRating.GoodSuccess, cultist.Instruction);
+				else if (result > 20)
+					ProcessSuccess(SuccessRating.NornalSuccess, cultist.Instruction);
+				else if (result > 0)
+					ProcessSuccess(SuccessRating.Failure, cultist.Instruction);
+				else if (result > -20)
+					ProcessSuccess(SuccessRating.BadFailure, cultist.Instruction);
+				else
+					ProcessSuccess(SuccessRating.TerribleFailure, cultist.Instruction);
 
 			}
 		}
 
-		public void GetSkillDifference(Cultist currentCultist)
+		public int GetSkillDifference(Cultist cultist)
+		{
+			Person attacker = GetPerson(cultist.PersonID);
+			Person defender;
+			int result = 0;
+			switch (cultist.Instruction.Action)
+			{
+				case ActionType.Abduct:
+					if (cultist.Instruction.TargetID.HasValue)
+					{
+						defender = GetPerson(cultist.Instruction.TargetID.Value);
+
+						result = attacker.Abduction - defender.AbductionDefense + traitPool.GetTraitValue(attacker.assets, defender.assets);
+					}
+
+					break;
+				case ActionType.Investigate:
+					if (cultist.Instruction.TargetID.HasValue)
+					{
+						defender = GetPerson(cultist.Instruction.TargetID.Value);
+
+						result = attacker.Investigation - defender.InvestigationDefense + traitPool.GetTraitValue(attacker.assets, defender.assets);
+					}
+					else
+					{
+						result = attacker.Investigation;
+					}
+					break;
+				case ActionType.Recruit:
+					if (cultist.Instruction.TargetID.HasValue)
+					{
+						defender = GetPerson(cultist.Instruction.TargetID.Value);
+
+						result = attacker.Recruitment - defender.RecruitmentDefense + traitPool.GetTraitValue(attacker.assets, defender.assets);
+					}
+					break;
+				case ActionType.None:
+					break;
+				default:
+					break;
+			}
+
+			return result;
+		}
+
+		public void GetSkillText(Cultist currentCultist)
 		{
 
 		}
 
-		public void GetSkillText(Person attacker, Person defender)
+		public void ProcessSuccess(SuccessRating rating, Instruction action)
 		{
-
-		}
-
-		public void ProcessSuccess(bool isSuccess, ActionType action)
-		{
-			switch (action)
+			action.IsSuccess = rating;
+			switch (action.Action)
 			{
 				case ActionType.Abduct:
 

@@ -95,8 +95,8 @@ namespace Assets.CultSimulator
 			femaleNames.Add("Danielle");
 			femaleNames.Add("Jill");
 			femaleNames.Add("Heather");
-			femaleNames.Add("Johannes");
-			femaleNames.Add("test");
+			femaleNames.Add("Sarah");
+			femaleNames.Add("Your Mom");
 
 
 			maleNames.Add("Alex");
@@ -106,6 +106,7 @@ namespace Assets.CultSimulator
 			maleNames.Add("Johannes");
 			maleNames.Add("Farron");
 			maleNames.Add("test");
+			maleNames.Add("Kris");
 		}
 
 	}
