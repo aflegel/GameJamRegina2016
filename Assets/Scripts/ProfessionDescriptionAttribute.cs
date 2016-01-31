@@ -18,12 +18,14 @@ namespace Assets.Scripts
 		public ProfessionDescriptionAttribute(string description)
 		{
 			Description = description;
+			IsAnimal = false;
 		}
 
 		public ProfessionDescriptionAttribute(string description, Gender gender)
 		{
 			Description = description;
 			Gender = gender;
+			IsAnimal = false;
 		}
 
 		public ProfessionDescriptionAttribute(string description, bool isAnimal)

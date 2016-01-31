@@ -62,10 +62,8 @@ namespace Assets.CultSimulator
 			//arrays to generate random values
 			var sins = Enum.GetValues(typeof(Sin)).Cast<Sin>().ToArray();
 			var virtues = Enum.GetValues(typeof(Virtue)).Cast<Virtue>().ToArray();
-			var professions = Enum.GetValues(typeof(Profession)).Cast<Profession>().ToArray();
+			var professions = Enum.GetValues(typeof(Profession)).Cast<Profession>().Where(s => s.GetAttributes<ProfessionDescriptionAttribute>().Any(a => a.IsAnimal == buildAnimals)).ToArray();
 			Person freshPerson = new Person();
-
-			professions.Where(s => s.GetAttributes<ProfessionDescriptionAttribute>().Any(a => a.IsAnimal == buildAnimals)).ToArray();
 
 			freshPerson.PersonID = id;
 			freshPerson.Active = true;
