@@ -52,7 +52,6 @@ namespace Assets.CultSimulator
 
 			var cultistAssets = new List<SearchableAsset>
 			{
-				new SearchableAsset() { Profession = Profession.None, Sin = Sin.None, Virtue = Virtue.None },
 				new SearchableAsset() { Profession = Profession.None, Sin = Sin.None, Virtue = Virtue.None }
 			};
 
