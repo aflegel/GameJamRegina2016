@@ -39,6 +39,7 @@ public class UIScript : MonoBehaviour
 	public Text SubSubFlavourText;
 	public Button InvestigateButton;
 	public Button AcceptButton;
+	public Button ProgressButton;
 
 	private CultistScript[] Cultists;
 
@@ -181,6 +182,8 @@ public class UIScript : MonoBehaviour
 		BuildTopUI();
 
 		AssignButton.onClick.AddListener(AssignTask);
+
+		ProgressButton.onClick.AddListener(ProgressSeason);
 	}
 
 	private void AssignTask()
@@ -199,6 +202,13 @@ public class UIScript : MonoBehaviour
 		SubSubFlavourText.text = String.Empty;
 		SubSubName.text = String.Empty;
 		SubSubProfession.text = String.Empty;
+		activeCultistIndex = -1;
+		CultistUIScript.SetCultistInformation(null);
+	}
+
+	private void ProgressSeason()
+	{
+
 	}
 
 	private string GetNumberString(int number)
