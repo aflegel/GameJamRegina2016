@@ -220,43 +220,45 @@ namespace Assets.CultSimulator
 			Person attacker = GetPerson(cultist.PersonID);
 			Person defender;
 			int result = 0;
-			switch (cultist.Instruction.Action)
+			if (cultist.Instruction != null && cultist.Instruction.Action != null)
 			{
-				case ActionType.Abduct:
-					if (cultist.Instruction.TargetID.HasValue)
-					{
-						defender = GetPerson(cultist.Instruction.TargetID.Value);
+				switch (cultist.Instruction.Action)
+				{
+					case ActionType.Abduct:
+						if (cultist.Instruction.TargetID.HasValue)
+						{
+							defender = GetPerson(cultist.Instruction.TargetID.Value);
 
-						result = attacker.Abduction - defender.AbductionDefense + traitPool.GetTraitValue(attacker.assets, defender.assets);
-					}
+							result = attacker.Abduction - defender.AbductionDefense + traitPool.GetTraitValue(attacker.assets, defender.assets);
+						}
 
-					break;
-				case ActionType.Investigate:
-					if (cultist.Instruction.TargetID.HasValue)
-					{
-						defender = GetPerson(cultist.Instruction.TargetID.Value);
+						break;
+					case ActionType.Investigate:
+						if (cultist.Instruction.TargetID.HasValue)
+						{
+							defender = GetPerson(cultist.Instruction.TargetID.Value);
 
-						result = attacker.Investigation - defender.InvestigationDefense + traitPool.GetTraitValue(attacker.assets, defender.assets);
-					}
-					else
-					{
-						result = attacker.Investigation;
-					}
-					break;
-				case ActionType.Recruit:
-					if (cultist.Instruction.TargetID.HasValue)
-					{
-						defender = GetPerson(cultist.Instruction.TargetID.Value);
+							result = attacker.Investigation - defender.InvestigationDefense + traitPool.GetTraitValue(attacker.assets, defender.assets);
+						}
+						else
+						{
+							result = attacker.Investigation;
+						}
+						break;
+					case ActionType.Recruit:
+						if (cultist.Instruction.TargetID.HasValue)
+						{
+							defender = GetPerson(cultist.Instruction.TargetID.Value);
 
-						result = attacker.Recruitment - defender.RecruitmentDefense + traitPool.GetTraitValue(attacker.assets, defender.assets);
-					}
-					break;
-				case ActionType.None:
-					break;
-				default:
-					break;
+							result = attacker.Recruitment - defender.RecruitmentDefense + traitPool.GetTraitValue(attacker.assets, defender.assets);
+						}
+						break;
+					case ActionType.None:
+						break;
+					default:
+						break;
+				}
 			}
-
 			return result;
 		}
 
