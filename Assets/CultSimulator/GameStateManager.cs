@@ -168,6 +168,12 @@ namespace Assets.CultSimulator
 				gameOver = true;
 			}
 
+			for (int i = 0; i < 8; i++)
+			{
+				if (cultists[i] != null)
+					cultists[i].Instruction = null;
+			}
+
 			if (seasonNumber == 5 && !gameWillEnd)
 			{
 				IncrementYear();
@@ -341,13 +347,89 @@ namespace Assets.CultSimulator
 						case SuccessRating.GoodSuccess:
 						case SuccessRating.GreatSuccess:
 						case SuccessRating.NormalSuccess:
+							int newIndex = 0;
+							for (int i = 0; i < 8; i++)
+							{
+								newIndex = i;
 
+								if (cultists[i] == null)
+								{
+									i = 10;
+								}
+							}
+
+							cultists[newIndex] = new Cultist()
+							{
+								PersonID = (int)action.TargetID,
+								Instruction = null
+							};
+
+							++numberOfCultists;
+
+							sacrificeCandidates.Remove(sacrificeCandidates.Find(sa => sa.PersonID == action.TargetID));
+							break;
+						case SuccessRating.BadFailure:
+						case SuccessRating.TerribleFailure:
+						case SuccessRating.Failure:
+							break;
+					}
+					peoplePool.activePool[(int)action.TargetID].Active = false;
+					break;
+				case ActionType.Investigate:
+					switch (action.IsSuccess)
+					{
+						case SuccessRating.GoodSuccess:
+						case SuccessRating.GreatSuccess:
+						case SuccessRating.NormalSuccess:
+							if (sacrificeCandidates.Exists(sa => sa.PersonID == action.TargetID))
+							{
+								var sacrifice = sacrificeCandidates.Find(sa => sa.PersonID == action.TargetID);
+								sacrifice.IndepthInvestigated = true;
+							}
+							else
+							{
+								var cultist = cultistCandidates.Find(cult => cult.PersonID == action.TargetID);
+								cultist.IndepthInvestigated = true;
+							}
+							break;
+						case SuccessRating.BadFailure:
+						case SuccessRating.TerribleFailure:
+						case SuccessRating.Failure:
 							break;
 					}
 					break;
-				case ActionType.Investigate:
-					break;
 				case ActionType.Recruit:
+					switch (action.IsSuccess)
+					{
+						case SuccessRating.GoodSuccess:
+						case SuccessRating.GreatSuccess:
+						case SuccessRating.NormalSuccess:
+							int newIndex = 0;
+							for (int i = 0; i < 8; i++)
+							{
+								newIndex = i;
+
+								if (cultists[i] == null)
+								{
+									i = 10;
+								}
+							}
+
+							cultists[newIndex] = new Cultist()
+							{
+								PersonID = (int)action.TargetID,
+								Instruction = null
+							};
+
+							++numberOfCultists;
+							break;
+						case SuccessRating.BadFailure:
+						case SuccessRating.TerribleFailure:
+						case SuccessRating.Failure:
+							break;
+					}
+					peoplePool.activePool[(int)action.TargetID].Active = false;
+					cultistCandidates.Remove(cultistCandidates.Find(cult => cult.PersonID == action.TargetID));
 					break;
 				case ActionType.None:
 					break;
