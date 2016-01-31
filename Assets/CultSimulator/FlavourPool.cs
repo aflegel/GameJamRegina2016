@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using UnityEngine;
 
 namespace Assets.CultSimulator
 {
@@ -114,7 +115,9 @@ namespace Assets.CultSimulator
 
 			string filename = "professionFlavour";
 
-			StreamReader reader = new StreamReader(@"Assets\TextAssets\" + filename + ".csv", Encoding.Default);
+			TextAsset file = (TextAsset) Resources.Load(@"TextAssets\" + filename);
+			StreamReader reader = new StreamReader(new MemoryStream(file.bytes), Encoding.Default);
+
 			string regLine = ",(?=(?:[^" + '"' + "]*" + '"' + "[^" + '"' + "]*" + '"' + ")*[^" + '"' + "]*$)";
 
 			//strip header line

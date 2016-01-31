@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using UnityEngine;
 
 namespace Assets.CultSimulator
 {
@@ -26,7 +27,7 @@ namespace Assets.CultSimulator
 			AddNames();
 		}
 
-		public string GetNextName(int? count, Gender gender, bool animal, Random randomNumber)
+		public string GetNextName(int? count, Gender gender, bool animal, System.Random randomNumber)
 		{
 			//sets an internal counter and escape
 			count = (count ?? 0);
@@ -77,7 +78,9 @@ namespace Assets.CultSimulator
 		{
 
 			List<string> nameList = new List<string>();
-			StreamReader reader = new StreamReader(@"Assets\TextAssets\" + filename + ".csv", Encoding.Default);
+			//StreamReader reader = new StreamReader(@"Assets\TextAssets\" + filename + ".csv", Encoding.Default);
+			TextAsset file = (TextAsset) Resources.Load(@"Assets\TextAssets\" + filename + ".csv");
+			StreamReader reader = new StreamReader(new MemoryStream(file.bytes), Encoding.Default);
 			string regLine = ",(?=(?:[^" + '"' + "]*" + '"' + "[^" + '"' + "]*" + '"' + ")*[^" + '"' + "]*$)";
 
 			//strip header line
