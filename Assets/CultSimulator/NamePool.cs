@@ -33,9 +33,8 @@ namespace Assets.CultSimulator
 
 			string freshName = "";
 
-
-
-			freshName = gender ? femaleNames[randomNumber.Next(0, femaleNames.Count)] : maleNames[randomNumber.Next(0, maleNames.Count)] + " " + lastNames[randomNumber.Next(0, lastNames.Count)];
+			freshName = gender ? femaleNames[randomNumber.Next(0, femaleNames.Count)] : maleNames[randomNumber.Next(0, maleNames.Count)];
+			freshName += " " + lastNames[randomNumber.Next(0, lastNames.Count)];
 
 			if (usedNames.Contains(freshName))
 			{
@@ -58,12 +57,12 @@ namespace Assets.CultSimulator
 			lastNames.Add("test");
 			lastNames.Add("test2");
 
-			femaleNames.Add("Alex");
-			femaleNames.Add("Alexander");
-			femaleNames.Add("Chris");
-			femaleNames.Add("Christopher");
+			femaleNames.Add("Jeannine");
+			femaleNames.Add("Danielle");
+			femaleNames.Add("Jill");
+			femaleNames.Add("Heather");
 			femaleNames.Add("Johannes");
-			femaleNames.Add("testet");
+			femaleNames.Add("Ager");
 			femaleNames.Add("test");
 
 
@@ -72,7 +71,7 @@ namespace Assets.CultSimulator
 			maleNames.Add("Chris");
 			maleNames.Add("Christopher");
 			maleNames.Add("Johannes");
-			maleNames.Add("testet");
+			maleNames.Add("Farron");
 			maleNames.Add("test");
 		}
 

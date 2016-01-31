@@ -66,7 +66,7 @@ namespace Assets.CultSimulator
 			freshPerson.assets.sin = (Sin)sins.GetValue( randomNumber.Next(1, sins.Length));
 			freshPerson.assets.virtue = (Virtue)virtues.GetValue(randomNumber.Next(1, virtues.Length));
 			freshPerson.assets.profession = (Profession)professions.GetValue(randomNumber.Next(1, professions.Length));
-			freshPerson.Gender = randomNumber.Next(0, 1) == 0;
+			freshPerson.Gender = randomNumber.Next(0, 2) == 0;
 
 
 			SkillMap professionSkills = professionPool.GetProfessionValue(freshPerson.assets);
