@@ -47,12 +47,35 @@ namespace Assets.CultSimulator
 					TraitMap entry = new TraitMap(firstKey, secondKey);
 					if (!Pool.ContainsKey(entry))
 					{
-						Pool.Add(entry, 0);
+						Pool.Add(entry, (firstKey == secondKey ? 10 : 0));
 					}
 				}
 			}
 
-			Pool[new TraitMap(Sin.Envious, Sin.Gluttonous)] = 0;
+			Pool[new TraitMap(Virtue.Forgiving, Sin.Wrathful)] = -10;
+			Pool[new TraitMap(Virtue.Humble, Sin.Proud)] = -10;
+			Pool[new TraitMap(Virtue.Charitable, Sin.Greedy)] = -10;
+			Pool[new TraitMap(Virtue.Temperant, Sin.Gluttonous)] = -10;
+			Pool[new TraitMap(Virtue.Diligent, Sin.Lazy)] = -10;
+			Pool[new TraitMap(Virtue.Chaste, Sin.Lusty)] = -10;
+			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -10;
+
+
+			Pool[new TraitMap(Sin.Wrathful, Sin.Proud)] = 5;
+			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
+			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
+			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
+			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
+			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
+			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
+			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
+			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
+			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
+			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
+			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
+			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
+			Pool[new TraitMap(Virtue.Kind, Sin.Envious)] = -5;
+
 		}
 
 		public static SearchableAsset GenerateRandomAsset(bool profession, bool sin, bool virtue, bool animal, Random randomNumber)
