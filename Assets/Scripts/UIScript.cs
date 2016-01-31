@@ -165,6 +165,8 @@ public class UIScript : MonoBehaviour
 		}
 	}
 
+	private bool Investigating { get; set; }
+
 	void Start()
 	{
 		Cultists = new[]
@@ -184,6 +186,13 @@ public class UIScript : MonoBehaviour
 		AssignButton.onClick.AddListener(AssignTask);
 
 		ProgressButton.onClick.AddListener(ProgressSeason);
+
+		InvestigateButton.onClick.AddListener(SetInvestigating);
+	}
+
+	private void SetInvestigating()
+	{
+		Investigating = true;
 	}
 
 	private void AssignTask()
@@ -192,6 +201,27 @@ public class UIScript : MonoBehaviour
 			GameState.SetCultistInstruction(ActionType.Investigate, null, activeCultistIndex);
 		else if (FindSacrifices)
 			GameState.SetCultistInstruction(ActionType.Investigate, null, activeCultistIndex);
+		else if (Investigating && (RecruitTarget >= 0 || SacrificeTarget >= 0))
+		{
+			int investigationTarget;
+
+			if (RecruitTarget >= 0 && SacrificeTarget < 0)
+			{
+				var recruits = GameState.GetCultistCandidates().ToArray();
+				var currentRecruit = recruits[RecruitTarget];
+
+				investigationTarget = currentRecruit.PersonID;
+			}
+			else
+			{
+				var sacrifices = GameState.GetCultistCandidates().ToArray();
+				var currentSacrifice = sacrifices[SacrificeTarget];
+
+				investigationTarget = currentSacrifice.PersonID;
+			}
+
+			GameState.SetCultistInstruction(ActionType.Investigate, investigationTarget, activeCultistIndex);
+		}
 		else if (RecruitTarget >= 0)
 		{
 			var recruits = GameState.GetCultistCandidates().ToArray();
@@ -212,6 +242,7 @@ public class UIScript : MonoBehaviour
 		SubSubProfession.text = String.Empty;
 		activeCultistIndex = -1;
 		CultistUIScript.SetCultistInformation(null);
+		Investigating = false;
 	}
 
 	private void ProgressSeason()
@@ -225,6 +256,8 @@ public class UIScript : MonoBehaviour
 			if (cultists[i] != null)
 				cultists[i].Instruction = null;
 		}
+
+		Investigating = false;
 	}
 
 	private string GetNumberString(int number)
