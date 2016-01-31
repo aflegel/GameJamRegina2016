@@ -294,12 +294,13 @@ namespace Assets.CultSimulator
 					break;
 			}
 
+			string attackerString = "";
+
 			if (attackertResult > 75)
 			{
 
 			}
 			else if (attackertResult > 50)
-
 			{
 
 			}
