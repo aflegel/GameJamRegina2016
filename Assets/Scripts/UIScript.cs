@@ -41,6 +41,8 @@ public class UIScript : MonoBehaviour
 	public Button AcceptButton;
 	public Button ProgressButton;
 
+	public Text SkillSuccess;
+
 	private CultistScript[] Cultists;
 
 	private int activeCultistIndex = -1;
@@ -234,6 +236,10 @@ public class UIScript : MonoBehaviour
 			var currentSacrifice = sacrifices[SacrificeTarget];
 			GameState.SetCultistInstruction(ActionType.Abduct, currentSacrifice.PersonID, activeCultistIndex);
 		}
+
+		var cultist = GameState.GetCultist(activeCultistIndex);
+
+		SkillSuccess.text = GameState.GetSkillText(cultist);
 
 		SubSubPane.SetActive(false);
 		SubSubCenterText.text = String.Empty;
