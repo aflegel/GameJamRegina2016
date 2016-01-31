@@ -178,24 +178,26 @@ namespace Assets.CultSimulator
 
 			foreach (Cultist cultist in cultists)
 			{
-				//grab the difference for the current action
-				result = GetSkillDifference(cultist);
+				if (cultist != null)
+				{
+					//grab the difference for the current action
+					result = GetSkillDifference(cultist);
 
-				result += randomNumber.Next(0, 100);
+					result += randomNumber.Next(0, 100);
 
-				if (result > 80)
-					ProcessSuccess(SuccessRating.GreatSuccess, cultist.Instruction);
-				else if (result > 50)
-					ProcessSuccess(SuccessRating.GoodSuccess, cultist.Instruction);
-				else if (result > 20)
-					ProcessSuccess(SuccessRating.NormalSuccess, cultist.Instruction);
-				else if (result > 0)
-					ProcessSuccess(SuccessRating.Failure, cultist.Instruction);
-				else if (result > -20)
-					ProcessSuccess(SuccessRating.BadFailure, cultist.Instruction);
-				else
-					ProcessSuccess(SuccessRating.TerribleFailure, cultist.Instruction);
-
+					if (result > 80)
+						ProcessSuccess(SuccessRating.GreatSuccess, cultist.Instruction);
+					else if (result > 50)
+						ProcessSuccess(SuccessRating.GoodSuccess, cultist.Instruction);
+					else if (result > 20)
+						ProcessSuccess(SuccessRating.NormalSuccess, cultist.Instruction);
+					else if (result > 0)
+						ProcessSuccess(SuccessRating.Failure, cultist.Instruction);
+					else if (result > -20)
+						ProcessSuccess(SuccessRating.BadFailure, cultist.Instruction);
+					else
+						ProcessSuccess(SuccessRating.TerribleFailure, cultist.Instruction);
+				}
 			}
 		}
 
