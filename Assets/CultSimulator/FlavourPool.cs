@@ -115,7 +115,7 @@ namespace Assets.CultSimulator
 
 			string filename = "professionFlavour";
 
-			TextAsset file = (TextAsset) Resources.Load(@"TextAssets\" + filename);
+			TextAsset file = (TextAsset) Resources.Load(filename);
 			StreamReader reader = new StreamReader(new MemoryStream(file.bytes), Encoding.Default);
 
 			string regLine = ",(?=(?:[^" + '"' + "]*" + '"' + "[^" + '"' + "]*" + '"' + ")*[^" + '"' + "]*$)";

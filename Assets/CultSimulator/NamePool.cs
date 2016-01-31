@@ -79,7 +79,7 @@ namespace Assets.CultSimulator
 
 			List<string> nameList = new List<string>();
 			//StreamReader reader = new StreamReader(@"Assets\TextAssets\" + filename + ".csv", Encoding.Default);
-			TextAsset file = (TextAsset) Resources.Load(@"Assets\TextAssets\" + filename + ".csv");
+			TextAsset file = (TextAsset) Resources.Load(filename);
 			StreamReader reader = new StreamReader(new MemoryStream(file.bytes), Encoding.Default);
 			string regLine = ",(?=(?:[^" + '"' + "]*" + '"' + "[^" + '"' + "]*" + '"' + ")*[^" + '"' + "]*$)";
 
