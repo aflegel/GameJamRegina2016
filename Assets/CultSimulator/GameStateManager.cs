@@ -17,6 +17,7 @@ namespace Assets.CultSimulator
 		private int seasonNumber;
 		private int yearNumber;
 		private PeoplePool peoplePool { get; set; }
+		private TraitPool traitPool { get; set; }
 
 		private void GetNewPools(IEnumerable<SearchableAsset> sacrificeAssets, IEnumerable<SearchableAsset> cultistAssets, int size)
 		{
@@ -48,6 +49,7 @@ namespace Assets.CultSimulator
 			cultistCandidates = new List<PersonReference>();
 			currentTarget = YearTargetFactory.GetYearTargets(yearNumber);
 			peoplePool = new PeoplePool();
+			traitPool = new TraitPool();
 			cultists = new Cultist[NUMBER_OF_CULTISTS];
 
 			var cultistAssets = new List<SearchableAsset>
@@ -106,7 +108,7 @@ namespace Assets.CultSimulator
 
 		public void SetCultistInstruction(ActionType action, int targetPersonID, int cultistIndex)
 		{
-			cultists[cultistIndex].Instruction = new Instruction { Action = action, TargetID =  targetPersonID};
+			cultists[cultistIndex].Instruction = new Instruction { Action = action, TargetID = targetPersonID };
 		}
 
 		public Cultist GetCultist(int cultistIndex)
@@ -146,22 +148,59 @@ namespace Assets.CultSimulator
 
 		public void ProcessActions()
 		{
-			foreach(Cultist cultist in cultists)
+			Person attacker;
+			Person defender;
+			int result;
+			System.Random randomNumber = new System.Random();
+
+			foreach (Cultist cultist in cultists)
 			{
+				attacker = GetPerson(cultist.PersonID);
+				result = 0;
 				switch (cultist.Instruction.Action)
 				{
 					case ActionType.Abduct:
-						GetPerson(cultist.PersonID);
+						if (cultist.Instruction.TargetID.HasValue)
+						{
+							defender = GetPerson(cultist.Instruction.TargetID.Value);
+
+							result = attacker.Abduction - defender.AbductionDefense + traitPool.GetTraitValue(attacker.assets, defender.assets);
+						}
+
 						break;
 					case ActionType.Investigate:
+						if (cultist.Instruction.TargetID.HasValue)
+						{
+							defender = GetPerson(cultist.Instruction.TargetID.Value);
+
+							result = attacker.Investigation - defender.InvestigationDefense + traitPool.GetTraitValue(attacker.assets, defender.assets);
+						}
+						else
+						{
+							result = attacker.Investigation;
+						}
 						break;
 					case ActionType.Recruit:
+						if (cultist.Instruction.TargetID.HasValue)
+						{
+							defender = GetPerson(cultist.Instruction.TargetID.Value);
+
+							result = attacker.Recruitment - defender.RecruitmentDefense + traitPool.GetTraitValue(attacker.assets, defender.assets);
+						}
 						break;
 					case ActionType.None:
 						break;
 					default:
 						break;
 				}
+
+				result += randomNumber.Next(0, 100);
+
+				if(result > 0)
+				{
+					//success
+				}
+
 			}
 		}
 
