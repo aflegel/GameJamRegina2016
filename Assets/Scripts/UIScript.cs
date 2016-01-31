@@ -187,6 +187,12 @@ public class UIScript : MonoBehaviour
 	{
 		if (FindRecruits)
 			GameState.SetCultistInstruction(ActionType.Investigate, -1, activeCultistIndex);
+		else if (FindSacrafices)
+			GameState.SetCultistInstruction(ActionType.Investigate, -1, activeCultistIndex);
+		else if (RecruitTarget >= 0)
+		{
+			GameState.SetCultistInstruction(ActionType.Recruit, RecruitTarget, activeCultistIndex);
+		}
 	}
 
 	private string GetNumberString(int number)

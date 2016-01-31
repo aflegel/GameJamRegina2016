@@ -20,6 +20,7 @@ namespace Assets.CultSimulator
 		private int yearNumber;
 		private PeoplePool peoplePool { get; set; }
 		private TraitPool traitPool { get; set; }
+		private bool gameWillEnd;
 
 		private void GetNewPools(IEnumerable<SearchableAsset> sacrificeAssets, IEnumerable<SearchableAsset> cultistAssets, int size)
 		{
@@ -70,6 +71,8 @@ namespace Assets.CultSimulator
 			cultists[1] = new Cultist() { PersonID = peoplePool.activePool[2].PersonID, Instruction = null };
 
 			GetNewPools(currentTarget.SacrificeTargets, cultistAssets, 20);
+
+			gameWillEnd = false;
 		}
 
 		public void AddSacrificeCandidate(int personID)
@@ -136,6 +139,11 @@ namespace Assets.CultSimulator
 			return currentTarget;
 		}
 
+		public bool IsGameOver()
+		{
+			return gameWillEnd;
+		}
+
 		public int GetSeasonNumber()
 		{
 			return seasonNumber;
@@ -145,10 +153,17 @@ namespace Assets.CultSimulator
 		{
 			bool gameOver = false;
 
-			seasonNumber += 1;
 			ProcessActions();
 
-			if (seasonNumber == 5)
+			seasonNumber += 1;
+
+			if (HasPlayerLost())
+			{
+				gameWillEnd = true;
+				gameOver = true;
+			}
+
+			if (seasonNumber == 5 && !gameWillEnd)
 			{
 				IncrementYear();
 			}
@@ -244,6 +259,7 @@ namespace Assets.CultSimulator
 			if (numberOfCultists <= 0)
 			{
 				gameOver = true;
+				gameWillEnd = true;
 			}
 
 			return gameOver;
@@ -253,9 +269,9 @@ namespace Assets.CultSimulator
 		{
 			bool gameOver = false;
 
-			if (true)
+			if (gameWillEnd)
 			{
-
+				gameOver = true;
 			}
 			else
 			{
