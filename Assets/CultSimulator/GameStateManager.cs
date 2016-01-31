@@ -210,6 +210,24 @@ namespace Assets.CultSimulator
 			}
 		}
 
+		public void ProcessSuccess(bool isSuccess, ActionType action)
+		{
+			switch (action)
+			{
+				case ActionType.Abduct:
+
+					break;
+				case ActionType.Investigate:
+					break;
+				case ActionType.Recruit:
+					break;
+				case ActionType.None:
+					break;
+				default:
+					break;
+			}
+		}
+
 		public int GetYearNumber()
 		{
 			return yearNumber;
