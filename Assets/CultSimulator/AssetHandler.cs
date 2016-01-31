@@ -18,40 +18,40 @@ namespace Assets.CultSimulator
 
 	public enum Profession
 	{
-		none = 0,
-		medical = 1,
-		religious = 2,
-		law = 3,
-		politics = 4,
-		trades = 5,
-		merchant = 6,
-		educator = 7,
-		farmer = 8,
-		cow = 9,
-		goat = 10
+		None = 0,
+		Medical = 1,
+		Religious = 2,
+		Law = 3,
+		Politics = 4,
+		Trades = 5,
+		Merchant = 6,
+		Educator = 7,
+		Farmer = 8,
+		Cow = 9,
+		Goat = 10
 	}
 
 	public enum Sin
 	{
-		none = 0,
-		wrath = 1,
-		pride = 2,
-		greed = 3,
-		gluttony = 4,
-		sloth = 5,
-		lust = 6,
-		envy = 7
+		None = 0,
+		Wrathful = 1,
+		Proud = 2,
+		Greedy = 3,
+		Gluttonous = 4,
+		Lazy = 5,
+		Lusty = 6,
+		Envious = 7
 	}
 
 	public enum Virtue
 	{
-		none = 10,
-		forgiveness = 11,
-		humility = 12,
-		charity = 13,
-		temperance = 14,
-		diligence = 15,
-		chastity = 16,
-		kindness = 17
+		None = 10,
+		Forgiving = 11,
+		Humble = 12,
+		Charitable = 13,
+		Temperant = 14,
+		Diligent = 15,
+		Chaste = 16,
+		Kind = 17
 	}
 }

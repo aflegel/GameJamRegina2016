@@ -29,8 +29,8 @@ namespace Assets.CultSimulator
 			currentTarget = new YearTarget();
 			peoplePool = new PeoplePool();
 			peoplePool.GeneratePeople(20, new List<SearchableAsset> {
-				new SearchableAsset() { profession = Profession.educator, sin = Sin.envy, virtue = Virtue.temperance },
-				new SearchableAsset() { profession = Profession.law, sin = Sin.lust, virtue = Virtue.kindness }
+				new SearchableAsset() { profession = Profession.Educator, sin = Sin.Envious, virtue = Virtue.Temperant },
+				new SearchableAsset() { profession = Profession.Law, sin = Sin.Lusty, virtue = Virtue.Kind }
 			});
 
 			cultists = new Cultist[NUMBER_OF_CULTISTS];
@@ -39,8 +39,8 @@ namespace Assets.CultSimulator
 				cultists[i] = null;
 			}
 
-			cultists[0] = new Cultist() { PersonID = peoplePool.activePool[0].PersonID, Instruction = null };
-			cultists[1] = new Cultist() { PersonID = peoplePool.activePool[1].PersonID, Instruction = null };
+			cultists[0] = new Cultist() { PersonID = peoplePool.activePool[1].PersonID, Instruction = null };
+			cultists[1] = new Cultist() { PersonID = peoplePool.activePool[2].PersonID, Instruction = null };
 		}
 
 		public void AddSacrificeCandidate(int personID)

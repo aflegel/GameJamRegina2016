@@ -69,6 +69,7 @@ namespace Assets.CultSimulator
 			freshPerson.assets.profession = (Profession)professions.GetValue(randomNumber.Next(0, professions.Length));
 			freshPerson.Gender = randomNumber.Next(0, 1) == 0;
 
+			/*
 			SkillMap professionSkills = professionPool.GetProfessionValue(freshPerson.assets);
 
 			freshPerson.Abduction = randomNumber.Next(0,100) + professionSkills.Abduction;
@@ -77,6 +78,7 @@ namespace Assets.CultSimulator
 			freshPerson.InvestigationDefense = randomNumber.Next(0, 100) + professionSkills.InvestigationDefense;
 			freshPerson.Recruitment = randomNumber.Next(0, 100) + professionSkills.Recruitment;
 			freshPerson.RecruitmentDefense = randomNumber.Next(0, 100) + professionSkills.RecruitmentDefense;
+			*/
 
 			return freshPerson;
 		}

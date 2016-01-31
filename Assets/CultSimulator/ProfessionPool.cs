@@ -43,7 +43,7 @@ namespace Assets.CultSimulator
 				}
 			}
 
-			SkillMap temp = Pool[Profession.cow];
+			SkillMap temp = Pool[Profession.Cow];
 			temp.Investigation = 0;
 		}
 
