@@ -29,6 +29,17 @@ public class UIScript : MonoBehaviour
 	public Text SubTitleText;
 	public Text SubConditionsText;
 
+	public Text SubSubCenterText;
+
+	public Button AssignButton;
+
+	public GameObject SubSubPane;
+	public Text SubSubName;
+	public Text SubSubProfession;
+	public Text SubSubFlavourText;
+	public Button InvestigateButton;
+	public Button AcceptButton;
+
 	private CultistScript[] Cultists;
 
 	private int activeCultistIndex = -1;
@@ -45,7 +56,13 @@ public class UIScript : MonoBehaviour
 				return;
 			recruiting = value;
 			if (recruiting)
-				sacraficeTargetIndex = -1;
+			{
+				SacraficeTargetIndex = -1;
+				FindRecruits = false;
+				FindSacrafices = false;
+				SacraficeTarget = -1;
+				RecruitTarget = -1;
+			}
 			BuildSubUI();
 		}
 	}
@@ -60,7 +77,13 @@ public class UIScript : MonoBehaviour
 				return;
 			sacraficeTargetIndex = value;
 			if (sacraficeTargetIndex >= 0)
-				recruiting = false;
+			{
+				Recruiting = false;
+				FindRecruits = false;
+				FindSacrafices = false;
+				SacraficeTarget = -1;
+				RecruitTarget = -1;
+			}
 			BuildSubUI();
 		}
 	}
@@ -156,6 +179,14 @@ public class UIScript : MonoBehaviour
 		};
 		currentTarget = GameState.GetCurrentTarget();
 		BuildTopUI();
+
+		AssignButton.onClick.AddListener(AssignTask);
+	}
+
+	private void AssignTask()
+	{
+		if (FindRecruits)
+			GameState.SetCultistInstruction(ActionType.Investigate, -1, activeCultistIndex);
 	}
 
 	private string GetNumberString(int number)
@@ -177,6 +208,7 @@ public class UIScript : MonoBehaviour
 	{
 		SetButtons(Panel1, new string[] { "Recruit" }.Concat(currentTarget.SacrificeTargets.Select((a, i) => GetNumberString(i + 1) + " Sacrafice Target")).ToArray(),
 		new UnityAction[] { () => Recruiting = true }.Concat(currentTarget.SacrificeTargets.Select((a, i) => new UnityAction(() => SacraficeTargetIndex = i))).ToArray());
+		BuildSubUI();
 	}
 
 	void BuildSubUI()
@@ -186,7 +218,8 @@ public class UIScript : MonoBehaviour
 			SubTitleText.text = "Recruit";
 			SubConditionsText.text = "Increase your ranks";
 
-			SetButtons(Panel2, new string[] { "Find Recruits" }, new UnityAction[] { () => FindRecruits = true });
+			SetButtons(Panel2, new string[] { "Find Recruits" }.Concat(GameState.GetCultistCandidates().Select(p => GameState.GetPerson(p.PersonID).Name)).ToArray(),
+			new UnityAction[] { () => FindRecruits = true }.Concat(GameState.GetCultistCandidates().Select((p, i) => new UnityAction(() => RecruitTarget = i))).ToArray());
 		}
 		else if (sacraficeTargetIndex >= 0)
 		{
@@ -205,12 +238,77 @@ public class UIScript : MonoBehaviour
 				conditions += target.Virtue.ToString();
 			SubConditionsText.text = conditions;
 
-			SetButtons(Panel2, new string[] { "Find Sacrafices" }, new UnityAction[] { () => FindSacrafices = true });
+			SetButtons(Panel2, new string[] { "Find Sacrafices" }.Concat(GameState.GetSacrificeCandidates().Select(p => GameState.GetPerson(p.PersonID).Name)).ToArray(),
+			new UnityAction[] { () => FindSacrafices = true }.Concat(GameState.GetSacrificeCandidates().Select((p, i) => new UnityAction(() => SacraficeTarget = i))).ToArray());
 		}
+		BuildSubSubUI();
 	}
 
 	void BuildSubSubUI()
 	{
+		if (FindRecruits)
+		{
+			SubSubCenterText.text = "Find Recruits";
+			SubSubPane.SetActive(false);
+		}
+		else if (FindSacrafices)
+		{
+			SubSubCenterText.text = "Find Sacrafices";
+			SubSubPane.SetActive(false);
+		}
+		else if (RecruitTarget >= 0)
+		{
+			var recruit = GameState.GetCultistCandidates().ToArray()[RecruitTarget];
+			var person = GameState.GetPerson(recruit.PersonID);
+			SubSubName.text = person.Name;
+			SubSubProfession.text = person.ProfessionDescription;
+			if (recruit.IndepthInvestigated)
+			{
+				SubSubFlavourText.text = person.FlavourText;
+				SubSubCenterText.text = String.Empty;
+			}
+			else
+			{
+				SubSubFlavourText.text = String.Empty;
+				SubSubCenterText.text = "Investigate for more Information";
+			}
+			AcceptButton.GetComponentInChildren<Text>().text = "Recruit";
+			SubSubPane.SetActive(true);
+		}
+		else if (SacraficeTarget >= 0)
+		{
+			var sacrafice = GameState.GetSacrificeCandidates().ToArray()[SacraficeTarget];
+			var person = GameState.GetPerson(sacrafice.PersonID);
+			SubSubName.text = person.Name;
+			SubSubProfession.text = person.ProfessionDescription;
+			if (sacrafice.IndepthInvestigated)
+			{
+				SubSubFlavourText.text = person.FlavourText;
+				SubSubCenterText.text = String.Empty;
+			}
+			else
+			{
+				SubSubFlavourText.text = String.Empty;
+				SubSubCenterText.text = "Investigate for more Information";
+			}
+			AcceptButton.GetComponentInChildren<Text>().text = "Sacrafice";
+			SubSubPane.SetActive(true);
+		}
+		else
+		{
+			SubSubCenterText.text = String.Empty;
+			SubSubPane.SetActive(false);
+		}
+
+		UpdateAssignButton();
+	}
+
+	void UpdateAssignButton()
+	{
+		if (activeCultistIndex >= 0 && (FindRecruits || FindSacrafices || RecruitTarget >= 0 || SacraficeTarget >= 0))
+			AssignButton.interactable = true;
+		else
+			AssignButton.interactable = false;
 	}
 
 	void Update()
@@ -220,7 +318,10 @@ public class UIScript : MonoBehaviour
 			Cultists[i].gameObject.SetActive(cultists[i] != null);
 
 		if (activeCultistIndex != -1 && cultists[activeCultistIndex] == null)
+		{
 			activeCultistIndex = -1;
+			UpdateAssignButton();
+		}
 
 		for (int i = 0; i < Cultists.Length; ++i)
 		{
@@ -256,5 +357,6 @@ public class UIScript : MonoBehaviour
 	public void SetActiveCultist(int cultistIndex)
 	{
 		activeCultistIndex = cultistIndex;
+		UpdateAssignButton();
 	}
 }
