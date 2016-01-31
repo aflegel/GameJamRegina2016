@@ -49,7 +49,6 @@ namespace Assets.CultSimulator
 			List<object> firstKeyValues = Enum.GetValues(typeof(Sin)).Cast<object>().ToList();
 			List<object> secondKeyValues = Enum.GetValues(typeof(Sin)).Cast<object>().ToList();
 
-
 			firstKeyValues.AddRange(Enum.GetValues(typeof(Virtue)).Cast<object>().ToList());
 			secondKeyValues.AddRange(Enum.GetValues(typeof(Virtue)).Cast<object>().ToList());
 

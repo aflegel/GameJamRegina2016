@@ -254,7 +254,7 @@ namespace Assets.CultSimulator
 			return result;
 		}
 
-		public string GetSkillText(Cultist cultist)
+		public string GetSkillText(Cultist cultist, System.Random randomNumber)
 		{
 			Person attacker = GetPerson(cultist.PersonID);
 			Person defender;
@@ -304,16 +304,28 @@ namespace Assets.CultSimulator
 
 			string attackerString = "";
 
-			if (attackertResult > 75)
+			if (attackertResult > 80)
 			{
-
+				attackerString = flavourPool.AmazingList[randomNumber.Next(0, flavourPool.AmazingList.Count)];
 			}
-			else if (attackertResult > 50)
+			else if (attackertResult > 60)
 			{
-
+				attackerString = flavourPool.GoodList[randomNumber.Next(0, flavourPool.GoodList.Count)];
+			}
+			else if (attackertResult > 40)
+			{
+				attackerString = flavourPool.NormalList[randomNumber.Next(0, flavourPool.NormalList.Count)];
+			}
+			else if (attackertResult > 20)
+			{
+				attackerString = flavourPool.BadList[randomNumber.Next(0, flavourPool.BadList.Count)];
+			}
+			else
+			{
+				attackerString = flavourPool.TerribleList[randomNumber.Next(0, flavourPool.TerribleList.Count)];
 			}
 
-			return "Aaaaaaaaaay";
+			return attackerString;
 		}
 
 		public void ProcessSuccess(SuccessRating rating, Instruction action)
