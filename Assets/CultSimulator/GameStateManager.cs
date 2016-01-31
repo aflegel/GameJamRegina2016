@@ -229,6 +229,16 @@ namespace Assets.CultSimulator
 			}
 		}
 
+		public void GetSkillDifference(Cultist currentCultist)
+		{
+
+		}
+
+		public void GetSkillText(Person attacker, Person defender)
+		{
+
+		}
+
 		public void ProcessSuccess(bool isSuccess, ActionType action)
 		{
 			switch (action)
