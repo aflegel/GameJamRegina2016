@@ -394,6 +394,8 @@ namespace Assets.CultSimulator
 							{
 								var cultist = cultistCandidates.Find(cult => cult.PersonID == action.TargetID);
 								cultist.IndepthInvestigated = true;
+								Person cu = GetPerson(cultist.PersonID);
+								cu.FlavourText = flavourPool.GetInvestigationValue(cu.assets.Profession, cu.assets.Sin) + " " + flavourPool.GetInvestigationValue(cu.assets.Profession, cu.assets.Virtue);
 							}
 							break;
 						case SuccessRating.BadFailure:
