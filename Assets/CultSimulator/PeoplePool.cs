@@ -67,7 +67,7 @@ namespace Assets.CultSimulator
 			freshPerson.PersonID = id;
 			freshPerson.Active = true;
 			freshPerson.assets = new SearchableAsset();
-			if(requiredAsset.HasValue)
+			if (requiredAsset.HasValue)
 			{
 				freshPerson.assets.Sin = (requiredAsset.Value.Sin == null ? (Sin)sins.GetValue(randomNumber.Next(1, sins.Length)) : requiredAsset.Value.Sin);
 				freshPerson.assets.Virtue = (requiredAsset.Value.Virtue == null ? (Virtue)virtues.GetValue(randomNumber.Next(1, virtues.Length)) : requiredAsset.Value.Virtue);
@@ -78,6 +78,7 @@ namespace Assets.CultSimulator
 				freshPerson.assets.Sin = (Sin)sins.GetValue(randomNumber.Next(1, sins.Length));
 				freshPerson.assets.Virtue = (Virtue)virtues.GetValue(randomNumber.Next(1, virtues.Length));
 				freshPerson.assets.Profession = (Profession)professions.GetValue(randomNumber.Next(1, professions.Length));
+			}
 			freshPerson.Gender = randomNumber.Next(0, 2) == 0 ? Gender.Male : Gender.Female;
 
 
