@@ -336,7 +336,14 @@ namespace Assets.CultSimulator
 			switch (action.Action)
 			{
 				case ActionType.Abduct:
+					switch (action.IsSuccess)
+					{
+						case SuccessRating.GoodSuccess:
+						case SuccessRating.GreatSuccess:
+						case SuccessRating.NormalSuccess:
 
+							break;
+					}
 					break;
 				case ActionType.Investigate:
 					break;
