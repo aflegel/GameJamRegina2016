@@ -277,6 +277,14 @@ public class UIScript : MonoBehaviour
 		}
 
 		Investigating = false;
+
+		ResultsPanel.SetActive(true);
+		ResultsText.text = String.Empty;
+
+		foreach (string result in GameState.ResultTextList)
+		{
+			ResultsText.text += result + Environment.NewLine;
+		}
 	}
 
 	private string GetNumberString(int number)

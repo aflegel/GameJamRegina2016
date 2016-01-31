@@ -22,7 +22,7 @@ namespace Assets.CultSimulator
 		private TraitPool traitPool { get; set; }
 		private bool gameWillEnd;
 
-		public List<string> ResultTextList;
+		public List<string> ResultTextList { get; set; }
 
 		private void GetNewPools(IEnumerable<SearchableAsset> sacrificeAssets, IEnumerable<SearchableAsset> cultistAssets, int size)
 		{
@@ -315,7 +315,7 @@ namespace Assets.CultSimulator
 
 		public void ProcessSuccess(SuccessRating rating, Instruction action)
 		{
-			string successText = "";
+			ResultTextList.Add(string.Format("{0} at {1}", rating.ToString(), action.Action.ToString()));
 
 			action.IsSuccess = rating;
 			switch (action.Action)
