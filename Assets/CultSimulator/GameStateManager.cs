@@ -136,10 +136,32 @@ namespace Assets.CultSimulator
 		public void IncrementSeason()
 		{
 			seasonNumber += 1;
+			ProcessActions();
 
 			if (seasonNumber == 5)
 			{
 				IncrementYear();
+			}
+		}
+
+		public void ProcessActions()
+		{
+			foreach(Cultist cultist in cultists)
+			{
+				switch (cultist.Instruction.Action)
+				{
+					case ActionType.Abduct:
+						GetPerson(cultist.PersonID);
+						break;
+					case ActionType.Investigate:
+						break;
+					case ActionType.Recruit:
+						break;
+					case ActionType.None:
+						break;
+					default:
+						break;
+				}
 			}
 		}
 

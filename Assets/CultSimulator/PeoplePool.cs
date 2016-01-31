@@ -143,7 +143,5 @@ namespace Assets.CultSimulator
 		{
 			return activePool[id];
 		}
-
-
 	}
 }

@@ -35,10 +35,11 @@ namespace Assets.CultSimulator
 
 			string freshName = "";
 
-			if(animal)
+			if (animal)
 			{
 				return animalNames[randomNumber.Next(0, animalNames.Count)];
-			} else
+			}
+			else
 			{
 				freshName = gender == Gender.Female ? femaleNames[randomNumber.Next(0, femaleNames.Count)] : maleNames[randomNumber.Next(0, maleNames.Count)];
 				freshName += " " + lastNames[randomNumber.Next(0, lastNames.Count)];
