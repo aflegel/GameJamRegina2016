@@ -107,31 +107,19 @@ namespace Assets.CultSimulator
 
 
 			if (sin)
-			{
 				simple.Sin = (Sin)sins.GetValue(randomNumber.Next(1, sins.Length));
-			}
 			else
-			{
 				simple.Sin = Sin.None;
-			}
 
 			if (virtue)
-			{
 				simple.Virtue = (Virtue)virtues.GetValue(randomNumber.Next(1, virtues.Length));
-			}
 			else
-			{
 				simple.Virtue = Virtue.None;
-			}
 
 			if (profession)
-			{
 				simple.Profession = (Profession)professions.GetValue(randomNumber.Next(1, professions.Length));
-			}
 			else
-			{
 				simple.Profession = Profession.None;
-			}
 
 			return simple;
 		}
