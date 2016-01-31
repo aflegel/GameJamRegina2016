@@ -146,6 +146,14 @@ public class UIScript : MonoBehaviour
 		}
 	}
 
+	private int RecruitTargetKey
+	{
+		get
+		{
+			return RecruitTarget - 1;
+		}
+	}
+
 	private int sacraficeTarget = -1;
 	private int SacraficeTarget
 	{
@@ -194,7 +202,9 @@ public class UIScript : MonoBehaviour
 			GameState.SetCultistInstruction(ActionType.Investigate, -1, activeCultistIndex);
 		else if (RecruitTarget >= 0)
 		{
-			GameState.SetCultistInstruction(ActionType.Recruit, RecruitTarget, activeCultistIndex);
+			var recruits = GameState.GetCultistCandidates().ToArray();
+			var currentRecruit = recruits[RecruitTarget];
+			GameState.SetCultistInstruction(ActionType.Recruit, currentRecruit.PersonID, activeCultistIndex);
 		}
 
 		SubSubPane.SetActive(false);
