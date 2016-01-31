@@ -90,12 +90,12 @@ namespace Assets.CultSimulator
 
 
 
-			SuccessPool.Add(SuccessRating.GreatSuccess, "1");
-			SuccessPool.Add(SuccessRating.GoodSuccess, "2");
-			SuccessPool.Add(SuccessRating.NormalSuccess, "3");
-			SuccessPool.Add(SuccessRating.Failure, "4");
-			SuccessPool.Add(SuccessRating.BadFailure, "5");
-			SuccessPool.Add(SuccessRating.TerribleFailure, "6");
+			SuccessPool.Add(SuccessRating.GreatSuccess, "Amazingly Succeeded");
+			SuccessPool.Add(SuccessRating.GoodSuccess, "Good Succeeded");
+			SuccessPool.Add(SuccessRating.NormalSuccess, "Succeeded");
+			SuccessPool.Add(SuccessRating.Failure, "Failed");
+			SuccessPool.Add(SuccessRating.BadFailure, "Badly Failed");
+			SuccessPool.Add(SuccessRating.TerribleFailure, "Terribly Failed");
 
 		}
 
