@@ -32,18 +32,25 @@ namespace Assets.CultSimulator
 			TraitMap getKey = new TraitMap(keyValue, matchValue);
 
 			//check the dictionary against values and return the match
-			//return Pool[getKey];
-			return 0;
+
+			if (Pool.ContainsKey(getKey))
+				return Pool[getKey];
+			return -100;
 		}
 
 		public void GenerateTraits()
 		{
-			List<object> values = Enum.GetValues(typeof(Sin)).Cast<object>().ToList();
-			values.Add(Enum.GetValues(typeof(Sin)).Cast<object>().ToList());
+			List<object> firstKeyValues = Enum.GetValues(typeof(Sin)).Cast<object>().ToList();
+			List<object> secondKeyValues = Enum.GetValues(typeof(Sin)).Cast<object>().ToList();
 
-			foreach (object firstKey in values)
+
+			firstKeyValues.AddRange(Enum.GetValues(typeof(Virtue)).Cast<object>().ToList());
+			secondKeyValues.AddRange(Enum.GetValues(typeof(Virtue)).Cast<object>().ToList());
+
+
+			foreach (object firstKey in firstKeyValues)
 			{
-				foreach (object secondKey in values)
+				foreach (object secondKey in secondKeyValues)
 				{
 					TraitMap entry = new TraitMap(firstKey, secondKey);
 					if (!Pool.ContainsKey(entry))
