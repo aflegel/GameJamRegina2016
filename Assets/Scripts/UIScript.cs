@@ -58,31 +58,31 @@ public class UIScript : MonoBehaviour
 			recruiting = value;
 			if (recruiting)
 			{
-				SacraficeTargetIndex = -1;
+				SacrificeTargetIndex = -1;
 				FindRecruits = false;
-				FindSacrafices = false;
-				SacraficeTarget = -1;
+				FindSacrifices = false;
+				SacrificeTarget = -1;
 				RecruitTarget = -1;
 			}
 			BuildSubUI();
 		}
 	}
 
-	private int sacraficeTargetIndex = -1;
-	private int SacraficeTargetIndex
+	private int sacrificeTargetIndex = -1;
+	private int SacrificeTargetIndex
 	{
-		get { return sacraficeTargetIndex; }
+		get { return sacrificeTargetIndex; }
 		set
 		{
-			if (sacraficeTargetIndex == value)
+			if (sacrificeTargetIndex == value)
 				return;
-			sacraficeTargetIndex = value;
-			if (sacraficeTargetIndex >= 0)
+			sacrificeTargetIndex = value;
+			if (sacrificeTargetIndex >= 0)
 			{
 				Recruiting = false;
 				FindRecruits = false;
-				FindSacrafices = false;
-				SacraficeTarget = -1;
+				FindSacrifices = false;
+				SacrificeTarget = -1;
 				RecruitTarget = -1;
 			}
 			BuildSubUI();
@@ -100,27 +100,27 @@ public class UIScript : MonoBehaviour
 			findRecruits = value;
 			if (findRecruits)
 			{
-				FindSacrafices = false;
-				SacraficeTarget = -1;
+				FindSacrifices = false;
+				SacrificeTarget = -1;
 				RecruitTarget = -1;
 			}
 			BuildSubSubUI();
 		}
 	}
 
-	private bool findSacrafices;
-	private bool FindSacrafices
+	private bool findSacrifices;
+	private bool FindSacrifices
 	{
-		get { return findSacrafices; }
+		get { return findSacrifices; }
 		set
 		{
-			if (findSacrafices == value)
+			if (findSacrifices == value)
 				return;
-			findSacrafices = value;
-			if (findSacrafices)
+			findSacrifices = value;
+			if (findSacrifices)
 			{
 				FindRecruits = false;
-				SacraficeTarget = -1;
+				SacrificeTarget = -1;
 				RecruitTarget = -1;
 			}
 			BuildSubSubUI();
@@ -139,26 +139,26 @@ public class UIScript : MonoBehaviour
 			if (recruitTarget >= 0)
 			{
 				FindRecruits = false;
-				FindSacrafices = false;
-				SacraficeTarget = -1;
+				FindSacrifices = false;
+				SacrificeTarget = -1;
 			}
 			BuildSubSubUI();
 		}
 	}
 
-	private int sacraficeTarget = -1;
-	private int SacraficeTarget
+	private int sacrificeTarget = -1;
+	private int SacrificeTarget
 	{
-		get { return sacraficeTarget; }
+		get { return sacrificeTarget; }
 		set
 		{
-			if (sacraficeTarget == value)
+			if (sacrificeTarget == value)
 				return;
-			sacraficeTarget = value;
-			if (sacraficeTarget >= 0)
+			sacrificeTarget = value;
+			if (sacrificeTarget >= 0)
 			{
 				FindRecruits = false;
-				FindSacrafices = false;
+				FindSacrifices = false;
 				RecruitTarget = -1;
 			}
 			BuildSubSubUI();
@@ -190,13 +190,17 @@ public class UIScript : MonoBehaviour
 	{
 		if (FindRecruits)
 			GameState.SetCultistInstruction(ActionType.Investigate, -1, activeCultistIndex);
-		else if (FindSacrafices)
+		else if (FindSacrifices)
 			GameState.SetCultistInstruction(ActionType.Investigate, -1, activeCultistIndex);
 		else if (RecruitTarget >= 0)
 		{
 			var recruits = GameState.GetCultistCandidates().ToArray();
 			var currentRecruit = recruits[RecruitTarget];
 			GameState.SetCultistInstruction(ActionType.Recruit, currentRecruit.PersonID, activeCultistIndex);
+		}
+		else if (SacrificeTarget >= 0)
+		{
+
 		}
 
 		SubSubPane.SetActive(false);
@@ -238,8 +242,8 @@ public class UIScript : MonoBehaviour
 
 	void BuildTopUI()
 	{
-		SetButtons(Panel1, new string[] { "Recruit" }.Concat(currentTarget.SacrificeTargets.Select((a, i) => GetNumberString(i + 1) + " Sacrafice Target")).ToArray(),
-		new UnityAction[] { () => Recruiting = true }.Concat(currentTarget.SacrificeTargets.Select((a, i) => new UnityAction(() => SacraficeTargetIndex = i))).ToArray());
+		SetButtons(Panel1, new string[] { "Recruit" }.Concat(currentTarget.SacrificeTargets.Select((a, i) => GetNumberString(i + 1) + " Sacrifice Target")).ToArray(),
+		new UnityAction[] { () => Recruiting = true }.Concat(currentTarget.SacrificeTargets.Select((a, i) => new UnityAction(() => SacrificeTargetIndex = i))).ToArray());
 		BuildSubUI();
 	}
 
@@ -253,10 +257,10 @@ public class UIScript : MonoBehaviour
 			SetButtons(Panel2, new string[] { "Find Recruits" }.Concat(GameState.GetCultistCandidates().Select(p => GameState.GetPerson(p.PersonID).Name)).ToArray(),
 			new UnityAction[] { () => FindRecruits = true }.Concat(GameState.GetCultistCandidates().Select((p, i) => new UnityAction(() => RecruitTarget = i))).ToArray());
 		}
-		else if (sacraficeTargetIndex >= 0)
+		else if (sacrificeTargetIndex >= 0)
 		{
-			var target = currentTarget.SacrificeTargets.Skip(sacraficeTargetIndex).First();
-			SubTitleText.text = GetNumberString(sacraficeTargetIndex + 1) + " Sacrafice Target";
+			var target = currentTarget.SacrificeTargets.Skip(sacrificeTargetIndex).First();
+			SubTitleText.text = GetNumberString(sacrificeTargetIndex + 1) + " Sacrifice Target";
 			string conditions = String.Empty;
 			if (target.Profession != Profession.None)
 			{
@@ -270,8 +274,8 @@ public class UIScript : MonoBehaviour
 				conditions += target.Virtue.ToString();
 			SubConditionsText.text = conditions;
 
-			SetButtons(Panel2, new string[] { "Find Sacrafices" }.Concat(GameState.GetSacrificeCandidates().Select(p => GameState.GetPerson(p.PersonID).Name)).ToArray(),
-			new UnityAction[] { () => FindSacrafices = true }.Concat(GameState.GetSacrificeCandidates().Select((p, i) => new UnityAction(() => SacraficeTarget = i))).ToArray());
+			SetButtons(Panel2, new string[] { "Find Sacrifices" }.Concat(GameState.GetSacrificeCandidates().Select(p => GameState.GetPerson(p.PersonID).Name)).ToArray(),
+			new UnityAction[] { () => FindSacrifices = true }.Concat(GameState.GetSacrificeCandidates().Select((p, i) => new UnityAction(() => SacrificeTarget = i))).ToArray());
 		}
 		BuildSubSubUI();
 	}
@@ -283,9 +287,9 @@ public class UIScript : MonoBehaviour
 			SubSubCenterText.text = "Find Recruits";
 			SubSubPane.SetActive(false);
 		}
-		else if (FindSacrafices)
+		else if (FindSacrifices)
 		{
-			SubSubCenterText.text = "Find Sacrafices";
+			SubSubCenterText.text = "Find Sacrifices";
 			SubSubPane.SetActive(false);
 		}
 		else if (RecruitTarget >= 0)
@@ -307,13 +311,13 @@ public class UIScript : MonoBehaviour
 			AcceptButton.GetComponentInChildren<Text>().text = "Recruit";
 			SubSubPane.SetActive(true);
 		}
-		else if (SacraficeTarget >= 0)
+		else if (SacrificeTarget >= 0)
 		{
-			var sacrafice = GameState.GetSacrificeCandidates().ToArray()[SacraficeTarget];
-			var person = GameState.GetPerson(sacrafice.PersonID);
+			var sacrifice = GameState.GetSacrificeCandidates().ToArray()[SacrificeTarget];
+			var person = GameState.GetPerson(sacrifice.PersonID);
 			SubSubName.text = person.Name;
 			SubSubProfession.text = person.ProfessionDescription;
-			if (sacrafice.IndepthInvestigated)
+			if (sacrifice.IndepthInvestigated)
 			{
 				SubSubFlavourText.text = person.FlavourText;
 				SubSubCenterText.text = String.Empty;
@@ -323,7 +327,7 @@ public class UIScript : MonoBehaviour
 				SubSubFlavourText.text = String.Empty;
 				SubSubCenterText.text = "Investigate for more Information";
 			}
-			AcceptButton.GetComponentInChildren<Text>().text = "Sacrafice";
+			AcceptButton.GetComponentInChildren<Text>().text = "Sacrifice";
 			SubSubPane.SetActive(true);
 		}
 		else
@@ -339,7 +343,7 @@ public class UIScript : MonoBehaviour
 	{
 		var cultists = GameState.GetCurrentCultists();
 
-		if (activeCultistIndex >= 0 && (FindRecruits || FindSacrafices || RecruitTarget >= 0 || SacraficeTarget >= 0) && cultists[activeCultistIndex].Instruction == null)
+		if (activeCultistIndex >= 0 && (FindRecruits || FindSacrifices || RecruitTarget >= 0 || SacrificeTarget >= 0) && cultists[activeCultistIndex].Instruction == null)
 			AssignButton.interactable = true;
 		else
 			AssignButton.interactable = false;
