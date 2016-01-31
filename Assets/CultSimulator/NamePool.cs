@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Assets.CultSimulator
 {
@@ -58,55 +60,40 @@ namespace Assets.CultSimulator
 
 		protected void AddNames()
 		{
+
+			lastNames = BuildNamesFromFile("lastNames");
+			maleNames = BuildNamesFromFile("maleNames");
+			femaleNames = BuildNamesFromFile("femaleNames");
+
 			animalNames.Add("Bessy");
 			animalNames.Add("Buddy");
 			animalNames.Add("123456");
 			animalNames.Add("Dutch");
-			animalNames.Add("snickerdoodle");
+			animalNames.Add("Snickerdoodle");
 
+		}
 
+		public List<string> BuildNamesFromFile(string filename)
+		{
 
-			lastNames.Add("Flegel");
-			lastNames.Add("Boutin");
-			lastNames.Add("Dusyk");
-			lastNames.Add("Moersch");
-			lastNames.Add("Ager");
-			lastNames.Add("test");
-			lastNames.Add("test1");
-			lastNames.Add("test2");
-			lastNames.Add("test3");
-			lastNames.Add("test4");
-			lastNames.Add("test5");
-			lastNames.Add("test6");
-			lastNames.Add("test7");
-			lastNames.Add("test8");
-			lastNames.Add("test9");
-			lastNames.Add("test2");
-			lastNames.Add("test23");
-			lastNames.Add("test24");
-			lastNames.Add("test25");
-			lastNames.Add("test26");
-			lastNames.Add("test27");
-			lastNames.Add("test28");
-			lastNames.Add("test29");
-			lastNames.Add("test20");
+			List<string> nameList = new List<string>();
+			StreamReader reader = new StreamReader(@"Assets\TextAssets\" + filename + ".csv", Encoding.Default);
+			string regLine = ",(?=(?:[^" + '"' + "]*" + '"' + "[^" + '"' + "]*" + '"' + ")*[^" + '"' + "]*$)";
 
-			femaleNames.Add("Jeannine");
-			femaleNames.Add("Danielle");
-			femaleNames.Add("Jill");
-			femaleNames.Add("Heather");
-			femaleNames.Add("Sarah");
-			femaleNames.Add("Your Mom");
+			//strip header line
+			reader.ReadLine().Split(',');
 
+			//loop for remaining enteries
+			while (!reader.EndOfStream)
+			{
+				string[] input = Regex.Split(reader.ReadLine(), regLine);
 
-			maleNames.Add("Alex");
-			maleNames.Add("Alexander");
-			maleNames.Add("Chris");
-			maleNames.Add("Christopher");
-			maleNames.Add("Johannes");
-			maleNames.Add("Farron");
-			maleNames.Add("test");
-			maleNames.Add("Kris");
+				if (input[0] != null && input[0].Trim().Length > 0)
+					nameList.Add(input[0]);
+			}
+			reader.Close();
+
+			return nameList;
 		}
 
 	}
