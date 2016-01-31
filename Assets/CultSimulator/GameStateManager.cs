@@ -294,6 +294,15 @@ namespace Assets.CultSimulator
 					break;
 			}
 
+			if (attackertResult > 75)
+			{
+
+			}
+			else if (attackertResult > 50)
+
+			{
+
+			}
 
 			return "Aaaaaaaaaay";
 		}

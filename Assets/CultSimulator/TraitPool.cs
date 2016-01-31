@@ -35,7 +35,7 @@ namespace Assets.CultSimulator
 
 			if (Pool.ContainsKey(getKey))
 				return Pool[getKey];
-			return -100;
+			return 0;
 		}
 
 		public void GenerateTraits()
@@ -46,7 +46,6 @@ namespace Assets.CultSimulator
 
 			firstKeyValues.AddRange(Enum.GetValues(typeof(Virtue)).Cast<object>().ToList());
 			secondKeyValues.AddRange(Enum.GetValues(typeof(Virtue)).Cast<object>().ToList());
-
 
 			foreach (object firstKey in firstKeyValues)
 			{
