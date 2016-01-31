@@ -245,9 +245,56 @@ namespace Assets.CultSimulator
 			return result;
 		}
 
-		public void GetSkillText(Cultist currentCultist)
+		public string GetSkillText(Cultist cultist)
 		{
+			Person attacker = GetPerson(cultist.PersonID);
+			Person defender;
+			int attackertResult = 0;
+			int defenderResult = 0;
+			switch (cultist.Instruction.Action)
+			{
+				case ActionType.Abduct:
+					if (cultist.Instruction.TargetID.HasValue)
+					{
+						defender = GetPerson(cultist.Instruction.TargetID.Value);
 
+						attackertResult = attacker.Abduction + traitPool.GetTraitValue(attacker.assets, defender.assets);
+						defenderResult = defender.AbductionDefense;
+					}
+
+					break;
+				case ActionType.Investigate:
+					if (cultist.Instruction.TargetID.HasValue)
+					{
+						defender = GetPerson(cultist.Instruction.TargetID.Value);
+
+						attackertResult = attacker.Investigation + traitPool.GetTraitValue(attacker.assets, defender.assets);
+						defenderResult = defender.InvestigationDefense;
+					}
+					else
+					{
+						attackertResult = attacker.Investigation;
+						defenderResult = 0;
+					}
+					break;
+				case ActionType.Recruit:
+					if (cultist.Instruction.TargetID.HasValue)
+					{
+						defender = GetPerson(cultist.Instruction.TargetID.Value);
+
+						attackertResult = attacker.Recruitment + traitPool.GetTraitValue(attacker.assets, defender.assets);
+						defenderResult = defender.RecruitmentDefense;
+
+					}
+					break;
+				case ActionType.None:
+					break;
+				default:
+					break;
+			}
+
+
+			return "Aaaaaaaaaay";
 		}
 
 		public void ProcessSuccess(SuccessRating rating, Instruction action)
