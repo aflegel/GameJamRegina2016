@@ -14,6 +14,7 @@ namespace Assets.CultSimulator
 		private List<PersonReference> cultistCandidates;
 		private Cultist[] cultists;
 		private int numberOfCultists;
+		private int currentPeoplePoolIndex;
 		private YearTarget currentTarget;
 		private int seasonNumber;
 		private int yearNumber;
@@ -26,15 +27,17 @@ namespace Assets.CultSimulator
 			sacrificeCandidates = new List<PersonReference>();
 			int startingIndex = size + 1;
 
-			for (int i = peoplePool.activePool.Count - startingIndex; i < peoplePool.activePool.Count - 1; i++)
+			for (int i = currentPeoplePoolIndex + 1; i < peoplePool.activePool.Count - 1; i++)
 			{
 				sacrificeCandidates.Add(new PersonReference() { PersonID = peoplePool.activePool[i].PersonID, IndepthInvestigated = false });
 			}
 
+			currentPeoplePoolIndex += size;
+
 			peoplePool.GeneratePeople(size, cultistAssets.ToList(), false, false);
 			cultistCandidates = new List<PersonReference>();
 
-			for (int i = peoplePool.activePool.Count - startingIndex; i < peoplePool.activePool.Count - 1; i++)
+			for (int i = currentPeoplePoolIndex + 1; i < peoplePool.activePool.Count - 1; i++)
 			{
 				cultistCandidates.Add(new PersonReference() { PersonID = peoplePool.activePool[i].PersonID, IndepthInvestigated = false });
 			}
@@ -60,6 +63,7 @@ namespace Assets.CultSimulator
 
 			// Create the starting Cultists
 			numberOfCultists = 2;
+			currentPeoplePoolIndex = 2;
 			peoplePool.GeneratePeople(numberOfCultists, cultistAssets, false, false);
 
 			cultists[0] = new Cultist() { PersonID = peoplePool.activePool[1].PersonID, Instruction = null };
@@ -233,6 +237,18 @@ namespace Assets.CultSimulator
 			return yearNumber;
 		}
 
+		private bool HasPlayerLost()
+		{
+			bool gameOver = false;
+
+			if (numberOfCultists <= 0)
+			{
+				gameOver = true;
+			}
+
+			return gameOver;
+		}
+
 		public bool IncrementYear()
 		{
 			bool gameOver = false;
@@ -251,9 +267,9 @@ namespace Assets.CultSimulator
 				var sacrificeAssets = currentTarget.SacrificeTargets;
 
 				var cultistAssets = new List<SearchableAsset>
-			{
-				new SearchableAsset() { Profession = Profession.None, Sin = Sin.None, Virtue = Virtue.None }
-			};
+				{
+					new SearchableAsset() { Profession = Profession.None, Sin = Sin.None, Virtue = Virtue.None }
+				};
 
 				GetNewPools(sacrificeAssets, cultistAssets, 20);
 			}
