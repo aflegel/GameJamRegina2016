@@ -22,6 +22,8 @@ namespace Assets.CultSimulator
 		private TraitPool traitPool { get; set; }
 		private bool gameWillEnd;
 
+		public List<string> ResultTextList;
+
 		private void GetNewPools(IEnumerable<SearchableAsset> sacrificeAssets, IEnumerable<SearchableAsset> cultistAssets, int size)
 		{
 			peoplePool.GeneratePeople(size, sacrificeAssets.ToList(), false, true);
@@ -152,6 +154,8 @@ namespace Assets.CultSimulator
 		{
 			bool gameOver = false;
 
+			ResultTextList = new List<string>();
+
 			ProcessActions();
 
 			seasonNumber += 1;
@@ -184,6 +188,8 @@ namespace Assets.CultSimulator
 					result = GetSkillDifference(cultist);
 
 					result += randomNumber.Next(0, 100);
+
+					ResultTextList.Add(GetPerson(cultist.PersonID).Name);
 
 					if (result > 80)
 						ProcessSuccess(SuccessRating.GreatSuccess, cultist.Instruction);
@@ -300,6 +306,8 @@ namespace Assets.CultSimulator
 
 		public void ProcessSuccess(SuccessRating rating, Instruction action)
 		{
+			string successText = "";
+
 			action.IsSuccess = rating;
 			switch (action.Action)
 			{

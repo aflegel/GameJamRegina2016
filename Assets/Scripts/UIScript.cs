@@ -43,6 +43,10 @@ public class UIScript : MonoBehaviour
 
 	public Text SkillSuccess;
 
+	public GameObject ResultsPanel;
+	public Text ResultsText;
+	public Button ResultsCloseButton;
+
 	private CultistScript[] Cultists;
 
 	private int activeCultistIndex = -1;
@@ -190,11 +194,20 @@ public class UIScript : MonoBehaviour
 		ProgressButton.onClick.AddListener(ProgressSeason);
 
 		InvestigateButton.onClick.AddListener(SetInvestigating);
+
+		ResultsPanel.SetActive(false);
+		ResultsCloseButton.onClick.AddListener(CloseResults);
 	}
 
 	private void SetInvestigating()
 	{
 		Investigating = true;
+	}
+
+	private void CloseResults()
+	{
+		ResultsPanel.SetActive(false);
+		ResultsText.text = String.Empty;
 	}
 
 	private void AssignTask()
