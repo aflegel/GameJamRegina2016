@@ -32,7 +32,8 @@ namespace Assets.CultSimulator
 			TraitMap getKey = new TraitMap(keyValue, matchValue);
 
 			//check the dictionary against values and return the match
-			return Pool[getKey];
+			//return Pool[getKey];
+			return 0;
 		}
 
 		public void GenerateTraits()
