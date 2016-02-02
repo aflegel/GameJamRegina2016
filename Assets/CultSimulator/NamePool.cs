@@ -65,29 +65,16 @@ namespace Assets.CultSimulator
 			lastNames = BuildNamesFromFile("lastNames");
 			maleNames = BuildNamesFromFile("maleNames");
 			femaleNames = BuildNamesFromFile("femaleNames");
-
-			animalNames.Add("Bessy");
-			animalNames.Add("Buddy");
-			animalNames.Add("Daisy");
-			animalNames.Add("Billy");
-			animalNames.Add("Lassie");
-			animalNames.Add("Lightnight");
-			animalNames.Add("Fluffy");
-			animalNames.Add("General");
-			animalNames.Add("Smellz");
-			animalNames.Add("StinkEye");
-			animalNames.Add("Dutch");
-			animalNames.Add("Snickerdoodle");
-
+			animalNames = BuildNamesFromFile("animalNames");
 		}
 
 		public List<string> BuildNamesFromFile(string filename)
 		{
-
 			List<string> nameList = new List<string>();
-			//StreamReader reader = new StreamReader(@"Assets\TextAssets\" + filename + ".csv", Encoding.Default);
+
 			TextAsset file = (TextAsset) Resources.Load(filename);
 			StreamReader reader = new StreamReader(new MemoryStream(file.bytes), Encoding.Default);
+
 			string regLine = ",(?=(?:[^" + '"' + "]*" + '"' + "[^" + '"' + "]*" + '"' + ")*[^" + '"' + "]*$)";
 
 			//strip header line
