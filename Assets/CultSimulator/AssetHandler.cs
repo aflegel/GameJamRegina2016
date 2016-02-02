@@ -120,4 +120,12 @@ namespace Assets.CultSimulator
 		Male,
 		Female
 	}
+
+	public enum ActionType
+	{
+		None = 0,
+		Investigate = 1,
+		Abduct = 2,
+		Recruit = 3,
+	}
 }
