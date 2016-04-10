@@ -7,4 +7,4 @@ All future development should be done in the future-development branch as the Gl
 This may be corrected at some point in the future, but until then, do not modify this branch.
 
 ## Global Game Jam link
-The game can be found on the Global Game Jam site [here](http://globalgamejam.org/2016/games/cultsimulator2016)
+The game can be found on the Global Game Jam site [here](http://globalgamejam.org/2016/games/cult-simulator-2016-1)
